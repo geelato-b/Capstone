@@ -1,15 +1,8 @@
 <?php
 session_start();
-include_once "includes/db_conn.php";
-include_once "includes/func.inc.php";   
-$status_logged_in = null;
-if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
-    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
-    
-    $STUD_ID = $_SESSION['stud_id'];
-    $student_info = GetUserDetails($conn, $STUD_ID );
-}
- ?>
+include_once ('includes/db_conn.php');
+include_once ('includes/func.inc.php');
+?>
 
 
 <!DOCTYPE html>
@@ -18,7 +11,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUPC CSC Accountability System</title>
+    <title>Sign In: BUPC CSC Accountability System</title>
    <!-- CSS only -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" > 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -26,59 +19,40 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
    
 </head>
 <body>
-<section id= "nav-bar">
-<header id="header">
 
-    <div class="px-3 py-2 ">
-      <div class="container">
-        <div class="navbar d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="#" class="logo d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none text-dark">logo</a>
 
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
-              <a href="#" class="nav-link text-dark">Home</a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-dark">Status</a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-dark">About Us</a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-dark">Setting</a>
-            </li>
-            <li>
-              <a href="sign_in.php" type="button" class="nav-link btn btn-outline-warning text-dark">Sign In</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </header>
+<!-------------------Sign In section------------------->
 
-</section>
-
-<!-------------------banner section------------------->
-
-<section id="banner">
+<section id="sign_in">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <p class="banner-title">BUPC CSC Accountability System</p>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus sed, quo, 
-                    odit ratione nobis, commodi dignissimos reiciendis 
-                    ipsam voluptates optio delectus consequatur 
-                    excepturi tenetur officia recusandae illo quia 
-                     distinctio?</p>
-            </div>
-            <div class="col-md-6">
-                <img src="img/banner2.png" alt="" class="img-fluid">
+        <div class="form-container">
+            <div class="sign-in">
+                <form action="includes/login.php" method="post" class="signin-form">
+                    <h2 class="title">Sign In</h2>
+                    <div class="input-field">
+                    <i class="bi bi-person-fill"></i>
+                        <input name="stud_id" type="text" placeholder="Student ID" required>
+                    </div>
+                    <div class="input-field">
+                    <i class="bi bi-lock-fill"></i>
+                        <input  name="password" type="password" placeholder="Password" required>
+                    </div>
+
+                    <input type="submit" value="Login" class="signin-btn">
+                </form>
             </div>
         </div>
-    </div>
-        
-</section>
 
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <img src="img/sign_in.svg" class="image" alt="">
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
 
 
 
