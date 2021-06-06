@@ -1,3 +1,17 @@
+<?php
+session_start();
+include_once "includes/db_conn.php";
+include_once "includes/func.inc.php";   
+$status_logged_in = null;
+if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
+    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
+    
+    $STUD_ID = $_SESSION['stud_id'];
+    $student_info = GetUserDetails($conn, $STUD_ID );
+}
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +27,7 @@
 </head>
 <body>
 <section id= "nav-bar">
-<header>
+<header id="header">
 
     <div class="px-3 py-2 ">
       <div class="container">
@@ -34,7 +48,7 @@
               <a href="#" class="nav-link text-dark">Setting</a>
             </li>
             <li>
-              <a href="#" type="button" class="nav-link btn btn-outline-warning text-dark">Sign In</a>
+              <a href="sign_in.php" type="button" class="nav-link btn btn-outline-warning text-dark">Sign In</a>
             </li>
           </ul>
         </div>
@@ -58,17 +72,14 @@
                      distinctio?</p>
             </div>
             <div class="col-md-6">
-                <img src="img/banner1.png" alt="" class="img-fluid">
+                <img src="img/banner2.png" alt="" class="img-fluid">
             </div>
         </div>
     </div>
-        <div>
-        <img src="img/wave2.png" alt="" class="bottom-img">
-        </div>
-
-       
-
+        
 </section>
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
