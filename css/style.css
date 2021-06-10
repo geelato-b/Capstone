@@ -182,3 +182,44 @@ form .signin-form{
 #sign_in .image{
     width: 100%;
 }
+
+
+/*---------------------------------
+ footer
+----------------------*/
+
+footer.footer {
+    padding: 1rem .875rem;
+    direction: ltr;
+    background:#b3e6ff;
+}
+
+footer.footer ul {
+    margin:0px;
+	list-style:none;
+    
+}
+
+.footer ul  li{
+ display:inline-block;
+ margin:0px 7px;
+
+}
+
+.footer a{
+    text-decoration: none;
+}
+
+.footer ul  li a{
+    text-decoration: none;
+}
+
+.text-muted {
+    color: black!important;
+	font-size:14px;
+}
+ 
+
+/*---------------------------------
+footer
+----------------------*/
