@@ -72,12 +72,40 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                      
             </div>
             <div class="col-md-6">
-                <img src="img/banner2.png" alt="" class="img-fluid">
+                <img src="../img/banner2.png" alt="" class="img-fluid">
             </div>
         </div>
     </div>
         
 </section>
+
+<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-left">
+							<p class="mb-0">
+								<a href="index.html" class="text-muted"><strong>BUPC CSC Accountability System </strong></a> &copy
+							</p>
+						</div>
+						<div class="col-6 text-right">
+							<ul class="list-inline">
+								<li class="footer-item">
+									<a class="text-muted" href="#">Support</a>
+								</li>
+								<li class="footer-item">
+									<a class="text-muted" href="#">Help Center</a>
+								</li>
+								<li class="footer-item">
+									<a class="text-muted" href="#">Privacy</a>
+								</li>
+								<li class="footer-item">
+									<a class="text-muted" href="#">Terms</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
 
 
 
