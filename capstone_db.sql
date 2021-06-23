@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2021 at 04:02 AM
+-- Generation Time: Jun 23, 2021 at 06:19 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -71,15 +71,18 @@ CREATE TABLE `student_acc` (
   `stud_id` varchar(50) NOT NULL,
   `bu_email` varchar(256) NOT NULL,
   `stud_name` varchar(255) NOT NULL,
-  `password` varchar(128) NOT NULL
+  `password` varchar(128) NOT NULL,
+  `user_type` varchar(11) NOT NULL COMMENT 'S- student, A- Admin',
+  `status` varchar(11) NOT NULL COMMENT 'Active or Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `student_acc`
 --
 
-INSERT INTO `student_acc` (`stud_id`, `bu_email`, `stud_name`, `password`) VALUES
-('2018-PC-100000', '', 'Vanya Seven', 'qwerty123');
+INSERT INTO `student_acc` (`stud_id`, `bu_email`, `stud_name`, `password`, `user_type`, `status`) VALUES
+('1969-PC-Admin', 'bicol-u.edu.ph', 'BUPC', 'admin000', 'A', 'Active'),
+('2018-PC-100000', 'vanyaseven@bicol-u.edu.ph', 'Vanya Seven', 'qwerty123', 'S', 'Active');
 
 -- --------------------------------------------------------
 
@@ -103,7 +106,7 @@ CREATE TABLE `student_info` (
 --
 
 INSERT INTO `student_info` (`stud_id`, `bu_email`, `stud_name`, `stud_program`, `stud_year_block`, `gender`, `stud_birthdate`, `stud_address`) VALUES
-('2018-PC-100000', '', 'Vanya Seven', 'BSIT', '4A', 'F', '2000-02-03', 'Dunao, Ligao, Albay');
+('2018-PC-100000', 'vanyaseven@bicol-u.edu.ph', 'Vanya Seven', 'BSIT', '4A', 'F', '2000-02-03', 'Dunao, Ligao, Albay');
 
 --
 -- Indexes for dumped tables
