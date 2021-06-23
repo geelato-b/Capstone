@@ -31,7 +31,10 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
     <div class="px-3 py-2 ">
       <div class="container">
         <div class="navbar d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="#" class="logo d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none text-dark">logo</a>
+          <a href="#" class="logo d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none text-dark">
+          <img class="img-profile " src="../img/logo2.png" width="115px" height="105px">
+            <img src="../img/logo1.png" alt="" width="100px" height="100px">
+          </a>
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
