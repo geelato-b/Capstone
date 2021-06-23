@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2021 at 02:11 PM
+-- Generation Time: Jun 23, 2021 at 04:02 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -69,6 +69,7 @@ CREATE TABLE `status` (
 
 CREATE TABLE `student_acc` (
   `stud_id` varchar(50) NOT NULL,
+  `bu_email` varchar(256) NOT NULL,
   `stud_name` varchar(255) NOT NULL,
   `password` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -77,8 +78,8 @@ CREATE TABLE `student_acc` (
 -- Dumping data for table `student_acc`
 --
 
-INSERT INTO `student_acc` (`stud_id`, `stud_name`, `password`) VALUES
-('2018-PC-100000', 'Vanya Seven', 'qwerty123');
+INSERT INTO `student_acc` (`stud_id`, `bu_email`, `stud_name`, `password`) VALUES
+('2018-PC-100000', '', 'Vanya Seven', 'qwerty123');
 
 -- --------------------------------------------------------
 
@@ -88,6 +89,7 @@ INSERT INTO `student_acc` (`stud_id`, `stud_name`, `password`) VALUES
 
 CREATE TABLE `student_info` (
   `stud_id` varchar(50) NOT NULL,
+  `bu_email` varchar(256) NOT NULL,
   `stud_name` varchar(255) NOT NULL,
   `stud_program` varchar(128) NOT NULL,
   `stud_year_block` varchar(30) NOT NULL,
@@ -100,8 +102,8 @@ CREATE TABLE `student_info` (
 -- Dumping data for table `student_info`
 --
 
-INSERT INTO `student_info` (`stud_id`, `stud_name`, `stud_program`, `stud_year_block`, `gender`, `stud_birthdate`, `stud_address`) VALUES
-('2018-PC-100000', 'Vanya Seven', 'BSIT', '4A', 'F', '2000-02-03', 'Dunao, Ligao, Albay');
+INSERT INTO `student_info` (`stud_id`, `bu_email`, `stud_name`, `stud_program`, `stud_year_block`, `gender`, `stud_birthdate`, `stud_address`) VALUES
+('2018-PC-100000', '', 'Vanya Seven', 'BSIT', '4A', 'F', '2000-02-03', 'Dunao, Ligao, Albay');
 
 --
 -- Indexes for dumped tables
