@@ -4,7 +4,6 @@ include_once ('includes/db_conn.php');
 include_once ('includes/func.inc.php');
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,31 +20,43 @@ include_once ('includes/func.inc.php');
 <body>
 
 
+
 <!-------------------Sign In section------------------->
 
 <section id="sign_in">
     <div class="container">
+    
         <div class="form-container">
             <div class="sign-in">
-                <form action="includes/login.php" method="post" class="signin-form">
-                    <h2 class="title">Sign In</h2>
+            <form action="includes/login.php" method="POST" id="login" class="signin-form" >
+            <h2 class="title">Sign In</h2>
+            <div>
+                <img class="img-profile " src="img/logo2.png" width="115px" height="105px">
+                <img class="img-profile" src="img/logo1.png" width="100px" height="100px">
+              </div>
                     <div class="input-field">
                     <i class="bi bi-person-fill"></i>
                         <input name="stud_id" type="text" placeholder="Student ID" required>
                     </div>
+
                     <div class="input-field">
                     <i class="bi bi-lock-fill"></i>
                         <input  name="password" type="password" placeholder="Password" required>
                     </div>
 
-                    <input type="submit" value="Login" class="signin-btn">
-                   
-                </form>
+                        <button type="submit" name="login"value="login" class="signin-btn">Log In</button>
+                        <br>
+                        <div>
+                        </div>
+                        
+                    </form>
             </div>
         </div>
+        
 
         <div class="panels-container">
             <div class="panel left-panel">
+            
                 <img src="img/sign_in.svg" class="image" alt="">
             </div>
         </div>
