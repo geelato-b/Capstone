@@ -39,10 +39,7 @@ include_once ('includes/func.inc.php');
                     </div>
 
                     <input type="submit" value="Login" class="signin-btn">
-                    <div>
-                        <br>
-                        <a  href="./admin/form.php">Don't have an account yet?</a>
-                    </div>
+                   
                 </form>
             </div>
         </div>
