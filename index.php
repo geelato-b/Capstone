@@ -28,7 +28,7 @@ include_once ('includes/func.inc.php');
     
         <div class="form-container">
             <div class="sign-in">
-            <form action="includes/login.php" method="POST" id="login" class="signin-form" >
+            <form action="includes/processlogin.php" method="POST" id="login" class="signin-form" >
             <h2 class="title">Sign In</h2>
             <div>
                 <img class="img-profile " src="img/logo2.png" width="115px" height="105px">
