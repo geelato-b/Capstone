@@ -80,7 +80,7 @@ sidebar
 
 
 .navbar-nav > li > a.active{
-     color: #e9ecef!important;
+    color: #e9ecef!important;
     background: linear-gradient(90deg,rgba(59,125,221,.1),rgba(59,125,221,.0875) 50%,transparent);
     border-left:4px solid #3b7ddd;
 }
@@ -115,12 +115,33 @@ sidebar
     margin-top: -15px;
 }
 
+#nav-alert{
+    padding-left:2rem;
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem ; 
+    margin-left: -1rem;  
+}
 
+#nav-alert li{
+   margin: 1rem; 
+}
+
+#nav-alert i{
+    color: black;
+    font-size: 1.5rem;
+}
+
+#nav-alert span{
+    font-size: 0.7rem;
+}
 
 #wrapper.toggled {
     padding-left: 270px;
 }
-
 
 
 .toggled#sidebar-wrapper {
@@ -273,13 +294,18 @@ header navbar design
 .text-gray-600 {
     color: #858796!important;
 }
-.nav-link .img-profile {
-    height:40px;
-    width:40px;
+.navbar-nav .img-profile {
+    justify-content: end;
+    align-items: flex-end;
+    
 }
 
 .position-relative {
     position: relative!important;
+}
+
+.navbar-search{
+    justify-content: end;
 }
 
 
