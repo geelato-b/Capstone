@@ -109,45 +109,79 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
             <nav class="navbar sticky-top navbar-light">
                 <div class="container-fluid">
                         <p>
-                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#AddAcctbl" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <i class="bi bi-plus-circle"></i> Accountability
                             </a>
                         </p>
                                       
                 </div>
             </nav>
-                <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                        <div class="AddAcctbl">
-                        <form>
-                                <div class="mb-3">
-                                    <label for="TextInput" class="form-label">Accountability Name</label>
-                                    <input type="text" name="" class="form-control" >
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="TextInput" class="form-label">Amount</label>
-                                    <input type="number" name="" class="form-control" >
-                                </div>
+                <div class="row mx-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                    
+                        <?php if(isset($_GET['error'])) {
+                              switch ($_GET['error']){
+                                  case 1:
+                                    echo "<p class='text-danger'> Item Exist</p>";
+                                  break;
+                                  case 2:
+                                    echo "<p class='text-danger'>Adding Record Failed</p>";
+                                  break;
+                                  case 3:
+                                    echo "<p class='text-danger'>Checking Item Failed</p>";
+                                  break;
+                                  case 0:
+                                    echo "<p class='text-danger'> Item Has Been Added</p>";
+                                  break;
+                              }
+                            }
+                        ?>
 
-                                <div class="mb-3">
-                                    <label for="TextInput" class="form-label">Deadline</label>
-                                    <input type="date" name="" class="form-control" >
-                                </div>
+                        <div class="collapse" id="AddAcctbl" class="card collapse mt-3 shadow">
+                          <div class="card-header">
+                              <h3 class="display-7">Add New Item</h3>
+                          </div>
 
-                                <div class="mb-3">
-                                    <label for="TextInput" class="form-label">Accountability Description</label>
-                                    <select id="disabledSelect" class="form-select">
-                                        <option>Mandatory</option>
-                                        <option>Optional</option>
-                                    </select>
+                            <div class="card-body">
+                                <div class="AddAcctbl">
+                                <form action="../includes/AddAcc.php" method="post">
+                                        <div class="mb-3">
+                                            <label for="TextInput" class="form-label">Accountability Name</label>
+                                            <input type="text" name="accbty_name" id="accbty_name" class="form-control" >
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="TextInput" class="form-label">Amount</label>
+                                            <input type="number" name="accbty_price" id="accbty_price" class="form-control" >
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="TextInput" class="form-label">Deadline</label>
+                                            <input type="date" name="accbty_deadline" id="accbty_deadline" class="form-control" >
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="TextInput" class="form-label">Accountability Description</label>
+                                            <select name="accbty_desc" id="accbty_desc" class="form-select">
+                                                <option value="Mandatory">Mandatory</option>
+                                                <option value="Optional">Optional</option>
+                                            </select>
+                                            
+                                        </div>
+                                          <div class="card-footer">
+                                            <button class="btn btn-primary"> <i class="bi bi-save"></i> Update </button>
+                                          </div>
+
+                                        </div>
+                                </form>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                                </div>
-                        </form>
+                            </div>
                         </div>
                     </div>
+                
                 </div>
+                
         </section>
 
         <section >
@@ -187,7 +221,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                                     <td><?php echo $row['Accbty_id']; ?></td>
                                                     <td><?php echo $row['accbty_name']; ?></td>
                                                     <td><?php echo $row['accbty_desc']; ?></td>
-                                                    <td><?php echo $row['accbty_price']; ?></td>
+                                                    <td> Php <?php  echo number_format($row['accbty_price'],2); ?> </td> 
                                                     <td><?php echo $row['accbty_deadline']; ?></td>
                                                 </tr>
                                             <?php }?>
