@@ -1,3 +1,8 @@
+<?php
+session_start();
+include_once "../includes/db_conn.php";
+include_once "../includes/func.inc.php";  
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,43 +26,57 @@
 
 <section>
     <div class="container">
-        <form>
+        <form action="../includes/registration.php" method="POST">
                 <legend>Register</legend>
+                <?php
+                    if (isset($_SESSION['status'])) {
+                    ?>
+                    <div class="input-box">
+                    <div class="alert alert-warning" role="alert">
+                    <?php echo $_SESSION['status']; ?>
+                    </div>
+                    </div>
+                    <?php
+                        
+                        unset($_SESSION['status']);
+                    }
+                ?>
+
                 <div class="mb-3">
                 <label for="disabledTextInput" class="form-label">Student ID</label>
-                <input type="text" name="" class="form-control">
+                <input type="text" id="stid" name="stid" class="form-control" required="">
                 </div>
                 <div class="mb-3">
                 <label for="disabledTextInput" class="form-label">Student FullName</label>
-                <input type="text" name="" class="form-control">
+                <input type="text" id="studname" name="studname" class="form-control" required="">
                 </div>
                 <div class="mb-3">
                 <label for="disabledTextInput" class="form-label">Password</label>
-                <input type="password" name="" class="form-control">
+                <input type="password" id="psword" name="psword" class="form-control" required="">
                 </div>
                 <div class="mb-3">
                 <label for="disabledTextInput" class="form-label">Confrim Password</label>
-                <input type="password" name="" class="form-control">
+                <input type="password" id="cpassword" name="cpassword" class="form-control" required="">
                 </div>
                 <div class="mb-3">
                 <label for="disabledTextInput" class="form-label">Gender</label>
-                <select id="disabledSelect" class="form-select">
+                <select id="gender" name="gender" class="form-select" > 
                     <option value="F">Female</option>
                     <option value="M">Male</option>
                 </select>
                 </div>
                 <div class="mb-3">
                 <label for="disabledSelect" class="form-label">Program</label>
-                <select id="disabledSelect" class="form-select">
+                <select id="studprog" name="studprog" class="form-select" >
                     <option>BS Information Technology</option>
                     <option>BS Information Technology Animation</option>
                 </select>
                 </div>
                 <div class="mb-3">
                 <label for="disabledTextInput" class="form-label">Year & Block</label>
-                <input type="text" name="" class="form-control" placeholder="Example: 1A">
+                <input type="text" id="studyrblck" name="studyrblck" class="form-control" placeholder="Example: 1A" required="">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" name="submit"class="btn btn-primary">Submit</button>
            
         </form>
 
