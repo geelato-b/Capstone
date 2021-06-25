@@ -5,7 +5,6 @@ include_once "../includes/func.inc.php";
 $status_logged_in = null;
 if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
     $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
-    
     $STUD_ID = $_SESSION['stud_id'];
     $student_info = GetUserDetails($conn, $STUD_ID );
 }
@@ -107,31 +106,64 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
 
         <section>
             
-                <div >
+                <div>
+                        <div class="card-header">
+                                    <h3 class="display-7">Pay Here</h3>
+                          </div>
+                          <div>
+                          <?php if(isset($_GET['error'])) {
+                              switch ($_GET['error']){
+                                  case 1:
+                                    echo "<p class='text-danger'> Item Exist</p>";
+                                  break;
+                                  case 2:
+                                    echo "<p class='text-danger'>Adding Record Failed</p>";
+                                  break;
+                                  case 3:
+                                    echo "<p class='text-danger'>Checking Item Failed</p>";
+                                  break;
+                                  case 0:
+                                    echo "<p class='text-danger'> Item Has Been Added</p>";
+                                  break;
+                              }
+                            }
+                        ?>
+                          
+                          </div>
+                                    
+                               
                     <div class="card card-body">
                         <div class="Payment">
-                        <form>
-                            <h3>Pay Here</h3>
+                        <form action="../includes/addstat.php" method="post">
                                 <br>
+                                
+                                    <input hidden type="text" name="status_id" class="form-control" >
+                                
+                                <div class="mb-3">
+                                    <label for="TextInput" class="form-label">Student ID</label>
+                                    <input type="text" name="stud_id" class="form-control" >
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Name</label>
-                                    <input type="text" name="" class="form-control" >
+                                    <input type="text" name="stud_name" class="form-control" >
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Program</label>
-                                    <select id="disabledSelect" class="form-select">
-                                        <option>BS Information Technology</option>
-                                        <option>BS Information Technology Animation</option>
+                                    <select name="stud_program" id="disabledSelect" class="form-select">
+                                        <option values="BSIT">BS Information Technology</option>
+                                        <option values="BSIT Animation">BS Information Technology Animation</option>
                                     </select>
 
                                 </div>
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Year & Block</label>
-                                    <input type="text" name="" class="form-control" >
+                                    <input type="text" name="stud_year_block" class="form-control" >
                                 </div>
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Gender</label>
-                                    <select id="disabledSelect" class="form-select">
+                                    <select name="gender" id="disabledSelect" class="form-select">
                                         <option value="F">Female</option>
                                         <option value="M">Male</option>
                                     </select>
@@ -139,32 +171,39 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
 
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Accountability</label>
-                                    <select id="disabledSelect" class="form-select">
-                                        <option value="">
-
-                                        </option>
+                                    <select name="accbty_id" id="" class="form-select">
+                                    <?php
+                                            $sql_acc = "SELECT `accbty_id`, `accbty_name` FROM `accountabilities`;";
+                                            $result = mysqli_query($conn, $sql_acc);
+                                            if(mysqli_num_rows($result) > 0){
+                                                while($row = mysqli_fetch_assoc($result)){
+                                                    echo "<option value='".$row['accbty_id']."'>".$row['accbty_name']."</option>";
+                                                }
+                                            }
+                                        ?>
                                     </select>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Status</label>
-                                    <select id="disabledSelect" class="form-select">
+                                    <select name="pay_status" id="disabledSelect" class="form-select">
                                         <option value="UP">Unpaid</option>
                                         <option value="P">Paid</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Payment Received By</label>
-                                    <input type="text" name="" class="form-control" >
+                                    <input type="text" name="pymt_rcv_by" class="form-control" >
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Date</label>
-                                    <input type="date" name="" class="form-control" >
+                                    <input type="date" name="date" class="form-control" >
                                 </div>
 
-
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                         <div class="card-footer">
+                                            <button class="btn btn-primary"> <i class="bi bi-save"></i> Save </button>
+                                          </div>
                                 </div>
                         </form>
                         </div>
