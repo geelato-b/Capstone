@@ -53,3 +53,55 @@ $stmt=mysqli_stmt_init($conn);
         }
         mysql_stmt_close($stmt);
 }
+function cidExists($conn, $stid){
+    $sql = "SELECT * FROM `student_acc`  WHERE `stud_id` = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../admin/form.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s", $stid);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultData)) {
+         return $row;
+    } else {
+        $result = false;
+        return $result;
+    }
+
+    mysqli_stmt_close($stmt);
+ }
+function passExists($conn, $psword){
+    $sql = "SELECT * FROM `student_acc`  WHERE `password` = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../admin/form.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s", $psword);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultData)) {
+         return $row;
+    } else {
+        $result = false;
+        return $result;
+    }
+
+    mysqli_stmt_close($stmt);
+ }
+
+function passMatch($psword, $cpassword) {
+    $result;
+    if($psword !== $cpassword) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $result;
+}
