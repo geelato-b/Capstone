@@ -33,6 +33,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
         <nav class="fixed-top align-top" id="sidebar-wrapper" role="navigation">
        <div class="simplebar-content" style="padding: 0px;">
 				<a class="sidebar-brand" href="index.php">
+        <br>
           <span class="align-middle">BUPC CSC Accountability System</span>
         </a>
 
@@ -87,7 +88,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                <span></span>
 			    <span></span>
 				 <span></span>
-            </div>
+          </div>
 			
 
           <!-- Topbar Search -->
@@ -102,6 +103,19 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
             </div>
           </form>
 
+          <!-- nav alert -->
+          <div id="nav-alert">
+            <li><a href=""><i class="bi bi-bell">
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                12
+               </span></i></a></li>
+
+            <li><a href=""><i class="bi bi-envelope">
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                99+
+               </span></i></a></li>
+          </div>
+  
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
             <li>
@@ -122,9 +136,8 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
 <div class="row">
 <div class="col-md-12 mt-lg-4 mt-4">
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-		  </div>
+          <img src="../img/hello.svg" alt="" width="150px" height="150px"> 
+          <h1>Hello!</h1>
 <div class="col-md-12">
        <div class="row">
 									<div class="col-sm-3">
