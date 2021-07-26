@@ -2,13 +2,13 @@
 session_start();
 include_once "../includes/db_conn.php";
 include_once "../includes/func.inc.php";   
-$status_logged_in = null;
-if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
-    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
+// $status_logged_in = null;
+// if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
+//     $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
     
-    $STUD_ID = $_SESSION['stud_id'];
-    $student_info = GetUserDetails($conn, $STUD_ID );
-}
+//     $STUD_ID = $_SESSION['stud_id'];
+//     $student_info = GetUserDetails($conn, $STUD_ID );
+// }
 ?>
 
 <!doctype html>
@@ -24,6 +24,8 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
     <link rel="stylesheet" href="../css/dash.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" >
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
   </head>
   <body>
   <div id="wrapper">
@@ -39,9 +41,10 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
 	<ul class="navbar-nav align-self-stretch">
 	 
       <li class="sidebar-header"></li>
-	  <li class=""> 
-      <a href="index.php" class="nav-link text-left active"  role="button"><i class="bi bi-house-door"></i>Home </a></li>
-
+	    <li class=""> 
+      <a href="index.php" class="nav-link text-left "  role="button"><i class="bi bi-house-door"></i>Home </a></li>
+      <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status</a></li>
+       <li><a href="e-payment.php" class="nav-link text-left active"  role="button"><i class="bi bi-cash-coin"></i>G-Cash</a></li>
       <li class="has-sub">
         <a class="nav-link collapsed text-left" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
         <i class="bi bi-people-fill"></i>Student
@@ -55,8 +58,9 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
         </div>
         </div>
       </li>
-		  <li><a href="payment.php" class="nav-link text-left"  role="button"><i class="bi bi-cash-coin"></i>Payment</a></li>
-      <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status</a></li>
+
+		 
+      
       <li><a href="update.php" class="nav-link text-left"  role="button"><i class="bi bi-journal-check"></i>Update</a></li>
       <li><a href="" class="nav-link text-left"  role="button"><i class="bi bi-gear-fill"></i>Setting</a></li>
       <li><a href="../logout.php" class="nav-link text-left"  role="button"><i class="bi bi-door-open"></i>Log Out</a></li>
@@ -88,11 +92,9 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                
                <form class="d-flex">
                <div class="input-group mb-3">
-               <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
-               <button class="btn btn-primary" type="button">
-               <i class="bi bi-search"></i>
-               </button>
+                <h1>G-Cash</h1>
                </div>
+
                </form>
 
                <div>
@@ -108,41 +110,75 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
         <section>
             <nav class="navbar sticky-top navbar-light">
                 <div class="container-fluid">
+                  
                         <p>
-                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#AddAcctbl" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            &nbsp
+                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#AddGCASH" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <i class="bi bi-plus-circle"></i> G-Cash
                             </a>
+                            &nbsp
+                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#History" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="bi bi-save"></i> Upload History
+                            </a>
                         </p>
-                                      
+                                  
                 </div>
             </nav>
-
-          <div class="collapse" id="AddAcctbl" class="card collapse mt-3 shadow">
+          <?php
+                    if (isset($_SESSION['status'])) {
+                    ?>
+                    <div class="container-sm">
+                    <div class="alert alert-success" role="alert">
+                      <i class="fas fa-check-circle"></i><?php echo $_SESSION['status']; ?>
+                    </div>
+                     </div>
+                    <?php
+                        
+                        unset($_SESSION['status']);
+                    }
+                ?>
+          <div class="collapse" id="AddGCASH" class="card collapse mt-3 shadow">
                           <div class="card-header">
-                              <h3 class="display-7">Upload G-Cash Receipt</h3>
+                              <h3 class="display-7">&nbsp Upload G-Cash Receipt</h3>
                           </div>
 
                             <div class="card-body">
                                 <div class="AddAcctbl">
-                                <form action="../includes/AddSS.php" method="post">
+                                <form action="../includes/AddSS.php" method="post" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <label for="disabledTextInput" class="form-label">Student ID</label>
+                                            <input type="text" id="stud_id" name="stud_id" class="form-control" placeholder="Ex. 201X-PC-1XXXXX" required="">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="disabledTextInput" class="form-label">Student FullName</label>
+                                            <input type="text" id="stud_name" name="stud_name" class="form-control" required="">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="disabledTextInput" class="form-label">BU Email</label>
+                                            <input type="text" id="bu_email" name="bu_email" class="form-control" placeholder="fnamelname@bicol-u.edu.ph" required="">
+                                        </div>
                                         <div class="mb-3">
                                             <label for="TextInput" class="form-label">Accountability Name</label>
-                                            <input type="text" name="accbty_name" id="accbty_name" class="form-control" >
+                                            <input type="text" name="accbty_name" id="accbty_name" class="form-control" placeholder="Ex. CSC Fee, T-Shirt" required="" >
                                         </div>
                                         
                                         <div class="mb-3">
                                             <label for="TextInput" class="form-label">Amount</label>
-                                            <input type="number" name="accbty_price" id="accbty_price" class="form-control" >
+                                            <input type="number" name="accbty_price" id="accbty_price" class="form-control" required="">
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="" class="form-label">Image</label>
-                                            <input name="itemimagefile" type="file" class="form-control">
+                                            <input name="itemimagefile" type="file" class="form-control" required="">
                                         </div>
-
+                                      
+                                        <div class="mb-3">
+                                          <label for="TextInput" class="form-label">Date</label>
+                                          <input type="text" id="date_time" name="date_time" value="<?php echo date("Y-m-d");?>"  class="form-control" readonly>
+                                        </div>
                                         </div>
                                           <div class="card-footer">
-                                            <button class="btn btn-primary" name="AddSS"> <i class="bi bi-save"></i> Upload </button>
+                                            <button class="btn btn-primary" name="AddSS" type="submit"> <i class="bi bi-save"></i> Upload </button>
                                           </div>
 
                                         </div>
@@ -154,6 +190,64 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                 
                 </div>
                 
+                <div class="collapse" id="History" class="card collapse mt-3 shadow">
+                  <div class="card-header">
+                              <h3 class="display-7"> &nbsp Upload History :</h3>
+                  </div>
+
+                  <div class="main__container" style="margin-top:2rem;">
+                    <div class="container__fluid"> 
+                      <div class="row" id="contentPanel">
+                        <div class="col-12">
+                            <?php
+                                            $sql =" SELECT 
+                                                        `stud_id`
+                                                        , `stud_name`
+                                                        , `bu_email`
+                                                        , `date_time`
+                                                        , `img`
+
+                                                        FROM `gcash`;
+                                                        ";
+                            $stmt=mysqli_stmt_init($conn);
+                            if (!mysqli_stmt_prepare($stmt, $sql)){
+                                header("location: ?error=failedcheckout");
+                                exit();
+                                }
+                                mysqli_stmt_execute($stmt);
+            
+                                $resultData = mysqli_stmt_get_result($stmt); ?>
+                            <div class="container">
+                                <div class="row">
+                                    <table class="table table-hover" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                                                                            border-radius: 10px;">
+                                                <thead>
+                                                    <th>Date</th>
+                                                    <th>Item</th>
+                                                    <th>Student ID</th>
+                                                    <th>Student's Name</th>
+                                                    <th>Confirmed</th>
+                                                </thead>
+                                            <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
+                                                <tr>
+                                                    <td><?php echo $row['date_time']; ?></td>
+                                                    <td><?php echo $row['stud_id']; ?></td>
+                                                    <td><?php echo $row['stud_name']; ?></td>
+                                                    <td></td>
+                                                   <!--  class="img-thumbnail" -->
+                                                   <!-- <img src="../img<?php echo $row['img']; ?>" > -->
+                                                   <!-- <a href="../img"><?php echo $row['img']; ?></a> -->
+                                                    <td></td>
+                                                </tr>
+                                            <?php }?>
+                                    </table> 
+                                  </div>
+                                </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
         </section>
 
         <section >
@@ -198,11 +292,14 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                                 </tr>
                                             <?php }?>
                                     </table> 
+                                  </div>
+                                </div>
                             </div>
-                        </div>
+                          </div>
              </div>
            </div>
-          </div>          
+          </div>    
+
         </section>
       
         <!-- /#page-content-wrapper -->
