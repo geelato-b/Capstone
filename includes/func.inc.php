@@ -57,7 +57,7 @@ function cidExists($conn, $stid){
     $sql = "SELECT * FROM `student_acc`  WHERE `stud_id` = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../admin/form.php?error=stmtfailed");
+        header("location: ../form.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "s", $stid);
@@ -78,7 +78,7 @@ function passExists($conn, $psword){
     $sql = "SELECT * FROM `student_acc`  WHERE `password` = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../admin/form.php?error=stmtfailed");
+        header("location: ../form.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "s", $psword);
