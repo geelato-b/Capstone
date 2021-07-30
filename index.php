@@ -49,6 +49,11 @@ include_once ('includes/func.inc.php');
                         <div>
                         </div>
                         
+                        <div class="sign_up">
+                        <a href="form.php">Don't have an account yet?</a>
+                        </div>
+                        
+                        
                     </form>
             </div>
         </div>
