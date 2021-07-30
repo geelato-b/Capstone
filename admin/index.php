@@ -3,12 +3,12 @@ session_start();
 include_once "../includes/db_conn.php";
 include_once "../includes/func.inc.php";   
 $status_logged_in = null;
-if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
-    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
+if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
+    $status_logged_in = array('status' => true, 'user_type' => $_SESSION['user_type'] );
     
     $STUD_ID = $_SESSION['stud_id'];
     $student_info = GetUserDetails($conn, $STUD_ID );
-}
+
 ?>
 
 <!doctype html>
@@ -64,7 +64,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
 		  <li><a href="payment.php" class="nav-link text-left"  role="button"><i class="bi bi-cash-coin"></i>Payment</a></li>
           <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status</a></li>
           <li><a href="update.php" class="nav-link text-left"  role="button"><i class="bi bi-journal-check"></i>Update</a></li>
-          <li><a href="" class="nav-link text-left"  role="button"><i class="bi bi-gear-fill"></i>Setting</a></li>
+          <li><a href="setting.php" class="nav-link text-left"  role="button"><i class="bi bi-gear-fill"></i>Setting</a></li>
           <li><a href="../logout.php" class="nav-link text-left"  role="button"><i class="bi bi-door-open"></i>Log Out</a></li>
 
 		  </ul>	
@@ -105,11 +105,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
 
           <!-- nav alert -->
           <div id="nav-alert">
-            <li><a href=""><i class="bi bi-bell">
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                12
-               </span></i></a></li>
-
+            
             <li><a href=""><i class="bi bi-envelope">
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 99+
@@ -182,7 +178,14 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                       
       </div>
 			
-		
+      <?php    
+
+    }
+
+else{
+    header("location: ../index.php");  
+}
+?>
 		
         <!-- /#page-content-wrapper -->
 

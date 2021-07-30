@@ -57,7 +57,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
 		  <li><a href="payment.php" class="nav-link text-left"  role="button"><i class="bi bi-cash-coin"></i>Payment</a></li>
           <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status</a></li>
           <li><a href="update.php" class="nav-link text-left"  role="button"><i class="bi bi-journal-check"></i>Update</a></li>
-          <li><a href="" class="nav-link text-left"  role="button"><i class="bi bi-gear-fill"></i>Setting</a></li>
+          <li><a href="setting.php" class="nav-link text-left"  role="button"><i class="bi bi-gear-fill"></i>Setting</a></li>
           <li><a href="../logout.php" class="nav-link text-left"  role="button"><i class="bi bi-door-open"></i>Log Out</a></li>
 
 		  </ul>	
