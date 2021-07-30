@@ -44,14 +44,15 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
               <a href="#" class="nav-link text-dark">Status</a>
             </li>
             <li>
-              <a href="#" class="nav-link text-dark">About Us</a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-dark">Setting</a>
-            </li>
-            <li>
               <a href="e-payment.php" class="nav-link text-dark">G-Cash</a>
             </li>
+            <li>
+              <a href="setting.php" class="nav-link text-dark">Setting</a>
+            </li>
+            <li>
+              <a href="#" class="nav-link text-dark">About Us</a>
+            </li>
+            
             <li>
               <a href="../logout.php" type="button" class="nav-link btn btn-outline-warning text-dark">Log out</a>
             </li>
