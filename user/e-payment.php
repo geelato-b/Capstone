@@ -2,13 +2,13 @@
 session_start();
 include_once "../includes/db_conn.php";
 include_once "../includes/func.inc.php";   
-// $status_logged_in = null;
-// if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
-//     $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
+$status_logged_in = null;
+if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
+    $status_logged_in = array('status' => true, 'user_type' => $_SESSION['user_type'] );
     
-//     $STUD_ID = $_SESSION['stud_id'];
-//     $student_info = GetUserDetails($conn, $STUD_ID );
-// }
+    $STUD_ID = $_SESSION['stud_id'];
+    $student_info = GetUserDetails($conn, $STUD_ID );
+
 ?>
 
 <!doctype html>
@@ -44,25 +44,9 @@ include_once "../includes/func.inc.php";
 	    <li class=""> 
       <a href="index.php" class="nav-link text-left "  role="button"><i class="bi bi-house-door"></i>Home </a></li>
       <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status</a></li>
-       <li><a href="e-payment.php" class="nav-link text-left active"  role="button"><i class="bi bi-cash-coin"></i>G-Cash</a></li>
-      <li class="has-sub">
-        <a class="nav-link collapsed text-left" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-        <i class="bi bi-people-fill"></i>Student
-        </a>
-        <div class="collapse" id="dashboard-collapse">
-            <div class="submenu-box">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="student_acc.php" class="nav-link text-left active">Student Account</a></li>
-            <li><a href="student_info.php" class="nav-link text-left active">Student Information</a></li>
-          </ul>
-        </div>
-        </div>
-      </li>
-
-		 
-      
-      <li><a href="update.php" class="nav-link text-left"  role="button"><i class="bi bi-journal-check"></i>Update</a></li>
+      <li><a href="e-payment.php" class="nav-link text-left active"  role="button"><i class="bi bi-cash-coin"></i>G-Cash</a></li>
       <li><a href="" class="nav-link text-left"  role="button"><i class="bi bi-gear-fill"></i>Setting</a></li>
+      <li><a href="" class="nav-link text-left"  role="button"><i class="bi bi-book-half"></i>About Us</a></li>
       <li><a href="../logout.php" class="nav-link text-left"  role="button"><i class="bi bi-door-open"></i>Log Out</a></li>
 
 		  </ul>	
@@ -206,14 +190,15 @@ include_once "../includes/func.inc.php";
                                                         , `bu_email`
                                                         , `date_time`
                                                         , `img`
-
-                                                        FROM `gcash`;
+                                                        FROM `gcash`
+                                                        WHERE stud_id = ?;
                                                         ";
                             $stmt=mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmt, $sql)){
-                                header("location: ?error=failedcheckout");
-                                exit();
-                                }
+                              echo "Statement Failed.";
+                              exit();
+                           }
+                                mysqli_stmt_bind_param($stmt, "s" , $STUD_ID);
                                 mysqli_stmt_execute($stmt);
             
                                 $resultData = mysqli_stmt_get_result($stmt); ?>
@@ -231,12 +216,20 @@ include_once "../includes/func.inc.php";
                                             <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
                                                 <tr>
                                                     <td><?php echo $row['date_time']; ?></td>
+                                                    <td>
+                                                      <div class="card" style="width: 18rem;">
+                                                          <img src="img<?php echo $row['img']; ?>" class="card-img-top" alt="1X1">
+                                                          <div class="card-body">
+                                                            <h5 class="card-title"></h5>
+                                                            <a href="../img"><?php echo $row['img']; ?></a>
+                                                          </div>
+                                                        </div>
+                                                    </td>
                                                     <td><?php echo $row['stud_id']; ?></td>
                                                     <td><?php echo $row['stud_name']; ?></td>
                                                     <td></td>
                                                    <!--  class="img-thumbnail" -->
-                                                   <!-- <img src="../img<?php echo $row['img']; ?>" > -->
-                                                   <!-- <a href="../img"><?php echo $row['img']; ?></a> -->
+                                                  
                                                     <td></td>
                                                 </tr>
                                             <?php }?>
@@ -301,6 +294,14 @@ include_once "../includes/func.inc.php";
           </div>    
 
         </section>
+        <?php    
+
+}
+
+else{
+header("location: ../index.php");  
+}
+?>
       
         <!-- /#page-content-wrapper -->
 
