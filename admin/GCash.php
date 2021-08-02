@@ -56,7 +56,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
       </li>
 
 		  <li><a href="payment.php" class="nav-link text-left"  role="button"><i class="bi bi-cash-coin"></i>Payment</a></li>
-      <li><a href="Gcash.php" class="nav-link text-left"  role="button"><i class="bi bi-currency-exchange"></i>Gcash</a></li>
+          <li><a href="Gcash.php" class="nav-link text-left"  role="button"><i class="bi bi-currency-exchange"></i>Gcash</a></li>
           <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status</a></li>
           <li><a href="update.php" class="nav-link text-left"  role="button"><i class="bi bi-journal-check"></i>Update</a></li>
           <li><a href="setting.php" class="nav-link text-left"  role="button"><i class="bi bi-gear-fill"></i>Setting</a></li>
@@ -80,46 +80,52 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
           <!-- Sidebar Toggle (Topbar) -->
             <div type="button"  id="bar" class="nav-icon1 hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
                <span></span>
-			         <span></span>
-				       <span></span>
+			    <span></span>
+				 <span></span>
             </div>
+          <!-- Topbar Navbar -->
           
-           <!-- Topbar Navbar -->
-          
-              <div class="container-fluid">
+          <div class="container-fluid">
                
-                <form class="d-flex">
-                <div class="input-group mb-3">
-                <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
-                <button class="btn btn-primary" type="button">
-                <i class="bi bi-search"></i>
-                </button>
-                </div>
-                </form>
+               <form class="d-flex">
+               <div class="input-group mb-3">
+               <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
+               <button class="btn btn-primary" type="button">
+               <i class="bi bi-search"></i>
+               </button>
+               </div>
+               </form>
 
-                <div>
-                <img class="img-profile " src="../img/logo2.png" width="115px" height="105px">
-                   <img class="img-profile" src="../img/logo1.png" width="100px" height="100px">
-                </div>
-                
-              </div>
-            
-
+               <div>
+               <img class="img-profile " src="../img/logo2.png" width="115px" height="105px">
+                  <img class="img-profile" src="../img/logo1.png" width="100px" height="100px">
+               </div>
+               
+             </div>
         </nav>
         <!-- End of Topbar -->
         <!-- Begin Page Content -->
 
         <section >
+            <div class="card-header">
+                <h3 class="display-7">GCash Confirmation</h3>
+        </div>
             <div class="main__container" style="margin-top:2rem;">
              <div class="container__fluid"> 
                     <div class="row" id="contentPanel">
                     <div class="col-12">
                         <?php
-                                            $sql =" SELECT `stud_id`
-                                                          , `stud_name`
-                                                          , `password` 
-                                                          FROM `student_acc` 
-                                                          WHERE user_type = 'S';";
+                                            $sql =" SELECT `gcash_id`
+                                                            , `stud_id`
+                                                            , `stud_name`
+                                                            , `bu_email`
+                                                            , `date_time`
+                                                            , `img`
+                                                            , `gc_status`
+                                                            , `status` 
+                                                            FROM `gcash` 
+                                                            WHERE gc_status = 'UC' 
+                                                            OR `status`  = 'N' ;";
                             $stmt=mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmt, $sql)){
                                 header("location: ?error=failedcheckout");
@@ -127,41 +133,65 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                 }
                                 mysqli_stmt_execute($stmt);
             
-                                $resultData = mysqli_stmt_get_result($stmt); ?>
-                            <div class="container">
-                                <div class="row">
-                                    <table class="table table-hover" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                                                                            border-radius: 10px;">
-                                                <thead>
-                                                    <th>ID Number</th>
-                                                    <th>Name</th>
-                                                    <th>Password</th>
-                                                    <th>Status</th>
-                                                    <th></th>
-                                                </thead>
-                                            <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
-                                                <tr>
-                                                    <td><?php echo $row['stud_id']; ?></td>
-                                                    <td><?php echo $row['stud_name']; ?></td>
-                                                    <td><?php echo $row['password'];?></td>
-                                                    <td><button type="button" class="btn btn-primary">Block</button></td>
-                                                    <td>
-                                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                                      <a href="" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
-                                                      
-                                                      
-                                                    </div>
-                                                    </td>
-                                                    
-                                                </tr>
-                                            <?php }?>
-                                    </table> 
-                            </div>
-                        </div>
+                                $resultData = mysqli_stmt_get_result($stmt); 
+
+                                $arr=array();
+
+                                while($row = mysqli_fetch_assoc($resultData)){
+
+                                    array_push($arr,$row);
+                                }
+                                    if(!empty($arr)){
+
+                                    ?>
+<section id="gcash">
+    <div class="container">
+        <?php
+        foreach($arr as $key => $val){
+        ?>
+
+        <div class="slider">
+            <div class="card item">
+                <div class="image">
+                <img src="../img/<?php echo $val['img'] ?>" alt="1 x 1" class="card-img-top">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><a href="../img"><?php echo $val['img']; ?></a></h5>
+                    <p class="card-text">
+                        <h6><?php echo $val['stud_id']?></h6>
+                        <h5><?php echo $val['stud_name']?></h5>
+                    </p>
+                </div>
+
+                    <div class="card-footer">
+                     <form action="../includes/update_stat.php" method="post">
+                         <input hidden type="text" name="stud_id" value="<?php echo $row['stud_id']; ?>">
+                          <input type="Hidden" name="new_item_status" value="<?php echo $row['gc_status'] == 'UC' ? 'C' : 'UC' ; ?>">
+                          <p class="lead"><?php echo $row['gc_status'] == 'C' ? 'Confirmed' : 'Unconfirmed' ; ?></p>
+                           <button class="btn btn-success"> <?php echo $row['gc_status'] == 'UC' ? 'Confirm' : 'Unconfirm' ; ?> </button>
+                           </a>
+                    </form>
+                    </div>
+            </div>
+        </div>
+
+                    <?php
+                        }
+                    }
+                
+                        ?>
+    </div>
+</section>
+                                                                        
+                                
+
+                      
              </div>
            </div>
-          </div>          
+          </div>  
+         
         </section>
+        
         <!-- /#page-content-wrapper -->
     </div>
     <!-- /#wrapper -->
