@@ -190,6 +190,8 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                         , `bu_email`
                                                         , `date_time`
                                                         , `img`
+                                                        , `gc_status`
+                                                        , `status`
                                                         FROM `gcash`
                                                         WHERE stud_id = ?;
                                                         ";
@@ -211,14 +213,14 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                     <th>Item</th>
                                                     <th>Student ID</th>
                                                     <th>Student's Name</th>
-                                                    <th>Confirmed</th>
+                                                    <th>Status</th>
                                                 </thead>
                                             <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
                                                 <tr>
                                                     <td><?php echo $row['date_time']; ?></td>
                                                     <td>
                                                       <div class="card" style="width: 18rem;">
-                                                          <img src="img<?php echo $row['img']; ?>" class="card-img-top" alt="1X1">
+                                                      <img src="../img/<?php echo $row['img'] ?>" alt="1 x 1" class="card-img-top">
                                                           <div class="card-body">
                                                             <h5 class="card-title"></h5>
                                                             <a href="../img"><?php echo $row['img']; ?></a>
@@ -227,7 +229,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                     </td>
                                                     <td><?php echo $row['stud_id']; ?></td>
                                                     <td><?php echo $row['stud_name']; ?></td>
-                                                    <td></td>
+                                                    <td> <p class="lead"><?php echo $row['gc_status'] == 'C' ? 'Confirmed' : 'Unconfirmed' ; ?></p></td>
                                                    <!--  class="img-thumbnail" -->
                                                   
                                                     <td></td>
