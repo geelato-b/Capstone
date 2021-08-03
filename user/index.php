@@ -3,12 +3,12 @@ session_start();
 include_once "../includes/db_conn.php";
 include_once "../includes/func.inc.php";   
 $status_logged_in = null;
-if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
-    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
+if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
+    $status_logged_in = array('status' => true, 'user_type' => $_SESSION['user_type'] );
     
     $STUD_ID = $_SESSION['stud_id'];
     $student_info = GetUserDetails($conn, $STUD_ID );
-}
+
  ?>
 
 <!DOCTYPE html>
@@ -41,7 +41,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
               <a href="index.php" class="nav-link text-dark">Home</a>
             </li>
             <li>
-              <a href="#" class="nav-link text-dark">Status</a>
+              <a href="status.php" class="nav-link text-dark">Status</a>
             </li>
             <li>
               <a href="e-payment.php" class="nav-link text-dark">G-Cash</a>
@@ -91,22 +91,19 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
 					<div class="row text-muted">
 						<div class="col-6 text-left">
 							<p class="mb-0">
-								<a href="index.html" class="text-muted"><strong>BUPC CSC Accountability System </strong></a> &copy
+								<a href="index.php" class="text-muted"><strong>BUPC CSC Accountability System </strong></a> &copy
 							</p>
 						</div>
 						<div class="col-6 text-right">
 							<ul class="list-inline">
 								<li class="footer-item">
-									<a class="text-muted" href="#">Support</a>
+									<a class="text-muted" href="#">Contact</a>
 								</li>
 								<li class="footer-item">
-									<a class="text-muted" href="#">Help Center</a>
+									<a class="text-muted" href="../footer/privacy.php">Privacy Policy</a>
 								</li>
 								<li class="footer-item">
-									<a class="text-muted" href="#">Privacy</a>
-								</li>
-								<li class="footer-item">
-									<a class="text-muted" href="#">Terms</a>
+									<a class="text-muted" href="../footer/terms.php">Terms of Service</a>
 								</li>
 							</ul>
 						</div>
@@ -114,7 +111,14 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
 				</div>
 			</footer>
 
+      <?php    
 
+}
+
+else{
+header("location: ../index.php");  
+}
+?>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
