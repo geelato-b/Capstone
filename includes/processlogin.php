@@ -14,12 +14,12 @@ $password = htmlentities($_POST['password']);
         switch($user_info['user_type']){
           
             case 'S': $_SESSION['user_type'] = 'S';
-                      $_SESSION['studid'] = $user_info['stud_id'];
+                      $_SESSION['stud_id'] = $user_info['stud_id'];
                       header("location: ../user/");
                       break;
                 
             case 'A': $_SESSION['user_type'] = 'A';
-                      $_SESSION['studid'] = $user_info['stud_id'];
+                      $_SESSION['stud_id'] = $user_info['stud_id'];
                       header("location: ../admin/");
                       break;
         }
