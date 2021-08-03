@@ -187,11 +187,38 @@ else{
     header("location: ../index.php");  
 }
 ?>
+<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-left">
+							<p class="mb-0">
+								<a href="index.html" class="text-muted"><strong> BUPC CSC Accountability System </strong></a> &copy
+							</p>
+						</div>
+						<div class="col-6 text-right">
+							<ul class="list-inline">
+								
+								<li class="footer-item">
+									<a class="text-muted" href="#">Contacts</a>
+								</li>
+								<li class="footer-item">
+									<a class="text-muted" href="../footer/privacy.php">Privacy Policy</a>
+								</li>
+								<li class="footer-item">
+									<a class="text-muted" href="../footer/terms.php">Terms of Service</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
 		
         <!-- /#page-content-wrapper -->
 
     </div>
     <!-- /#wrapper -->
+
+   
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

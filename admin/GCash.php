@@ -3,12 +3,13 @@ session_start();
 include_once "../includes/db_conn.php";
 include_once "../includes/func.inc.php";   
 $status_logged_in = null;
-if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
-    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
+if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
+    $status_logged_in = array('status' => true, 'user_type' => $_SESSION['user_type'] );
     
     $STUD_ID = $_SESSION['stud_id'];
     $student_info = GetUserDetails($conn, $STUD_ID );
-}
+
+
 ?>
 
 <!doctype html>
@@ -153,7 +154,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
         <div class="slider">
             <div class="card item">
                 <div class="image">
-                <img src="../img/<?php echo $val['img'] ?>" alt="1 x 1" class="card-img-top">
+                    <img src="../img/<?php echo $val['img'] ?>" alt="1 x 1" class="card-img-top">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title"><a href="../img"><?php echo $val['img']; ?></a></h5>
@@ -202,7 +203,15 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" ></script>
   
-  
+    <?php    
+
+}
+
+else{
+header("location: ../index.php");  
+}
+?>
+
     
   
  <script>
