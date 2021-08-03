@@ -3,12 +3,12 @@ session_start();
 include_once "../includes/db_conn.php";
 include_once "../includes/func.inc.php";   
 $status_logged_in = null;
-if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
-    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
+if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
+    $status_logged_in = array('status' => true, 'user_type' => $_SESSION['user_type'] );
     
     $STUD_ID = $_SESSION['stud_id'];
     $student_info = GetUserDetails($conn, $STUD_ID );
-}
+
 ?>
 
 <!doctype html>
@@ -179,6 +179,14 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
         <!-- /#page-content-wrapper -->
     </div>
     <!-- /#wrapper -->
+    <?php    
+
+}
+
+else{
+header("location: ../index.php");  
+}
+?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
