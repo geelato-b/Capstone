@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2021 at 04:20 AM
+-- Generation Time: Aug 10, 2021 at 08:57 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -50,19 +50,23 @@ INSERT INTO `accountabilities` (`accbty_id`, `accbty_name`, `accbty_desc`, `accb
 --
 
 CREATE TABLE `gcash` (
+  `gcash_id` int(11) NOT NULL,
   `stud_id` varchar(128) NOT NULL,
   `stud_name` varchar(255) NOT NULL,
   `bu_email` varchar(255) NOT NULL,
   `date_time` date NOT NULL DEFAULT current_timestamp(),
-  `img` varchar(11) NOT NULL
+  `img` varchar(128) NOT NULL,
+  `gc_status` varchar(64) NOT NULL,
+  `status` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `gcash`
 --
 
-INSERT INTO `gcash` (`stud_id`, `stud_name`, `bu_email`, `date_time`, `img`) VALUES
-('2018-PC-100000', 'Vanya Seven', 'vanyaseven@bicol-u.edu.ph', '2021-06-29', 'gcash1.jpeg');
+INSERT INTO `gcash` (`gcash_id`, `stud_id`, `stud_name`, `bu_email`, `date_time`, `img`, `gc_status`, `status`) VALUES
+(1, '2018-PC-100000', 'Vanya Seven', 'vanyaseven@bicol-u.edu.ph', '2021-06-29', 'gcash1.jpeg', 'UC', 'N'),
+(2, '2018-PC-100223', 'Angelica Mae Bonganay', 'angelicamaelianko.bonganay@bicol-u.edu.ph', '2021-08-10', '2018-pc-100', 'UC', 'N');
 
 -- --------------------------------------------------------
 
@@ -78,6 +82,7 @@ CREATE TABLE `status` (
   `stud_year_block` varchar(30) NOT NULL,
   `gender` varchar(11) NOT NULL COMMENT 'M-male, F-female',
   `accbty_id` varchar(11) NOT NULL,
+  `pymt_rcv_by` varchar(128) NOT NULL,
   `pay_status` varchar(20) NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -140,6 +145,12 @@ ALTER TABLE `accountabilities`
   ADD PRIMARY KEY (`accbty_id`);
 
 --
+-- Indexes for table `gcash`
+--
+ALTER TABLE `gcash`
+  ADD PRIMARY KEY (`gcash_id`);
+
+--
 -- Indexes for table `status`
 --
 ALTER TABLE `status`
@@ -166,6 +177,12 @@ ALTER TABLE `student_info`
 --
 ALTER TABLE `accountabilities`
   MODIFY `accbty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `gcash`
+--
+ALTER TABLE `gcash`
+  MODIFY `gcash_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `status`
