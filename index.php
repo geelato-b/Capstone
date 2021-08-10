@@ -27,8 +27,22 @@ include_once ('includes/func.inc.php');
     <div class="container">
     
         <div class="form-container">
+                    
             <div class="sign-in">
             <form action="includes/processlogin.php" method="POST" id="login" class="signin-form" >
+                <?php
+                    if (isset($_SESSION['status'])) {
+                    ?>
+                    <div class="input-box">
+                    <div class="alert alert-success" role="alert">
+                    <?php echo $_SESSION['status']; ?>
+                    </div>
+                    </div>
+                    <?php
+                        
+                        unset($_SESSION['status']);
+                    }
+                    ?>
             <h2 class="title">Sign In</h2>
             <div>
                 <img class="img-profile " src="img/logo2.png" width="115px" height="105px">
