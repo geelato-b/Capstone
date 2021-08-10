@@ -129,7 +129,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                             OR `status`  = 'N' ;";
                             $stmt=mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmt, $sql)){
-                                header("location: ?error=failedcheckout");
+                                header("location: GCash.php?error");
                                 exit();
                                 }
                                 mysqli_stmt_execute($stmt);
@@ -166,11 +166,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 
                     <div class="card-footer">
                      <form action="../includes/update_stat.php" method="post">
-                         <input hidden type="text" name="stud_id" value="<?php echo $row['stud_id']; ?>">
-                          <input type="Hidden" name="new_item_status" value="<?php echo $row['gc_status'] == 'UC' ? 'C' : 'UC' ; ?>">
-                          <p class="lead"><?php echo $row['gc_status'] == 'C' ? 'Confirmed' : 'Unconfirmed' ; ?></p>
-                           <button class="btn btn-success"> <?php echo $row['gc_status'] == 'UC' ? 'Confirm' : 'Unconfirm' ; ?> </button>
-                           </a>
+                            <input hidden type="text" name="gcash_id" value="<?php echo $row['gcash_id']; ?>">
+                            <input type="" name="confirm_status" value="<?php echo $row['gc_status'] == 'UC' ? 'C' : 'UC' ; ?>">
+                            <p class="lead"><?php echo $row['gc_status'] == 'UC' ? 'For Confirmation' : 'Confirmed' ; ?></p>
+                            <button class="btn btn-primary"> <?php echo $row['gc_status'] == 'UC' ? 'Confirm' : 'Unconfirm' ; ?> </button>
                     </form>
                     </div>
             </div>
