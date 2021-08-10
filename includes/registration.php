@@ -1,5 +1,5 @@
 <?php
- 
+ session_start();
 include_once "func.inc.php";
 
 $stid = $_POST['stid'];
@@ -29,7 +29,7 @@ die("Connection failed: " . mysqli_connect_error());
  
 if(cidExists($conn, $stid)!== false){
     $_SESSION['status'] = "Account already exist.";
-    header("location: ../form.php?error=This Student ID already have an account.");
+    header("location: ../form.php?error=This Student ID have already  an account.");
     exit();
 
 }
@@ -57,8 +57,8 @@ $sql .="INSERT INTO  `student_info`
 
 
 if (mysqli_multi_query($conn, $sql)) {
-     $_SESSION['status'] = "<h2>Successfully Registered.</h2>";
-    header("location: ../form.php?success");
+     $_SESSION['status'] = "Successfully Registered. You can Sign In now.";
+    header("location: ../index.php?success");
     } else {
     echo "Error: " . $sql . mysqli_error($conn);
     }

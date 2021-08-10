@@ -58,7 +58,7 @@ include_once "includes/func.inc.php";
                 <input type="password" id="psword" name="psword" class="form-control" required="">
                 </div>
                 <div class="mb-3">
-                <label for="disabledTextInput" class="form-label">Confrim Password</label>
+                <label for="disabledTextInput" class="form-label">Confirm Password</label>
                 <input type="password" id="cpassword" name="cpassword" class="form-control" required="">
                 </div>
                 <div class="mb-3">
@@ -81,7 +81,7 @@ include_once "includes/func.inc.php";
                 </div>
 
                 <div class="mb-3">
-                <label for="disabledTextInput" class="form-label">Student Birthday</label>
+                <label for="disabledTextInput" class="form-label">Student Birthdate</label>
                 <input type="date" id="studname" name="studbdate" class="form-control" required="">
                 </div>
 
@@ -90,9 +90,10 @@ include_once "includes/func.inc.php";
                 <input type="text" id="studname" name="studaddress" class="form-control" required="">
                 </div>
 
-
+                
 
                 <button type="submit" name="submit"class="btn btn-primary">Submit</button>
+
            
         </form>
 
