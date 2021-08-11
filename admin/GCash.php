@@ -107,84 +107,209 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <!-- End of Topbar -->
         <!-- Begin Page Content -->
 
+
         <section >
             <div class="card-header">
                 <h3 class="display-7">GCash Confirmation</h3>
         </div>
-            <div class="main__container" style="margin-top:2rem;">
-             <div class="container__fluid"> 
-                    <div class="row" id="contentPanel">
-                    <div class="col-12">
+
+<div class="row no-gutters">
+  <div class= "col-md-6 no-gutters">
+    <div class = "leftside d-flex justify-content-center align-items-center">
+
+                            <?php
+                            $sql =" SELECT `gcash_id`
+                            , s.stud_id
+                            , s.stud_program
+                            , s.stud_year_block
+                            , s.gender
+                            , g.stud_id
+                            , g.stud_name
+                            , g.accbty_name
+                            , g.bu_email
+                            , g.date_time
+                            , g.img
+                            , g.gc_status
+                            , g.status 
+                            FROM `gcash` g
+                            JOIN `student_info` s
+                            ON s.stud_id = g.stud_id
+                            WHERE gc_status = 'UC' 
+                            AND `status`  = 'A' ;";
+
+                  $stmt=mysqli_stmt_init($conn);
+                  if (!mysqli_stmt_prepare($stmt, $sql)){
+                  header("location: GCash.php?error");
+                  exit();
+                  }
+                  mysqli_stmt_execute($stmt);
+
+                  $resultData = mysqli_stmt_get_result($stmt); 
+
+                  $arr=array();
+
+                  while($row = mysqli_fetch_assoc($resultData)){
+
+                  array_push($arr,$row);
+                  }
+                  if(!empty($arr)){
+
+                  ?>
+                  
+                  <section>
+                  <div class="container" >
+                      <?php
+                      foreach($arr as $key => $val){
+                      ?>
+                        <div class="card mb-3" style="max-width: 540px; margin-top:2rem;">
+                          <div class="row g-0">
+                            <div class="col-md-4">
+                            <img  class="img-fluid rounded-start" src="../img/<?php echo $val['img'] ?>" alt="1 x 1" class="card-img-top">
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                                <h5 class="card-title"><a href="../img"><?php echo $val['img']; ?></a></h5>
+                                <p class="card-text">
+                                    <label for="">Student ID:</label>
+                                    <h6><?php echo $val['stud_id']?></h6>
+                                    <label for="">Name: </label>
+                                    <h6><?php echo $val['stud_name']?></h6>
+                                    <label for="">Program: </label>
+                                    <h6><?php echo $val['stud_program']?></h6>
+                                    <label for=""> Year & Block: </label>
+                                    <h6><?php echo $val['stud_year_block']?></h6>
+                                    <label for=""> Gender: </label>
+                                    <h6><?php echo $val['gender']?></h6>
+                                    <label for="">Accountability: </label>
+                                    <h6><?php echo $val['accbty_name']?></h6>
+                              </div>
+                            </div>
+                            <div class="card-footer">
+                              <form action="../includes/update_stat.php" method="post">
+                                      <input hidden type="text" name="gcash_id" value="<?php echo $val['gcash_id'];?>">
+                                      <input hidden type="text" name="confirm_status" value="<?php echo $val['gc_status'] == 'C' ? 'UC' : 'C' ; ?>">
+                                      <p class="lead"><?php echo $val['gc_status'] == 'UC' ? 'For Confirmation' : 'Confirmed' ; ?></p>
+                                      <button class="btn btn-primary"> <?php echo $val['gc_status'] == 'C' ? 'Unconfirm' : 'Confirm' ; ?> </button>
+                              </form>
+                              </div>
+                          </div>
+                        </div>
                         <?php
-                                            $sql =" SELECT `gcash_id`
-                                                            , `stud_id`
-                                                            , `stud_name`
-                                                            , `accbty_name`
-                                                            , `bu_email`
-                                                            , `date_time`
-                                                            , `img`
-                                                            , `gc_status`
-                                                            , `status` 
-                                                            FROM `gcash` 
-                                                            WHERE gc_status = 'UC' 
-                                                            OR `status`  = 'A' ;";
-                            $stmt=mysqli_stmt_init($conn);
-                            if (!mysqli_stmt_prepare($stmt, $sql)){
-                                header("location: GCash.php?error");
-                                exit();
-                                }
-                                mysqli_stmt_execute($stmt);
-            
-                                $resultData = mysqli_stmt_get_result($stmt); 
-
-                                $arr=array();
-
-                                while($row = mysqli_fetch_assoc($resultData)){
-
-                                    array_push($arr,$row);
-                                }
-                                    if(!empty($arr)){
-
-                                    ?>
-<section id="gcash">
-    <div class="container">
-        <?php
-        foreach($arr as $key => $val){
-        ?>
-
-        <div class="slider">
-            <div class="card item">
-                <div class="image">
-                    <img src="../img/<?php echo $val['img'] ?>" alt="1 x 1" class="card-img-top">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title"><a href="../img"><?php echo $val['img']; ?></a></h5>
-                    <p class="card-text">
-                        <h6><?php echo $val['stud_id']?></h6>
-                        <h5><?php echo $val['stud_name']?></h5>
-                    </p>
-                </div>
-
-                    <div class="card-footer">
-                     <form action="../includes/update_stat.php" method="post">
-                            <input hidden type="text" name="gcash_id" value="<?php echo $val['gcash_id'];?>">
-                            <input hidden type="text" name="confirm_status" value="<?php echo $val['gc_status'] == 'C' ? 'UC' : 'C' ; ?>">
-                            <p class="lead"><?php echo $val['gc_status'] == 'UC' ? 'For Confirmation' : 'Confirmed' ; ?></p>
-                            <button class="btn btn-primary"> <?php echo $val['gc_status'] == 'C' ? 'Unconfirm' : 'Confirm' ; ?> </button>
-                    </form>
-                    </div>
-            </div>
-        </div>
-
-                    <?php
                         }
                     }
                 
                         ?>
+                    </div>
+
+                  </section>
+
+      </div>
     </div>
-</section>
-                                                                        
-                                
+
+
+  <div class= "col-md-6 no-gutters">
+  
+                          
+    <div class = "rightside d-flex justify-content-center align-items-center">
+                    <div class="card card-body">
+                            <form action="../includes/gcashprocess.php" method="post">
+                            <?php if(isset($_GET['error'])) {
+                              switch ($_GET['error']){
+                                  case 1:
+                                    echo "<p class='text-danger'> Item Exist</p>";
+                                  break;
+                                  case 2:
+                                    echo "<p class='text-danger'>Adding Record Failed</p>";
+                                  break;
+                                  case 3:
+                                    echo "<p class='text-danger'>Checking Item Failed</p>";
+                                  break;
+                                  case 0:
+                                    echo "<p class='text-danger'> Item Has Been Added</p>";
+                                  break;
+                              }
+                            }
+                        ?>
+                                    <br>
+                                    
+                                        <input hidden type="text" name="status_id" class="form-control" >
+                                    
+                                    <div class="mb-3">
+                                        <label for="TextInput" class="form-label">Student ID</label>
+                                        <input type="text" name="stud_id" class="form-control" require>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="TextInput" class="form-label">Name</label>
+                                        <input type="text" name="stud_name" class="form-control" require>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="TextInput" class="form-label">Program</label>
+                                        <select name="stud_program" id="disabledSelect" class="form-select" require>
+                                            <option values="BSIT">BS Information Technology</option>
+                                            <option values="BSIT Animation">BS Information Technology Animation</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="TextInput" class="form-label">Year & Block</label>
+                                        <input type="text" name="stud_year_block" class="form-control" require>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="TextInput" class="form-label">Gender</label>
+                                        <select name="gender" id="disabledSelect" class="form-select" require>
+                                            <option value="F">Female</option>
+                                            <option value="M">Male</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="TextInput" class="form-label">Accountability</label>
+                                        <select name="accbty_id" id="" class="form-select" require>
+                                        <?php
+                                                $sql_acc = "SELECT `accbty_id`, `accbty_name` FROM `accountabilities`;";
+                                                $result = mysqli_query($conn, $sql_acc);
+                                                if(mysqli_num_rows($result) > 0){
+                                                    while($row = mysqli_fetch_assoc($result)){
+                                                        echo "<option value='".$row['accbty_id']."'>".$row['accbty_name']."</option>";
+                                                    }
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="TextInput" class="form-label">Status</label>
+                                        <select name="pay_status" id="disabledSelect" class="form-select" require>
+                                            <option value="UP">Unpaid</option>
+                                            <option value="P">Paid</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="TextInput" class="form-label">Payment Received By</label>
+                                        <input type="text" name="pymt_rcv_by" class="form-control" require>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="TextInput" class="form-label">Date</label>
+                                        <input type="date" name="date" class="form-control" require>
+                                    </div>
+
+                                            <div class="card-footer">
+                                                <button class="btn btn-primary"> <i class="bi bi-save"></i> Save </button>
+                                              </div>
+                                    </div>
+                            </form>
+                  </div>
+    </div>
+  </div>
+
+</div>
+
+        
+                       
+                  
 
                       
              </div>
