@@ -119,6 +119,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                             $sql =" SELECT `gcash_id`
                                                             , `stud_id`
                                                             , `stud_name`
+                                                            , `accbty_name`
                                                             , `bu_email`
                                                             , `date_time`
                                                             , `img`
@@ -126,7 +127,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                             , `status` 
                                                             FROM `gcash` 
                                                             WHERE gc_status = 'UC' 
-                                                            OR `status`  = 'N' ;";
+                                                            OR `status`  = 'A' ;";
                             $stmt=mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmt, $sql)){
                                 header("location: GCash.php?error");
@@ -167,9 +168,9 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                     <div class="card-footer">
                      <form action="../includes/update_stat.php" method="post">
                             <input hidden type="text" name="gcash_id" value="<?php echo $row['gcash_id']; ?>">
-                            <input type="" name="confirm_status" value="<?php echo $row['gc_status'] == 'UC' ? 'C' : 'UC' ; ?>">
-                            <p class="lead"><?php echo $row['gc_status'] == 'UC' ? 'For Confirmation' : 'Confirmed' ; ?></p>
-                            <button class="btn btn-primary"> <?php echo $row['gc_status'] == 'UC' ? 'Confirm' : 'Unconfirm' ; ?> </button>
+                            <input type="hidden" name="confirm_status" value="<?php echo $row['gc_status'] == 'UC' ? 'C' : 'UC' ; ?>">
+                            <p class="lead"><?php echo $row['gc_status'] == 'UC' ? 'Confirmed' : 'For Confirmation' ; ?></p>
+                            <button class="btn btn-primary"> <?php echo $row['gc_status'] == 'C' ? 'Unconfirm' : 'Confirm' ; ?> </button>
                     </form>
                     </div>
             </div>
