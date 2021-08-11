@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2021 at 08:57 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+-- Generation Time: Aug 11, 2021 at 04:46 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 7.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `capstone_db`
+-- Database: `capstone`
 --
 
 -- --------------------------------------------------------
@@ -55,18 +55,11 @@ CREATE TABLE `gcash` (
   `stud_name` varchar(255) NOT NULL,
   `bu_email` varchar(255) NOT NULL,
   `date_time` date NOT NULL DEFAULT current_timestamp(),
+  `accbty_name` varchar(128) NOT NULL,
   `img` varchar(128) NOT NULL,
   `gc_status` varchar(64) NOT NULL,
   `status` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `gcash`
---
-
-INSERT INTO `gcash` (`gcash_id`, `stud_id`, `stud_name`, `bu_email`, `date_time`, `img`, `gc_status`, `status`) VALUES
-(1, '2018-PC-100000', 'Vanya Seven', 'vanyaseven@bicol-u.edu.ph', '2021-06-29', 'gcash1.jpeg', 'UC', 'N'),
-(2, '2018-PC-100223', 'Angelica Mae Bonganay', 'angelicamaelianko.bonganay@bicol-u.edu.ph', '2021-08-10', '2018-pc-100', 'UC', 'N');
 
 -- --------------------------------------------------------
 
@@ -182,7 +175,7 @@ ALTER TABLE `accountabilities`
 -- AUTO_INCREMENT for table `gcash`
 --
 ALTER TABLE `gcash`
-  MODIFY `gcash_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `gcash_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `status`
