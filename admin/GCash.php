@@ -167,10 +167,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 
                     <div class="card-footer">
                      <form action="../includes/update_stat.php" method="post">
-                            <input hidden type="text" name="gcash_id" value="<?php echo $row['gcash_id']; ?>">
-                            <input type="hidden" name="confirm_status" value="<?php echo $row['gc_status'] == 'UC' ? 'C' : 'UC' ; ?>">
-                            <p class="lead"><?php echo $row['gc_status'] == 'UC' ? 'Confirmed' : 'For Confirmation' ; ?></p>
-                            <button class="btn btn-primary"> <?php echo $row['gc_status'] == 'C' ? 'Unconfirm' : 'Confirm' ; ?> </button>
+                            <input hidden type="text" name="gcash_id" value="<?php echo $val['gcash_id'];?>">
+                            <input hidden type="text" name="confirm_status" value="<?php echo $val['gc_status'] == 'C' ? 'UC' : 'C' ; ?>">
+                            <p class="lead"><?php echo $val['gc_status'] == 'UC' ? 'For Confirmation' : 'Confirmed' ; ?></p>
+                            <button class="btn btn-primary"> <?php echo $val['gc_status'] == 'C' ? 'Unconfirm' : 'Confirm' ; ?> </button>
                     </form>
                     </div>
             </div>
