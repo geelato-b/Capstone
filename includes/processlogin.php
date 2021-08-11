@@ -24,7 +24,7 @@ $password = htmlentities($_POST['password']);
                       break;
         }
     }else{
-       echo "error";
+        header("location: ../index.php");;
        exit();
     }
 }
