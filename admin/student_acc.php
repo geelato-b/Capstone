@@ -118,11 +118,14 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                             $sql =" SELECT `stud_id`
                                                           , `stud_name`
                                                           , `password` 
+                                                          , `status` 
+                                                          , `user_type` 
                                                           FROM `student_acc` 
-                                                          WHERE user_type = 'S';";
+                                                          WHERE user_type = 'S'
+                                                          OR user_type = 'blocked';";
                             $stmt=mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmt, $sql)){
-                                header("location: ?error=failedcheckout");
+                              header("location: student_acc.php?error");
                                 exit();
                                 }
                                 mysqli_stmt_execute($stmt);
@@ -144,15 +147,17 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                     <td><?php echo $row['stud_id']; ?></td>
                                                     <td><?php echo $row['stud_name']; ?></td>
                                                     <td><?php echo $row['password'];?></td>
-                                                    <td><button type="button" class="btn btn-primary">Block</button></td>
                                                     <td>
-                                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                                      <a href="" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
-                                                      
-                                                      
-                                                    </div>
-                                                    </td>
-                                                    
+                                                    <form action="../includes/stud_stat.php" method="post">
+                                                                <input hidden type="text" name="stud_id" value="<?php echo $row['stud_id']; ?>">
+                                                                <input hidden type="text" name="stud_name" value="<?php echo $row['stud_name']; ?>">
+                                                                <input type="hidden" name="block_user" value="<?php echo $row['user_type'] == 'S' ? 'Blocked' : 'S' ; ?>">
+                                                                <button class="btn btn-primary"> <?php echo $row['user_type'] == 'S' ? 'Block' : 'Unblock' ; ?> </button>
+                                                                </a>
+                                                    </form>
+                                                  
+                                                  </td>
+                                            
                                                 </tr>
                                             <?php }?>
                                     </table> 
