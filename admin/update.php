@@ -216,6 +216,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                                     <th>Description</th>
                                                     <th>Amount</th>
                                                     <th>Deadline</th>
+                                                    <th></th>
                                                 </thead>
                                             <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
                                                 <tr>
@@ -224,6 +225,12 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                                     <td><?php echo $row['accbty_desc']; ?></td>
                                                     <td> Php <?php  echo number_format($row['accbty_price'],2); ?> </td> 
                                                     <td><?php echo $row['accbty_deadline']; ?></td>
+                                                    <td>
+                                                      <form action="../includes/del_accbty.php" method="get">
+                                                              <input hidden type="text" name="Accbty_id" value="<?php echo $row['Accbty_id']; ?>" >
+                                                              <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></i> </button>
+                                                      </form>
+                                                    </td>
                                                 </tr>
                                             <?php }?>
                                     </table> 
