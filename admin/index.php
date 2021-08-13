@@ -140,7 +140,28 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 									<div class="col-sm-3">
 										<div class="card">
 											<div class="card-body">
-												<a href=""><h5 class="card-title mb-4">Total of Number Students</h5></a>
+												<a href="student_info.php"><h5 class="card-title mb-4">Total of Number Registered Students</h5>
+                        <?php 
+                            $sql_count = "SELECT COUNT(*) cartcount FROM `student_acc` WHERE status = 'Active' AND user_type = 'S' OR user_type = 'blocked';";
+                            $stmt=mysqli_stmt_init($conn);
+        
+                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
+                            header("location: index.php?error=stmtfailed");
+                            exit();
+                        }
+                            
+                            mysqli_stmt_execute($stmt);
+
+                            $resultData = mysqli_stmt_get_result($stmt);
+
+                            if($row = mysqli_fetch_assoc($resultData)){ ?>
+                                <span style = "font-size:1.5rem;
+                                                color:white;" class="badge bg-primary"><?php echo $row['cartcount']; ?></span>
+                            <?php }
+                        
+                            ?>
+                      
+                      </a>
 											</div>
 										</div>
 										
@@ -148,7 +169,27 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 									<div class="col-sm-3">
 										<div class="card">
 											<div class="card-body">
-												<a href=""><h5 class="card-title mb-4">Payment</h5></a>
+												<a href="GCash.php"><h5 class="card-title mb-4">Pending Gcash Payment</h5>
+                        <?php 
+                            $sql_count = "SELECT COUNT(*) cartcount FROM `gcash` WHERE gc_status = 'UC';";
+                            $stmt=mysqli_stmt_init($conn);
+        
+                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
+                            header("location: index.php?error=stmtfailed");
+                            exit();
+                        }
+                            
+                            mysqli_stmt_execute($stmt);
+
+                            $resultData = mysqli_stmt_get_result($stmt);
+
+                            if($row = mysqli_fetch_assoc($resultData)){ ?>
+                                <span style = "font-size:1.5rem;
+                                                color:white;" class="badge bg-primary"><?php echo $row['cartcount']; ?></span>
+                            <?php }
+                        
+                            ?>
+                      </a>
 												
 											</div>
 										</div>
@@ -157,7 +198,29 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 									<div class="col-sm-3">
 										<div class="card">
 											<div class="card-body">
-												<a href=""><h5 class="card-title mb-4">Accountabilities</h5></a>
+												<a href=""><h5 class="card-title mb-4">Accountabilities</h5>
+                        <?php 
+                            $sql_count = "SELECT COUNT(*) cartcount FROM `accountabilities` WHERE status = 'NYP' or status = 'P' ;";
+                            $stmt=mysqli_stmt_init($conn);
+        
+                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
+                            header("location: index.php?error=stmtfailed");
+                            exit();
+                        }
+                            
+                            mysqli_stmt_execute($stmt);
+
+                            $resultData = mysqli_stmt_get_result($stmt);
+
+                            if($row = mysqli_fetch_assoc($resultData)){ ?>
+                                <span style = "font-size:1.5rem;
+                                                color:white;" class="badge bg-primary"><?php echo $row['cartcount']; ?></span>
+                            <?php }
+                        
+                            ?>
+                      
+                      
+                      </a>
 												
 											</div>
 										</div>
