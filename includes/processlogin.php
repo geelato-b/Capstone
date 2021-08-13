@@ -22,6 +22,11 @@ $password = htmlentities($_POST['password']);
                       $_SESSION['stud_id'] = $user_info['stud_id'];
                       header("location: ../admin/");
                       break;
+
+            case 'blocked': $_SESSION['user_type'] = 'blocked';
+                      $_SESSION['stud_id'] = $user_info['stud_id'];
+                      header("location: ../index.php");
+                      break;
         }
     }else{
         header("location: ../index.php");;
