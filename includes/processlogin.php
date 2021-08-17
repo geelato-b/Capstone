@@ -23,7 +23,7 @@ $password = htmlentities($_POST['password']);
                       header("location: ../admin/");
                       break;
 
-            case 'blocked': $_SESSION['user_type'] = 'blocked';
+            case 'Blocked': $_SESSION['user_type'] = 'Blocked';
                       $_SESSION['stud_id'] = $user_info['stud_id'];
                       header("location: ../index.php");
                       break;
