@@ -39,7 +39,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 	 
       <li class="sidebar-header"></li>
 	  <li class=""> 
-      <a href="index.php" class="nav-link text-left active"  role="button"><i class="bi bi-house-door"></i>Dashboard </a></li>
+      <a href="index.php" class="nav-link text-left"  role="button"><i class="bi bi-house-door"></i>Dashboard </a></li>
 
       <li class="has-sub">
         <a class="nav-link collapsed text-left" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
@@ -54,7 +54,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         </div>
         </div>
       </li>
-		  <li><a href="payment.php" class="nav-link text-left"  role="button"><i class="bi bi-cash-coin"></i>Payment</a></li>
+		  <li><a href="payment.php" class="nav-link text-left active"  role="button"><i class="bi bi-cash-coin"></i>Payment</a></li>
       <li><a href="Gcash.php" class="nav-link text-left"  role="button"><i class="bi bi-currency-exchange"></i>Gcash</a></li>
           <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status</a></li>
           <li><a href="update.php" class="nav-link text-left"  role="button"><i class="bi bi-journal-check"></i>Update</a></li>
@@ -92,6 +92,32 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                <button class="btn btn-primary" type="button">
                <i class="bi bi-search"></i>
                </button>
+
+               <div class="mess-badge" style="margin-left:2rem;">
+                      <a href="feedback.php">
+                      <i style="font-size:1.5rem; 
+                                color:black;" class="bi bi-envelope"></i> 
+                                <?php 
+                            $sql_count = "SELECT COUNT(*) cartcount FROM `feedback` WHERE fb_status = 'Unread';";
+                            $stmt=mysqli_stmt_init($conn);
+        
+                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
+                            header("location: index.php?error=stmtfailed");
+                            exit();
+                        }
+                            
+                            mysqli_stmt_execute($stmt);
+
+                            $resultData = mysqli_stmt_get_result($stmt);
+
+                            if($row = mysqli_fetch_assoc($resultData)){ ?>
+                                <span style="color:black;" class="badge bg-danger position-absolute"><?php echo $row['cartcount']; ?></span>
+                            <?php }
+                        
+                            ?>
+                                
+                      </a>
+               </div>
                </div>
                </form>
 
