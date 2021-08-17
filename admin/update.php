@@ -40,7 +40,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
 	 
       <li class="sidebar-header"></li>
 	  <li class=""> 
-      <a href="index.php" class="nav-link text-left active"  role="button"><i class="bi bi-house-door"></i>Dashboard </a></li>
+      <a href="index.php" class="nav-link text-left"  role="button"><i class="bi bi-house-door"></i>Dashboard </a></li>
 
       <li class="has-sub">
         <a class="nav-link collapsed text-left" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
@@ -58,7 +58,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
 		  <li><a href="payment.php" class="nav-link text-left"  role="button"><i class="bi bi-cash-coin"></i>Payment</a></li>
       <li><a href="Gcash.php" class="nav-link text-left"  role="button"><i class="bi bi-currency-exchange"></i>Gcash</a></li>
           <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status</a></li>
-          <li><a href="update.php" class="nav-link text-left"  role="button"><i class="bi bi-journal-check"></i>Update</a></li>
+          <li><a href="update.php" class="nav-link text-left active"  role="button"><i class="bi bi-journal-check"></i>Update</a></li>
           <li><a href="setting.php" class="nav-link text-left"  role="button"><i class="bi bi-gear-fill"></i>Setting</a></li>
           <li><a href="../logout.php" class="nav-link text-left"  role="button"><i class="bi bi-door-open"></i>Log Out</a></li>
 
@@ -93,6 +93,32 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                <button class="btn btn-primary" type="button">
                <i class="bi bi-search"></i>
                </button>
+
+               <div class="mess-badge" style="margin-left:2rem;">
+                      <a href="feedback.php">
+                      <i style="font-size:1.5rem; 
+                                color:black;" class="bi bi-envelope"></i> 
+                                <?php 
+                            $sql_count = "SELECT COUNT(*) cartcount FROM `feedback` WHERE fb_status = 'Unread';";
+                            $stmt=mysqli_stmt_init($conn);
+        
+                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
+                            header("location: index.php?error=stmtfailed");
+                            exit();
+                        }
+                            
+                            mysqli_stmt_execute($stmt);
+
+                            $resultData = mysqli_stmt_get_result($stmt);
+
+                            if($row = mysqli_fetch_assoc($resultData)){ ?>
+                                <span style="color:black;" class="badge bg-danger position-absolute"><?php echo $row['cartcount']; ?></span>
+                            <?php }
+                        
+                            ?>
+                                
+                      </a>
+               </div>
                </div>
                </form>
 
@@ -211,7 +237,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                     <table class="table table-hover" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                                                                             border-radius: 10px;">
                                                 <thead>
-                                                    <th>ID Number</th>
+                                                    
                                                     <th>Name</th>
                                                     <th>Description</th>
                                                     <th>Amount</th>
@@ -220,7 +246,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                                 </thead>
                                             <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
                                                 <tr>
-                                                    <td><?php echo $row['Accbty_id']; ?></td>
+                                                    
                                                     <td><?php echo $row['accbty_name']; ?></td>
                                                     <td><?php echo $row['accbty_desc']; ?></td>
                                                     <td> Php <?php  echo number_format($row['accbty_price'],2); ?> </td> 

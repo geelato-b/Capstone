@@ -108,8 +108,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
           <div id="nav-alert">
             
             <li><a href="feedback.php"><i class="bi bi-envelope">
-              
-              <?php 
+            <?php 
                             $sql_count = "SELECT COUNT(*) cartcount FROM `feedback` WHERE fb_status = 'Unread';";
                             $stmt=mysqli_stmt_init($conn);
         
@@ -127,7 +126,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                             <?php }
                         
                             ?>
-               </span></i></a></li>
+</i></a></li>
           </div>
   
           <!-- Topbar Navbar -->
@@ -146,118 +145,75 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <div class="container-fluid px-lg-4">
-<div class="row">
-<div class="col-md-12 mt-lg-4 mt-4">
-          <!-- Page Heading -->
-          <img src="../img/hello.svg" alt="" width="150px" height="150px"> 
-          <h1>Hello!</h1>
-<div class="col-md-12">
-       <div class="row">
-									<div class="col-sm-3">
-										<div class="card">
-											<div class="card-body">
-												<a href="student_info.php"><h5 class="card-title mb-4">Total of Number Registered Students</h5>
-                        <?php 
-                            $sql_count = "SELECT COUNT(*) cartcount FROM `student_acc` WHERE status = 'Active' AND user_type = 'S' OR user_type = 'blocked';";
-                            $stmt=mysqli_stmt_init($conn);
-        
-                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
-                            header("location: index.php?error=stmtfailed");
-                            exit();
+
+        <section>
+                            <?php
+                            $sql =" SELECT `fb_id`
+                                            , `stud_id`
+                                            , `stud_name`
+                                            , `fb_cont`
+                                            , `date_sent`
+                                            , `status`
+                                            , `fb_status` 
+                                            FROM `feedback` ;";
+
+                  $stmt=mysqli_stmt_init($conn);
+                  if (!mysqli_stmt_prepare($stmt, $sql)){
+                  header("location: feedback.php?error");
+                  exit();
+                  }
+                  mysqli_stmt_execute($stmt);
+
+                  $resultData = mysqli_stmt_get_result($stmt); 
+
+                  $arr=array();
+
+                  while($row = mysqli_fetch_assoc($resultData)){
+
+                  array_push($arr,$row);
+                  }
+                  if(!empty($arr)){
+
+                  ?>
+                  
+                  <section id="Unread">
+                    <br>
+                  <div class="container" >
+                      <?php
+                      foreach($arr as $key => $val){
+                      ?>
+                            <div class="modal-content rounded-4 shadow">
+                              <div class="modal-body p-4 text-center">
+                                <h5 style= "font-weight:bold;" class="mb-0"><?php echo $val['stud_name']?></h5>
+                                <h6 style="font-size: 0.8rem;"><?php echo $val['date_sent']?></h6>
+                                <br>
+                                <p class="mb-0"><?php echo $val['fb_cont']?>.</p>
+                              </div>
+                              <form action="">
+                                <div class="modal-footer flex-nowrap p-0">
+                                  <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-right"><strong>Mark as Read</strong></button>
+                                  <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">Unread</button>
+                                </div>
+                              </form>
+                              
+                            </div>
+                        </div>
+                        <?php
                         }
-                            
-                            mysqli_stmt_execute($stmt);
+                    }
+                
+                        ?>
+                    </div>
 
-                            $resultData = mysqli_stmt_get_result($stmt);
+                  </section>
 
-                            if($row = mysqli_fetch_assoc($resultData)){ ?>
-                                <span style = "font-size:1.5rem;
-                                                color:white;" class="badge bg-primary"><?php echo $row['cartcount']; ?></span>
-                            <?php }
-                        
-                            ?>
-                      
-                      </a>
-											</div>
-										</div>
-										
-									</div>
-									<div class="col-sm-3">
-										<div class="card">
-											<div class="card-body">
-												<a href="GCash.php"><h5 class="card-title mb-4">Pending Gcash Payment</h5>
-                        <?php 
-                            $sql_count = "SELECT COUNT(*) cartcount FROM `gcash` WHERE gc_status = 'UC';";
-                            $stmt=mysqli_stmt_init($conn);
-        
-                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
-                            header("location: index.php?error=stmtfailed");
-                            exit();
-                        }
-                            
-                            mysqli_stmt_execute($stmt);
-
-                            $resultData = mysqli_stmt_get_result($stmt);
-
-                            if($row = mysqli_fetch_assoc($resultData)){ ?>
-                                <span style = "font-size:1.5rem;
-                                                color:white;" class="badge bg-primary"><?php echo $row['cartcount']; ?></span>
-                            <?php }
-                        
-                            ?>
-                      </a>
-												
-											</div>
-										</div>
-										
-									</div>
-									<div class="col-sm-3">
-										<div class="card">
-											<div class="card-body">
-												<a href="update.php"><h5 class="card-title mb-4">Accountabilities</h5>
-                        <?php 
-                            $sql_count = "SELECT COUNT(*) cartcount FROM `accountabilities` WHERE status = 'NYP' or status = 'P' ;";
-                            $stmt=mysqli_stmt_init($conn);
-        
-                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
-                            header("location: index.php?error=stmtfailed");
-                            exit();
-                        }
-                            
-                            mysqli_stmt_execute($stmt);
-
-                            $resultData = mysqli_stmt_get_result($stmt);
-
-                            if($row = mysqli_fetch_assoc($resultData)){ ?>
-                                <span style = "font-size:1.5rem;
-                                                color:white;" class="badge bg-primary"><?php echo $row['cartcount']; ?></span>
-                            <?php }
-                        
-                            ?>
-                      
-                      
-                      </a>
-												
-											</div>
-										</div>
-										
-									</div>
-									<div class="col-sm-3">
-										<div class="card">
-											<div class="card-body">
-												<a href=""><h5 class="card-title mb-4">Generated Report</h5></a>
-												
-											</div>
-										</div>
-										
-									</div>
-									
-									
-								</div>
-</div>
-                      
       </div>
+    </div>
+
+
+
+        </section>
+       
 			
       <?php    
 
