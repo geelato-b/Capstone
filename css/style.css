@@ -14,6 +14,7 @@ body{
 }
 
 #header{
+    width: 100%;
     background-image: linear-gradient(to right, #cceeff, #99ddff );
     padding: 0 !important;
 }
@@ -30,8 +31,9 @@ header{
 #banner{
     background-image: linear-gradient(to right, #cceeff, #99ddff );
     color:black;
-    padding-top: 5%;
-    height: 100vh;
+    padding-top: 10%;
+    height: 100%;
+    width: 100%;
 }
 
 .banner-title{
@@ -40,6 +42,35 @@ header{
     margin-top: 100px;
     
 }
+/*------------------------content---------------------------------*/
+
+#content{
+    color:black;
+    height: 100%;
+    width: 100%;
+
+}
+
+.leftside, .rightside{
+
+    height: 100%;
+    width: 100%;
+
+}
+@media screen and (min-width:768px)
+{
+    .leftside, .rightside{
+        height: 50vh;
+    }
+  
+}
+.leftside{
+    background-image: linear-gradient(to right, #cceeff, #99ddff );
+}
+
+
+
+
 /*------------------------sign-In---------------------------------*/
 
 #sign_in{
@@ -189,9 +220,10 @@ form .signin-form{
 ----------------------*/
 
 footer.footer {
-    padding-top: 1rem;
+    position:relative;
+    bottom:0;
     padding-bottom: 1rem;
-    width: 100vw;
+    width: 100%;
     direction: ltr;
     background:#b3e6ff;
 }
@@ -237,4 +269,10 @@ footer.footer ul {
 /*---------------------------------END sign_up----------------------*/
 
 
-
+#content{
+   justify-content: center;
+    color:black;
+    padding-top: 5%;
+    height: 100vh;
+    width: 100%; 
+}
