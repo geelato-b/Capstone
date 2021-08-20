@@ -79,12 +79,65 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                      
             </div>
             <div class="col-md-6">
-                <img src="../img/banner2.png" alt="" class="img-fluid">
+                <img src="../img/banner4.svg" alt="" class="img-fluid">
             </div>
         </div>
     </div>
         
 </section>
+
+
+<section id="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+            <img src="../img/steps.svg" alt="" class="img-fluid">  
+            </div>
+
+            <div class="col-md-6 justify-content-center">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="../img/step1.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="../img/step2.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="../img/step3.png" class="d-block w-100" alt="...">
+                </div>
+              </div>
+            </div>
+                
+            </div>
+        </div>
+    </div>
+        
+</section>
+
+<section id="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+            <p class="banner-title">Status</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus sed, quo, 
+                    odit ratione nobis, commodi dignissimos reiciendis 
+                    ipsam voluptates optio delectus consequatur 
+                    excepturi tenetur officia recusandae illo quia 
+                     distinctio?</p>
+            </div>
+
+            <div class="col-md-6 justify-content-center">
+            <img src="../img/status.svg" alt="" class="img-fluid">  
+                
+            </div>
+        </div>
+    </div>
+        
+</section>
+
+
+
 
 <footer class="footer">
 				<div class="container-fluid">
@@ -104,6 +157,9 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 								</li>
 								<li class="footer-item">
 									<a class="text-muted" href="../footer/terms.php">Terms of Service</a>
+								</li>
+                <li class="footer-item">
+									<a class="text-muted" href="../footer/feedback.php">Feedback</a>
 								</li>
 							</ul>
 						</div>
