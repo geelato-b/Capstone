@@ -95,38 +95,9 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                <button class="btn btn-primary" type="button">
                <i class="bi bi-search"></i>
                </button>
-
-               <!-- top alert -->
-
-               <div class="mess-badge" style="margin-left:2rem;">
-                      <a href="feedback.php">
-                      <i style="font-size:1.5rem; 
-                                color:black;" class="bi bi-envelope"></i> 
-                                <?php 
-                            $sql_count = "SELECT COUNT(*) cartcount FROM `feedback` WHERE fb_status = 'Unread';";
-                            $stmt=mysqli_stmt_init($conn);
-        
-                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
-                            header("location: index.php?error=stmtfailed");
-                            exit();
-                        }
-                            
-                            mysqli_stmt_execute($stmt);
-
-                            $resultData = mysqli_stmt_get_result($stmt);
-
-                            if($row = mysqli_fetch_assoc($resultData)){ ?>
-                                <span style="color:black;" class="badge bg-danger position-absolute"><?php echo $row['cartcount']; ?></span>
-                            <?php }
-                        
-                            ?>
-                                
-                      </a>
-               </div>
                </div>
                </form>
 
-               
 
                <div>
                <img class="img-profile " src="../img/logo2.png" width="115px" height="105px">
@@ -142,7 +113,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <!-- Begin Page Content -->
 
 
-        <section >
+        <section id="content" >
             <div class="card-header">
                 <h3 class="display-7">GCash Confirmation</h3>
         </div>
@@ -190,7 +161,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 
                   ?>
                   
-                  <section>
+                  <section id="content">
                   <div class="container" >
                       <?php
                       foreach($arr as $key => $val){
@@ -245,7 +216,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
   
                           
     <div class = "rightside d-flex justify-content-center align-items-center">
-                    <div class="card card-body">
+                    <div class="card-body">
                             <form action="../includes/gcashprocess.php" method="post">
                             <?php if(isset($_GET['error'])) {
                               switch ($_GET['error']){
@@ -351,6 +322,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
           </div>  
          
         </section>
+
         
         <!-- /#page-content-wrapper -->
     </div>

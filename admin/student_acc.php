@@ -93,33 +93,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                 <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
                 <button class="btn btn-primary" type="button">
                 <i class="bi bi-search"></i>
-                </button>
-
-                <div class="mess-badge" style="margin-left:2rem;">
-                      <a href="feedback.php">
-                      <i style="font-size:1.5rem; 
-                                color:black;" class="bi bi-envelope"></i> 
-                                <?php 
-                            $sql_count = "SELECT COUNT(*) cartcount FROM `feedback` WHERE fb_status = 'Unread';";
-                            $stmt=mysqli_stmt_init($conn);
-        
-                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
-                            header("location: index.php?error=stmtfailed");
-                            exit();
-                        }
-                            
-                            mysqli_stmt_execute($stmt);
-
-                            $resultData = mysqli_stmt_get_result($stmt);
-
-                            if($row = mysqli_fetch_assoc($resultData)){ ?>
-                                <span style="color:black;" class="badge bg-danger position-absolute"><?php echo $row['cartcount']; ?></span>
-                            <?php }
-                        
-                            ?>
-                                
-                      </a>
-               </div>
+                </button>            
                 </div>
                 </form>
 
@@ -135,7 +109,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <!-- End of Topbar -->
         <!-- Begin Page Content -->
 
-        <section >
+        <section>
             <div class="main__container" style="margin-top:2rem;">
              <div class="container__fluid"> 
                     <div class="row" id="contentPanel">
@@ -204,6 +178,8 @@ else{
 header("location: ../index.php");  
 }
 ?>
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

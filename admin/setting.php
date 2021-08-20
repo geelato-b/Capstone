@@ -71,7 +71,7 @@ return output;
 </head>
 <body>
 
-<section>
+<section id="main-content">
     <div class="container">
         <form name="frmChange" method="post" action=""
         onSubmit="return validatePassword()">
