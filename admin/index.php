@@ -82,7 +82,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 
        <div class="container-fluid p-0 px-lg-0 px-md-0">
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light my-navbar">
+      <nav class="navbar navbar-expand navbar-light my-navbar">
 
           <!-- Sidebar Toggle (Topbar) -->
             <div type="button"  id="bar" class="nav-icon1 hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
@@ -90,51 +90,17 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 			    <span></span>
 				 <span></span>
           </div>
-			
-
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                <i class="bi bi-search"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-
+		
           <!-- nav alert -->
           <div id="nav-alert">
-            
-            <li><a href="feedback.php"><i class="bi bi-envelope">
-              
-              <?php 
-                            $sql_count = "SELECT COUNT(*) cartcount FROM `feedback` WHERE fb_status = 'Unread';";
-                            $stmt=mysqli_stmt_init($conn);
-        
-                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
-                            header("location: index.php?error=stmtfailed");
-                            exit();
-                        }
-                            
-                            mysqli_stmt_execute($stmt);
-
-                            $resultData = mysqli_stmt_get_result($stmt);
-
-                            if($row = mysqli_fetch_assoc($resultData)){ ?>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $row['cartcount']; ?></span>
-                            <?php }
-                        
-                            ?>
-               </span></i></a></li>
+            <h4>BUPC CSC Accountability System</h4>
           </div>
   
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
             <li>
               <div>
-                <img class="img-profile " src="../img/logo2.png" width="115px" height="105px">
+                <img class="img-profile " src="../img/logo2.png" width="115px" height="105px" max-width="50px">
                 <img class="img-profile" src="../img/logo1.png" width="100px" height="100px">
               </div>
                 
@@ -142,10 +108,11 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 
           </ul>
 
-        </nav>
+        </nav>  
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
+        <section id="main-content">
         <div class="container-fluid px-lg-4">
 <div class="row">
 <div class="col-md-12 mt-lg-4 mt-4">
@@ -243,7 +210,36 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 										</div>
 										
 									</div>
-									<div class="col-sm-3">
+
+                  <div class="col-sm-3">
+										<div class="card">
+											<div class="card-body">
+												<a href="feedback.php"><h5 class="card-title mb-4">Feedbacks</h5></a>
+                        <?php 
+                            $sql_count = "SELECT COUNT(*) cartcount FROM `feedback` WHERE fb_status = 'Unread' or status = 'A' ;";
+                            $stmt=mysqli_stmt_init($conn);
+        
+                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
+                            header("location: index.php?error=stmtfailed");
+                            exit();
+                        }
+                            
+                            mysqli_stmt_execute($stmt);
+
+                            $resultData = mysqli_stmt_get_result($stmt);
+
+                            if($row = mysqli_fetch_assoc($resultData)){ ?>
+                                <span style = "font-size:1.5rem;
+                                                color:white;" class="badge bg-primary"><?php echo $row['cartcount']; ?></span>
+                            <?php }
+                        
+                            ?>
+											</div>
+										</div>
+										
+									</div>
+									
+                  <div class="col-sm-3">
 										<div class="card">
 											<div class="card-body">
 												<a href=""><h5 class="card-title mb-4">Generated Report</h5></a>
@@ -253,20 +249,16 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 										
 									</div>
 									
-									
 								</div>
 </div>
                       
       </div>
+
+
+        </section>
+
 			
-      <?php    
-
-    }
-
-else{
-    header("location: ../index.php");  
-}
-?>
+      
 <footer class="footer">
 				<div class="container-fluid">
 					<div class="row text-muted">
@@ -298,7 +290,14 @@ else{
     </div>
     <!-- /#wrapper -->
 
-   
+   <?php    
+
+}
+
+else{
+header("location: ../index.php");  
+}
+?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

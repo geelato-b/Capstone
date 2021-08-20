@@ -92,32 +92,6 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                <button class="btn btn-primary" type="button">
                <i class="bi bi-search"></i>
                </button>
-
-               <div class="mess-badge" style="margin-left:2rem;">
-                      <a href="feedback.php">
-                      <i style="font-size:1.5rem; 
-                                color:black;" class="bi bi-envelope"></i> 
-                                <?php 
-                            $sql_count = "SELECT COUNT(*) cartcount FROM `feedback` WHERE fb_status = 'Unread';";
-                            $stmt=mysqli_stmt_init($conn);
-        
-                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
-                            header("location: index.php?error=stmtfailed");
-                            exit();
-                        }
-                            
-                            mysqli_stmt_execute($stmt);
-
-                            $resultData = mysqli_stmt_get_result($stmt);
-
-                            if($row = mysqli_fetch_assoc($resultData)){ ?>
-                                <span style="color:black;" class="badge bg-danger position-absolute"><?php echo $row['cartcount']; ?></span>
-                            <?php }
-                        
-                            ?>
-                                
-                      </a>
-               </div>
                </div>
                </form>
 
@@ -131,7 +105,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <!-- End of Topbar -->
         <!-- Begin Page Content -->
 
-        <section>
+        <section id="content">
             
                 <div>
                         <div class="card-header">
@@ -159,7 +133,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                           </div>
                                     
                                
-                    <div class="card card-body">
+                    <div class="card-body">
                         <div class="Payment">
                         <form action="../includes/addstat.php" method="post">
                                 <br>
@@ -249,6 +223,32 @@ else{
 header("location: ../index.php");  
 }
 ?>
+
+<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-left">
+							<p class="mb-0">
+								<a href="index.html" class="text-muted"><strong> BUPC CSC Accountability System </strong></a> &copy
+							</p>
+						</div>
+						<div class="col-6 text-right">
+							<ul class="list-inline">
+								
+								<li class="footer-item">
+									<a class="text-muted" href="#">Contacts</a>
+								</li>
+								<li class="footer-item">
+									<a class="text-muted" href="../footer/privacy.php">Privacy Policy</a>
+								</li>
+								<li class="footer-item">
+									<a class="text-muted" href="../footer/terms.php">Terms of Service</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
 
     <!-- /#wrapper -->
 

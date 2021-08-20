@@ -103,31 +103,6 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
               </div>
             </div>
           </form>
-
-          <!-- nav alert -->
-          <div id="nav-alert">
-            
-            <li><a href="feedback.php"><i class="bi bi-envelope">
-            <?php 
-                            $sql_count = "SELECT COUNT(*) cartcount FROM `feedback` WHERE fb_status = 'Unread';";
-                            $stmt=mysqli_stmt_init($conn);
-        
-                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
-                            header("location: index.php?error=stmtfailed");
-                            exit();
-                        }
-                            
-                            mysqli_stmt_execute($stmt);
-
-                            $resultData = mysqli_stmt_get_result($stmt);
-
-                            if($row = mysqli_fetch_assoc($resultData)){ ?>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $row['cartcount']; ?></span>
-                            <?php }
-                        
-                            ?>
-</i></a></li>
-          </div>
   
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -146,11 +121,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 
         <!-- Begin Page Content -->
 
-        <section>
+        <section id="content">
                             <?php
                             $sql =" SELECT `fb_id`
-                                            , `stud_id`
-                                            , `stud_name`
+                                            , `bu_email`
                                             , `fb_cont`
                                             , `date_sent`
                                             , `status`
@@ -182,9 +156,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                       <?php
                       foreach($arr as $key => $val){
                       ?>
+                      <br>
                             <div class="modal-content rounded-4 shadow">
                               <div class="modal-body p-4 text-center">
-                                <h5 style= "font-weight:bold;" class="mb-0"><?php echo $val['stud_name']?></h5>
+                                <h5 style= "font-weight:bold;" class="mb-0"><?php echo $val['bu_email']?></h5>
                                 <h6 style="font-size: 0.8rem;"><?php echo $val['date_sent']?></h6>
                                 <br>
                                 <p class="mb-0"><?php echo $val['fb_cont']?>.</p>
@@ -195,14 +170,16 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                   <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">Unread</button>
                                 </div>
                               </form>
+                             
                               
                             </div>
-                        </div>
-                        <?php
+                            <?php
                         }
                     }
                 
                         ?>
+                        </div>
+                        
                     </div>
 
                   </section>
@@ -223,32 +200,7 @@ else{
     header("location: ../index.php");  
 }
 ?>
-<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-left">
-							<p class="mb-0">
-								<a href="index.html" class="text-muted"><strong> BUPC CSC Accountability System </strong></a> &copy
-							</p>
-						</div>
-						<div class="col-6 text-right">
-							<ul class="list-inline">
-								
-								<li class="footer-item">
-									<a class="text-muted" href="#">Contacts</a>
-								</li>
-								<li class="footer-item">
-									<a class="text-muted" href="../footer/privacy.php">Privacy Policy</a>
-								</li>
-								<li class="footer-item">
-									<a class="text-muted" href="../footer/terms.php">Terms of Service</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
-		
+
         <!-- /#page-content-wrapper -->
 
     </div>
