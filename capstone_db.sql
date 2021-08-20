@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2021 at 04:46 AM
+-- Generation Time: Aug 20, 2021 at 08:35 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -41,7 +41,22 @@ CREATE TABLE `accountabilities` (
 --
 
 INSERT INTO `accountabilities` (`accbty_id`, `accbty_name`, `accbty_desc`, `accbty_price`, `accbty_deadline`, `status`) VALUES
-(1, 'CSC Fee', 'Mandatory for 1st Sem', 20, '2021-11-28', 'NYP');
+(1, 'CSC fee', 'Mandatory', 20, '2021-12-17', 'NYP');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `fb_id` int(128) NOT NULL,
+  `bu_email` varchar(225) NOT NULL,
+  `fb_cont` varchar(10000) NOT NULL,
+  `date_sent` date NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(1) NOT NULL DEFAULT 'A',
+  `fb_status` varchar(11) NOT NULL DEFAULT 'Unread'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -57,8 +72,8 @@ CREATE TABLE `gcash` (
   `date_time` date NOT NULL DEFAULT current_timestamp(),
   `accbty_name` varchar(128) NOT NULL,
   `img` varchar(128) NOT NULL,
-  `gc_status` varchar(64) NOT NULL,
-  `status` varchar(64) NOT NULL
+  `gc_status` varchar(64) NOT NULL DEFAULT 'UC',
+  `status` varchar(64) NOT NULL DEFAULT 'A'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -100,7 +115,7 @@ CREATE TABLE `student_acc` (
 --
 
 INSERT INTO `student_acc` (`stud_id`, `bu_email`, `stud_name`, `password`, `user_type`, `status`) VALUES
-('1969-PC-Admin', 'bicol-u.edu.ph', 'BUPC', 'admin000', 'A', 'Active'),
+('1969-PC-Admin', 'bicol-u.edu.ph', 'BUPC', 'admin', 'A', 'Active'),
 ('2018-PC-100000', 'vanyaseven@bicol-u.edu.ph', 'Vanya Seven', 'qwerty123', 'S', 'Active');
 
 -- --------------------------------------------------------
@@ -138,6 +153,12 @@ ALTER TABLE `accountabilities`
   ADD PRIMARY KEY (`accbty_id`);
 
 --
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`fb_id`);
+
+--
 -- Indexes for table `gcash`
 --
 ALTER TABLE `gcash`
@@ -170,6 +191,12 @@ ALTER TABLE `student_info`
 --
 ALTER TABLE `accountabilities`
   MODIFY `accbty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `fb_id` int(128) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `gcash`
