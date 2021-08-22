@@ -86,7 +86,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
           <!-- Topbar Navbar -->
           
           <div class="container-fluid">
-               
+          <div id="nav-alert">
+                  <a href="index.php">BUPC CSC Accountability System</a>
+              </div>
+              
                <form class="d-flex">
                <div class="input-group mb-3">
                <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
