@@ -70,18 +70,29 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <p class="banner-title">BUPC CSC Accountability System</p>
+                <p class="banner-title">Bicol University Polangui Campus</p>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus sed, quo, 
                     odit ratione nobis, commodi dignissimos reiciendis 
                     ipsam voluptates optio delectus consequatur 
                     excepturi tenetur officia recusandae illo quia 
                      distinctio?</p>
-                     
             </div>
-            <div class="col-md-6">
-                <img src="../img/banner4.svg" alt="" class="img-fluid">
+
+            <div class="col-md-6 justify-content-center">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                        <img src="../img/bupc logo.png" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                        <img src="../img/bupc2.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                        <img src="../img/bupc3.jpg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    </div>
             </div>
-        </div>
     </div>
         
 </section>
@@ -91,22 +102,17 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-            <img src="../img/steps.svg" alt="" class="img-fluid">  
+            <img src="../img/csc.svg" alt="" class="img-fluid">
+            
             </div>
 
             <div class="col-md-6 justify-content-center">
-            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="../img/step1.png" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="../img/step2.png" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="../img/step3.png" class="d-block w-100" alt="...">
-                </div>
-              </div>
+            <p class="banner-title">BUPC College Student Council</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus sed, quo, 
+                    odit ratione nobis, commodi dignissimos reiciendis 
+                    ipsam voluptates optio delectus consequatur 
+                    excepturi tenetur officia recusandae illo quia 
+                     distinctio?</p>
             </div>
                 
             </div>
@@ -119,7 +125,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-            <p class="banner-title">Status</p>
+            <p class="banner-title">BUPC CSC Accountability System</p>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus sed, quo, 
                     odit ratione nobis, commodi dignissimos reiciendis 
                     ipsam voluptates optio delectus consequatur 
@@ -128,7 +134,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
             </div>
 
             <div class="col-md-6 justify-content-center">
-            <img src="../img/status.svg" alt="" class="img-fluid">  
+            <img src="../img/system.svg" alt="" class="img-fluid">  
                 
             </div>
         </div>
