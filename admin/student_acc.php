@@ -155,7 +155,6 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                                 <input hidden type="text" name="stud_name" value="<?php echo $row['stud_name']; ?>">
                                                                 <input type="hidden" name="block_user" value="<?php echo $row['user_type'] == 'S' ? 'Blocked' : 'S' ; ?>">
                                                                 <button class="btn btn-primary"> <?php echo $row['user_type'] == 'S' ? 'Block' : 'Unblock' ; ?> </button>
-                                                                </a>
                                                     </form>
                                                   
                                                   </td>
