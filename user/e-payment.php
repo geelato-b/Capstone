@@ -219,8 +219,8 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                 <tr>
                                                     <td><?php echo $row['date_time']; ?></td>
                                                     <td>
-                                                      <div class="card" style="width: 18rem;">
-                                                      <img src="../img/<?php echo $row['img'] ?>" alt="1 x 1" class="card-img-top">
+                                                      <div class="card-body" style="width: 18rem;">
+                                                      <img src="../img/<?php echo $row['img'] ?>" alt="1 x 1" class="card-img-top" style="height:400px; width: 200px;">
                                                           <div class="card-body">
                                                             <h5 class="card-title"></h5>
                                                             <a href="../img"><?php echo $row['img']; ?></a>
