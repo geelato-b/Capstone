@@ -118,7 +118,88 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <section id="content" >
             <div class="card-header">
                 <h3 class="display-7">GCash Confirmation</h3>
-        </div>
+            </div>
+            <div class="rightbutton">
+              <p>
+                  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    History
+                  </a>
+              </p>
+                <div class="collapse" id="collapseExample">
+                  <div class="card-body">
+                   
+                  <div class="main__container" style="margin-top:2rem;">
+                    <div class="container__fluid"> 
+                      <div class="row" id="contentPanel">
+                        <div class="col-12">
+                            <?php
+                                            $sql =" SELECT 
+                                                        `stud_id`
+                                                        , `stud_name`
+                                                        , `accbty_name`
+                                                        , `bu_email`
+                                                        , `date_time`
+                                                        , `img`
+                                                        , `gc_status`
+                                                        , `status`
+                                                        FROM `gcash`
+                                                        WHERE gc_status = 'C';
+                                                        ";
+                            $stmt=mysqli_stmt_init($conn);
+                            if (!mysqli_stmt_prepare($stmt, $sql)){
+                              echo "Statement Failed.";
+                              exit();
+                           }
+                                
+                                mysqli_stmt_execute($stmt);
+            
+                                $resultData = mysqli_stmt_get_result($stmt); ?>
+                            <div class="container">
+                                <div class="row">
+                                    <table class="table table-hover" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                                                                            border-radius: 10px;">
+                                                <thead>
+                                                    <th>Date</th>
+                                                    <th>Item</th>
+                                                    <th>Student ID</th>
+                                                    <th>Student's Name</th>
+                                                    <th>Accountability</th>
+                                                    <th>Status</th>
+                                                </thead>
+                                            <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
+                                                <tr>
+                                                    <td><?php echo $row['date_time']; ?></td>
+                                                    <td>
+                                                      <div class="card-body" style="width: 18rem;">
+                                                      <img src="../img/<?php echo $row['img'] ?>" alt="1 x 1" class="card-img-top" style="height:400px; width: 200px;">
+                                                          <div class="card-body">
+                                                            <h5 class="card-title"></h5>
+                                                            <a href="../img"><?php echo $row['img']; ?></a>
+                                                          </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><?php echo $row['stud_id']; ?></td>
+                                                    <td><?php echo $row['stud_name']; ?></td>
+                                                    <td><?php echo $row['accbty_name']; ?></td>
+                                                    <td> <p class="lead"><?php echo $row['gc_status'] == 'C' ? 'Confirmed' : 'Unconfirmed' ; ?></p></td>
+                                                   <!--  class="img-thumbnail" -->
+                                                  
+                                                    <td></td>
+                                                </tr>
+                                            <?php }?>
+                                    </table> 
+                                  </div>
+                                </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  </div>
+                </div>
+            </div>
+
+          
 
 <div class="row no-gutters">
   <div class= "col-md-6 no-gutters">
@@ -162,8 +243,11 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                   if(!empty($arr)){
 
                   ?>
+
+                  
                   
                   <section id="content">
+                    
                   <div class="container" >
                       <?php
                       foreach($arr as $key => $val){

@@ -216,7 +216,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 											<div class="card-body">
 												<a href="feedback.php"><h5 class="card-title mb-4">Feedbacks</h5></a>
                         <?php 
-                            $sql_count = "SELECT COUNT(*) cartcount FROM `feedback` WHERE fb_status = 'Unread' or status = 'A' ;";
+                            $sql_count = "SELECT COUNT(*) cartcount FROM `feedback` WHERE fb_status = 'Unread';";
                             $stmt=mysqli_stmt_init($conn);
         
                         if (!mysqli_stmt_prepare($stmt, $sql_count)){
