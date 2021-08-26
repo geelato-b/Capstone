@@ -136,7 +136,8 @@ sidebar
 
 #nav-alert a:hover{ 
     color: black;
-    text-decoration: none;  
+    text-decoration: none; 
+    
 }
 
 #wrapper.toggled {
@@ -184,10 +185,11 @@ sidebar
 ----------------------*/
 
 #page-content-wrapper {
-    background: white;
     width: 100%;
 	transition: all 0.5s ease;
 }
+
+
 #main-content{
     height: 100%;
     width: 100vw;
