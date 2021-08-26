@@ -11,6 +11,7 @@ include_once "db_conn.php";
     $stud_year_block  = htmlentities($_POST['stud_year_block']);
     $gender = htmlentities($_POST['gender']);
     $accbty_id = htmlentities($_POST['accbty_id']);
+    $accbty_price = htmlentities($_POST['accbty_price']);
     $pay_status = htmlentities($_POST['pay_status']);
     $pymt_rcv_by = htmlentities($_POST['pymt_rcv_by']);
     $date= htmlentities($_POST['date']);
@@ -45,16 +46,17 @@ include_once "db_conn.php";
                             , `stud_year_block`
                             , `gender`
                             , `accbty_id`
+                            , `accbty_price`
                             , `pymt_rcv_by`
                             , `pay_status`
-                            , `date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                            , `date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt_ins = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt_ins, $sql_ins)){
            
             header("location: ../admin/GCash.php?error=2"); //insert failed
             exit();
         }
-        mysqli_stmt_bind_param($stmt_ins, "sssssssss", $stud_id , $stud_name,  $stud_program,  $stud_year_block, $gender, $accbty_id, $pymt_rcv_by, $pay_status, $date );
+        mysqli_stmt_bind_param($stmt_ins, "ssssssssss", $stud_id , $stud_name,  $stud_program,  $stud_year_block, $gender, $accbty_id, $accbty_price, $pymt_rcv_by, $pay_status, $date );
         mysqli_stmt_execute($stmt_ins);
         
         header("location: ../admin/GCash.php?error=0"); //success
