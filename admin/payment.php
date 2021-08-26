@@ -187,6 +187,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                         ?>
                                     </select>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="TextInput" class="form-label">Amount</label>
+                                    <input type="text" name="accbty_price" class="form-control" >
+                                </div>
 
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Status</label>
