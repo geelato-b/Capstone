@@ -1,17 +1,19 @@
 <?php
-if(isset($_GET['Accbty_id'])){
+if(isset($_POST['accbty_id'])){
         include "db_conn.php";
-        $Accbty_id = htmlentities($_GET['Accbty_id']);
-         $sql_del = "DELETE FROM `accountabilities` WHERE Accbty_id = ? ; ";
-        $stmt_del = mysqli_stmt_init($conn);
-
-            if(!mysqli_stmt_prepare($stmt_del, $sql_del)){
-            header("location: ../admin/update.php?error=9"); //delete failed
-            exit();
-            }
-            
-        mysqli_stmt_bind_param($stmt_del,"s",$Accbty_id);
-        mysqli_stmt_execute($stmt_del);
-        header("location: ../admin/update.php?success_delete");
+        $accbty_id = htmlentities($_POST['accbty_id']);
+        $new_user_status = htmlentities($_POST['new_stat']);
+    
+         $sql_upd = "UPDATE `accountabilities` 
+                        SET status = ?
+                    WHERE accbty_id  = ?;";
+        $stmt_upd = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt_upd, $sql_upd)){
+        header("location: ../admin/update.php?error=8"); //update failed
+        exit();
+        }
+        mysqli_stmt_bind_param($stmt_upd,"ss", $new_user_status, $accbty_id );
+        mysqli_stmt_execute($stmt_upd);
+        header("location: ../admin/update.php?updated");
         
-    }
+}

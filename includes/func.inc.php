@@ -128,3 +128,79 @@ function checkImage($img_file, $target_dir, $targetimagename){
    
     return $stat;
 }
+
+function getCategories($conn){
+    $sql = "SELECT * FROM `accountabilities`";
+    $stmt=mysqli_stmt_init($conn);
+    
+    if (!mysqli_stmt_prepare($stmt, $sql)){
+        return false;
+        exit;
+    }
+        mysqli_stmt_execute($stmt);
+        $resultData = mysqli_stmt_get_result($stmt);
+        $resArr = array();
+      if(!empty($resultData)){
+        while($row = mysqli_fetch_assoc($resultData)){
+            array_push($resArr, $row);
+        }
+        return $resArr;
+      }
+        else{
+            return false;
+      }
+        mysql_stmt_close($stmt);
+}
+
+
+function getSalesPerfCat($conn, $cat_id = null){
+    if($cat_id != null){
+
+         $sql="SELECT c.date
+                   , c.stud_name
+                   , c.accbty_price
+                from `status` c
+                join `accountabilities` i
+                  on (c.accbty_id = i.accbty_id)
+               WHERE i.accbty_id = ?
+                 AND c.pay_status = 'P';
+        ";
+        $params = array();
+        array_push($params, $cat_id);
+        
+        return query($conn, $sql, $params );
+    } 
+    else if($cat_id != null) {
+            $sql="SELECT c.date
+            , c.stud_name
+            , c.accbty_price
+         from `status` c
+         join `accountabilities` i
+           on (c.accbty_id = i.accbty_id)
+        WHERE i.accbty_id = ?
+          AND c.pay_status = 'P';
+        ";
+        $params = array();
+        array_push($params, $cat_id);
+        
+        return query($conn, $sql, $params );
+    }
+    else{
+         $sql="SELECT c.date
+         , c.stud_name
+         , c.accbty_price
+      from `status` c
+      join `accountabilities` i
+        on (c.accbty_id = i.accbty_id)
+     WHERE i.accbty_id = ?
+       AND c.pay_status = 'P'
+        ";
+        
+        return query($conn, $sql);
+    }
+       
+        
+    }
+
+
+
