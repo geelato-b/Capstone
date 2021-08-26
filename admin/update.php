@@ -195,11 +195,12 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                     <div class="col-12">
                         <?php
                                             $sql =" SELECT 
-                                                        `Accbty_id`
+                                                        `accbty_id`
                                                         , `accbty_name`
                                                         , `accbty_desc`
                                                         , `accbty_price`
                                                         , `accbty_deadline`
+                                                        , `status`
                                                         FROM `accountabilities`;";
                             $stmt=mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmt, $sql)){
@@ -214,7 +215,6 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                     <table class="table table-hover" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                                                                             border-radius: 10px;">
                                                 <thead>
-                                                    
                                                     <th>Name</th>
                                                     <th>Description</th>
                                                     <th>Amount</th>
@@ -229,10 +229,13 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                                     <td> Php <?php  echo number_format($row['accbty_price'],2); ?> </td> 
                                                     <td><?php echo $row['accbty_deadline']; ?></td>
                                                     <td>
-                                                      <form action="../includes/del_accbty.php" method="get">
-                                                              <input hidden type="text" name="Accbty_id" value="<?php echo $row['Accbty_id']; ?>" >
-                                                              <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></i> </button>
-                                                      </form>
+                                                    <form action="../includes/del_accbty.php" method="post">
+                                                                <input hidden type="text" name="accbty_id" value="<?php echo $row['accbty_id']; ?>">
+                                                                <input hidden type="text" name="accbty_name" value="<?php echo $row['accbty_name']; ?>">
+                                                                <input type="hidden" name="new_stat" value="<?php echo $row['status'] == 'A' ? 'D' : 'A' ; ?>">
+                                                                <button class="btn btn-primary"> <?php echo $row['status'] == 'A' ? 'Deactivate' : 'Activate' ; ?> </button>
+                                                    </form>
+                                                  
                                                     </td>
                                                 </tr>
                                             <?php }?>
