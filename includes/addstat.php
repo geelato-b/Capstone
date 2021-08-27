@@ -49,14 +49,14 @@ include_once "db_conn.php";
                             , `accbty_price`
                             , `pymt_rcv_by`
                             , `pay_status`
-                            , `date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt_ins = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt_ins, $sql_ins)){
            
             header("location: ../admin/payment.php?error=2"); //insert failed
             exit();
         }
-        mysqli_stmt_bind_param($stmt_ins, "ssssssssss", $stud_id , $stud_name,  $stud_program,  $stud_year_block, $gender, $accbty_id, $accbty_price, $pymt_rcv_by, $pay_status, $date );
+        mysqli_stmt_bind_param($stmt_ins, "sssssssss", $stud_id , $stud_name,  $stud_program,  $stud_year_block, $gender, $accbty_id, $accbty_price, $pymt_rcv_by, $pay_status);
         mysqli_stmt_execute($stmt_ins);
         
         header("location: ../admin/payment.php?error=0"); //success

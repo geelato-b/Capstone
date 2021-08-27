@@ -59,15 +59,15 @@ session_start();
             array_push($arr, $row);
     }
     $sql_ins = "INSERT INTO `gcash`
-                  (`stud_id`,`stud_name`,`accbty_name`, `bu_email`, `date_time`, `img`) 
-                   VALUES (?,?,?,?,?,?);";
+                  (`stud_id`,`stud_name`,`accbty_name`, `bu_email`, `img`) 
+                   VALUES (?,?,?,?,?);";
         $stmt_ins = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt_ins, $sql_ins)){
         header("location: ../user/e-payment.php?error=2&target_filename={$target_filename}"); //insert failed
         exit();
         }
-        mysqli_stmt_bind_param($stmt_ins,"ssssss",$studid,$stud_name,$accbty_name,$bu_email,$date_time,$target_filename);
+        mysqli_stmt_bind_param($stmt_ins,"sssss",$studid,$stud_name,$accbty_name,$bu_email,$target_filename);
         mysqli_stmt_execute($stmt_ins);
 
         if (!$file_err_count) {
