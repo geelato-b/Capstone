@@ -179,37 +179,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 										</div>
 										
 									</div>
-									<div class="col-sm-3">
-										<div class="card">
-											<div class="card-body">
-												<a href="update.php"><h5 class="card-title mb-4">Accountabilities</h5>
-                        <?php 
-                            $sql_count = "SELECT COUNT(*) cartcount FROM `accountabilities` WHERE status = 'A' ;";
-                            $stmt=mysqli_stmt_init($conn);
-        
-                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
-                            header("location: index.php?error=stmtfailed");
-                            exit();
-                        }
-                            
-                            mysqli_stmt_execute($stmt);
-
-                            $resultData = mysqli_stmt_get_result($stmt);
-
-                            if($row = mysqli_fetch_assoc($resultData)){ ?>
-                                <span style = "font-size:1.5rem;
-                                                color:white;" class="badge bg-primary"><?php echo $row['cartcount']; ?></span>
-                            <?php }
-                        
-                            ?>
-                      
-                      
-                      </a>
-												
-											</div>
-										</div>
-										
-									</div>
+									
 
                   <div class="col-sm-3">
 										<div class="card">

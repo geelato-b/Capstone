@@ -352,7 +352,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                       <label for="TextInput" class="form-label">Accountability</label>
                                                       <select name="accbty_id" id="" class="form-select" require>
                                                       <?php
-                                                              $sql_acc = "SELECT `accbty_id`, `accbty_name` FROM `accountabilities`;";
+                                                              $sql_acc = "SELECT `accbty_id`, `accbty_name` FROM `accountabilities` WHERE status = 'A';";
                                                               $result = mysqli_query($conn, $sql_acc);
                                                               if(mysqli_num_rows($result) > 0){
                                                                   while($row = mysqli_fetch_assoc($result)){
@@ -380,11 +380,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                       <input type="text" name="pymt_rcv_by" class="form-control" require>
                                                   </div>
 
-                                                  <div class="mb-3">
-                                                      <label for="TextInput" class="form-label">Date</label>
-                                                      <input type="date" name="date" class="form-control" require>
-                                                  </div>
-
+                                            
                                                           <div class="card-footer">
                                                               <button class="btn btn-primary"> <i class="bi bi-save"></i> Save </button>
                                                             </div>
