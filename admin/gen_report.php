@@ -33,7 +33,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
     <nav class="fixed-top align-top" id="sidebar-wrapper" role="navigation">
        <div class="simplebar-content" style="padding: 0px;">
 				<a class="sidebar-brand" href="index.php">
-          <span class="align-middle">BUPC CSC Accountability System</span>
+                <span class="align-middle">BUPC CSC AS</span>
         </a>
 
 	<ul class="navbar-nav align-self-stretch">
@@ -88,22 +88,20 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
            <!-- Topbar Navbar -->
           
               <div class="container-fluid">
-              <div id="nav-alert">
-                  <a href="index.php">BUPC CSC Accountability System</a>
-              </div>
-                <form class="d-flex">
-                <div class="input-group mb-3">
-                <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
-                <button class="btn btn-primary" type="button">
-                <i class="bi bi-search"></i>
-                </button>            
-                </div>
-                </form>
-
-                <div>
-                <img class="img-profile " src="../img/logo2.png" width="115px" height="105px">
-                   <img class="img-profile" src="../img/logo1.png" width="100px" height="100px">
-                </div>
+                    <div>
+                    <a href="index.php"><img class="img-profile " src="../img/logo2.png" width="115px" height="105px"></a>
+                        <a href="index.php"><img class="img-profile" src="../img/logo1.png" width="100px" height="100px"></a>
+                    </div>
+                    
+                    
+                    <form class="d-flex">
+                    <div class="input-group mb-3">
+                    <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
+                    <button class="btn btn-primary" type="button">
+                    <i class="bi bi-search"></i>
+                    </button>
+                    </div>
+                    </form>
                 
               </div>
             
@@ -113,20 +111,12 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <!-- Begin Page Content -->
 
     <section>
-
-
             <div class="main__container" style="margin-top:2rem;">
              <div class="container__fluid"> 
-                    <div class="row" id="contentPanel">
-                    <div class="col-12">
+            <div class="row" id="contentPanel">
                    
-
-
-
-    <div class="container-fluid">
-        <div class="row mt-5">
             <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-
+                
                 <div class="list-group">
                     <a href="?cat=all&cat_n=All Category" class="list-group-item list-group-item-action">All</a>
                     <?php $category_list = getCategories($conn);

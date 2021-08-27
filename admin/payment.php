@@ -32,7 +32,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <nav class="fixed-top align-top" id="sidebar-wrapper" role="navigation">
        <div class="simplebar-content" style="padding: 0px;">
 				<a class="sidebar-brand" href="index.php">
-          <span class="align-middle">BUPC CSC Accountability System</span>
+                <span class="align-middle">BUPC CSC AS</span>
         </a>
 
 	<ul class="navbar-nav align-self-stretch">
@@ -85,9 +85,11 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
            <!-- Topbar Navbar -->
           
            <div class="container-fluid">
-           <div id="nav-alert">
-                  <a href="index.php">BUPC CSC Accountability System</a>
-              </div>
+           <div>
+               <a href="index.php"><img class="img-profile " src="../img/logo2.png" width="115px" height="105px"></a>
+                  <a href="index.php"><img class="img-profile" src="../img/logo1.png" width="100px" height="100px"></a>
+            </div>
+               
               
                <form class="d-flex">
                <div class="input-group mb-3">
@@ -98,10 +100,6 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                </div>
                </form>
 
-               <div>
-                <img class="img-profile " src="../img/logo2.png" width="115px" height="105px">
-                  <img class="img-profile" src="../img/logo1.png" width="100px" height="100px">
-               </div>
                
              </div>
         </nav>
