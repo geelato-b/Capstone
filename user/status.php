@@ -168,6 +168,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
           </div>    
 
         </section>
+      </div>
         <?php    
 
 }

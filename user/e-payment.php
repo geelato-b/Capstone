@@ -156,10 +156,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                             <input name="itemimagefile" type="file" class="form-control" required="">
                                         </div>
                                       
-                                        <div class="mb-3">
-                                          <label for="TextInput" class="form-label">Date</label>
-                                          <input type="text" id="date_time" name="date_time" value="<?php echo date("Y-m-d");?>"  class="form-control" readonly>
-                                        </div>
+                                        
                                         </div>
                                           <div class="card-footer">
                                             <button class="btn btn-primary" name="AddSS" type="submit"> <i class="bi bi-save"></i> Upload </button>
@@ -257,7 +254,9 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                         , `accbty_desc`
                                                         , `accbty_price`
                                                         , `accbty_deadline`
-                                                        FROM `accountabilities`;";
+                                                        , `status`
+                                                        FROM `accountabilities`
+                                                        Where status = 'A';";
                             $stmt=mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmt, $sql)){
                                 header("location: ?error=failedcheckout");
