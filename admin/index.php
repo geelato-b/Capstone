@@ -34,7 +34,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
        <div class="simplebar-content" style="padding: 0px;">
 				<a class="sidebar-brand" href="index.php">
         <br>
-          <span class="align-middle">BUPC CSC Accountability System</span>
+          <span class="align-middle">BUPC CSC AS</span>
         </a>
 
 	<ul class="navbar-nav align-self-stretch">
@@ -93,7 +93,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 		
           <!-- nav alert -->
           <div id="nav-alert">
-            <h4>BUPC CSC Accountability System</h4>
+            <a href="index.php"><h4>BUPC CSC Accountability System</h4></a>
           </div>
   
           <!-- Topbar Navbar -->
