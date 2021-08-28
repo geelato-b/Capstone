@@ -280,7 +280,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                       </div>
                                       <?php
                                       }
+                                  }else{
+                                    echo "NO GCASH PAYMENT TO CONFIRM.";
                                   }
+
                               
                                       ?>
                                   </div>

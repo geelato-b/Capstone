@@ -113,27 +113,36 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                     <h3 class="display-7">Pay Here</h3>
                           </div>
                           <div>
-                          <?php if(isset($_GET['error'])) {
-                              switch ($_GET['error']){
-                                  case 1:
-                                    echo "<p class='text-danger'> Item Exist</p>";
-                                  break;
-                                  case 2:
-                                    echo "<p class='text-danger'>Adding Record Failed</p>";
-                                  break;
-                                  case 3:
-                                    echo "<p class='text-danger'>Checking Item Failed</p>";
-                                  break;
-                                  case 0:
-                                    echo "<p class='text-danger'> Item Has Been Added</p>";
-                                  break;
-                              }
-                            }
-                        ?>
+                      
                           
                           </div>
-                                    
-                               
+                    <?php
+                    if (isset($_SESSION['status'])) {
+                    ?>
+                    <div class="container-sm">
+                    <div class="alert alert-success" role="alert">
+                      <i class="fas fa-check-circle"></i> <?php echo $_SESSION['status']; ?>
+                    </div>
+                     </div>
+                     
+                    <?php
+                        
+                        unset($_SESSION['status']);
+                    }
+
+                   ?>   
+                <?php
+                if (isset($_SESSION['status1'])) {
+                  ?>
+                      <div class="container-sm">
+                    <div class="alert alert-warning" role="alert">
+                      <i class="fas fa-exclamation-circle"></i> <?php echo $_SESSION['status1']; ?>
+                    </div>
+                     </div>
+                      <?php
+                      unset($_SESSION['status1']);
+                    }    
+                ?>             
                     <div class="card-body">
                         <div class="Payment">
                         <form action="../includes/addstat.php" method="post">
@@ -143,12 +152,12 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                 
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Student ID</label>
-                                    <input type="text" name="stud_id" class="form-control" >
+                                    <input type="text" name="stud_id" class="form-control" required="">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Name</label>
-                                    <input type="text" name="stud_name" class="form-control" >
+                                    <input type="text" name="stud_name" class="form-control" required="">
                                 </div>
 
                                 <div class="mb-3">
@@ -169,7 +178,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                 </div>
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label" >Year & Block</label>
-                                    <input type="text" placeholder= "Ex: 1A, 2B, 3C" name="stud_year_block" class="form-control" >
+                                    <input type="text" placeholder= "Ex: 1A, 2B, 3C" name="stud_year_block" class="form-control" required="">
                                 </div>
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Gender</label>
@@ -195,7 +204,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                 </div>
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Amount</label>
-                                    <input type="text" name="accbty_price" class="form-control" >
+                                    <input type="text" name="accbty_price" class="form-control" required="">
                                 </div>
 
                                 <div class="mb-3">
@@ -207,7 +216,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                 </div>
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Payment Received By</label>
-                                    <input type="text" name="pymt_rcv_by" class="form-control" >
+                                    <input type="text" name="pymt_rcv_by" class="form-control" required="">
                                 </div>
 
                                 
