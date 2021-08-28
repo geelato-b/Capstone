@@ -34,7 +34,7 @@ include_once "db_conn.php";
     }
 
     if(!empty($arr)){
-        
+        $_SESSION['status1'] = "Already Exist";
         header("location: ../admin/GCash.php?error=1&itemname={$accbty_name}"); //item exist
         exit();
     }
@@ -52,13 +52,13 @@ include_once "db_conn.php";
                             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt_ins = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt_ins, $sql_ins)){
-           
+           $_SESSION['status1'] = "Failed to Save. Try Again.";
             header("location: ../admin/GCash.php?error=2"); //insert failed
             exit();
         }
         mysqli_stmt_bind_param($stmt_ins, "sssssssss", $stud_id , $stud_name,  $stud_program,  $stud_year_block, $gender, $accbty_id, $accbty_price, $pymt_rcv_by, $pay_status);
         mysqli_stmt_execute($stmt_ins);
-        
+        $_SESSION['status'] = "Success";
         header("location: ../admin/GCash.php?error=0"); //success
     }
 }
