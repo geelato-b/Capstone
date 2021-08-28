@@ -3,12 +3,12 @@ session_start();
 include_once "../includes/db_conn.php";
 include_once "../includes/func.inc.php";   
 $status_logged_in = null;
-if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
-    $status_logged_in = array('status' => true, 'user_type' => $_SESSION['user_type'] );
+if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
+    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
     
     $STUD_ID = $_SESSION['stud_id'];
     $student_info = GetUserDetails($conn, $STUD_ID );
-
+}
 ?>
 
 <!doctype html>
@@ -20,12 +20,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" > 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <title>Student: BUPC CSC Accountability System</title>
+    <title>Admin Dashboard: BUPC CSC Accountability System</title>
     <link rel="stylesheet" href="../css/dash.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" >
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" >
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-
   </head>
   <body>
   <div id="wrapper">
@@ -35,7 +33,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <nav class="fixed-top align-top" id="sidebar-wrapper" role="navigation">
        <div class="simplebar-content" style="padding: 0px;">
 				<a class="sidebar-brand" href="index.php">
-          <span class="align-middle">BUPC CSC Accountability System</span>
+        <span class="align-middle">BUPC CSC AS</span>
         </a>
 
         <ul class="navbar-nav align-self-stretch">
@@ -134,129 +132,98 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
           <!-- Topbar Navbar -->
           
           <div class="container-fluid">
-               
-               <form class="d-flex">
+          <form class="d-flex">
                <div class="input-group mb-3">
-                <h1>Status</h1>
+                <h1>List of Accountabilities</h1>
                </div>
 
                </form>
-
-               <div>
-               <img class="img-profile " src="../img/logo2.png" width="115px" height="105px">
-                  <img class="img-profile" src="../img/logo1.png" width="100px" height="100px">
-               </div>
+            <div>
+               <a href="index.php"><img class="img-profile " src="../img/logo2.png" width="115px" height="105px"></a>
+                  <a href="index.php"><img class="img-profile" src="../img/logo1.png" width="100px" height="100px"></a>
+            </div>
                
+            
+
              </div>
         </nav>
         <!-- End of Topbar -->
         <!-- Begin Page Content -->
 
-    
-        <section >
+       
+              
+
+        <section id="content" >
             <div class="main__container" style="margin-top:2rem;">
              <div class="container__fluid"> 
                     <div class="row" id="contentPanel">
                     <div class="col-12">
                         <?php
-                                            $sql =" SELECT `status_id`
-                                            , s.stud_id
-                                            , s.stud_name
-                                            , s.stud_program
-                                            , s.stud_year_block
-                                            , s.gender
-                                            , s.accbty_id
-                                            , s.pymt_rcv_by
-                                            , s.pay_status
-                                            , s.date
-                                            , a.accbty_name
-                                            , a.accbty_desc
-                                            , a.accbty_price
-                                            , a.accbty_deadline
-                                            FROM `status` s
-                                            JOIN `accountabilities` a
-                                            ON s.accbty_id = a.accbty_id
-                                            WHERE s.stud_id = ?;";
+                                            $sql =" SELECT 
+                                                        `accbty_id`
+                                                        , `accbty_name`
+                                                        , `accbty_desc`
+                                                        , `accbty_price`
+                                                        , `accbty_deadline`
+                                                        , `status`
+                                                        FROM `accountabilities`
+                                                        Where status = 'A';";
                             $stmt=mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmt, $sql)){
                                 header("location: ?error=failedcheckout");
                                 exit();
                                 }
-                                mysqli_stmt_bind_param($stmt, "s" , $STUD_ID);
                                 mysqli_stmt_execute($stmt);
-
+            
                                 $resultData = mysqli_stmt_get_result($stmt); ?>
                             <div class="container">
                                 <div class="row">
-                                <table class="table table-hover" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                                    <table class="table table-hover" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                                                                             border-radius: 10px;">
                                                 <thead>
-                                                    <th>ID Number</th>
                                                     <th>Name</th>
-                                                    <th>Program</th>
-                                                    <th>Year & Block</th>
-                                                    <th>Gender</th>
-                                                    <th>Accountability</th>
+                                                    <th>Description</th>
                                                     <th>Amount</th>
                                                     <th>Deadline</th>
-                                                    <th>Payment Received By</th>
-                                                    <th>Status</th>
-                                                    <th>Date</th>
-                                                    
+                                                    <th></th>
                                                 </thead>
-
                                             <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
                                                 <tr>
-                                                    <td><?php echo $row['stud_id']; ?></td>
-                                                    <td><?php echo $row['stud_name']; ?></td>
-                                                    <td><?php echo $row['stud_program'];?></td>
-                                                    <td><?php echo $row['stud_year_block'];?></td>
-                                                    <td><?php echo $row['gender'];?></td>
-                                                    <td><?php echo $row['accbty_name'];?></td>
-                                                    <td><?php echo $row['accbty_price'];?></td>
-                                                    <td><?php echo $row['accbty_deadline'];?></td>
-                                                    <td><?php echo $row['pymt_rcv_by'];?></td>
-                                                    <td><?php echo $row['pay_status'] == 'P' ? 'Paid' : 'Unpaid';?></td>
-                                                    <td><?php echo $row['date'];?></td>
                                                     
-                                                  
+                                                    <td><?php echo $row['accbty_name']; ?></td>
+                                                    <td><?php echo $row['accbty_desc']; ?></td>
+                                                    <td> Php <?php  echo number_format($row['accbty_price'],2); ?> </td> 
+                                                    <td><?php echo $row['accbty_deadline']; ?></td>
+                                                    
                                                 </tr>
                                             <?php }?>
                                     </table> 
-                                  </div>
-                                </div>
                             </div>
-                          </div>
+                        </div>
              </div>
            </div>
-          </div>    
-
+          </div>          
         </section>
-      </div>
-        <?php    
 
-}
-
-else{
-header("location: ../index.php");  
-}
-?>
-      
+		
         <!-- /#page-content-wrapper -->
 
     </div>
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <!-- /#wrapper -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" ></script>
   
-  
-    
+   
   
  <script>
  
 $('#bar').click(function(){
-  $(this).toggleClass('open');
-  $('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled' );
+	$(this).toggleClass('open');
+	$('#page-content-wrapper ,#sidebar-wrapper').toggleClass('toggled' );
 
 });
   </script>

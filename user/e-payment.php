@@ -43,8 +43,69 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
       <li class="sidebar-header"></li>
 	    <li class=""> 
       <a href="index.php" class="nav-link text-left "  role="button"><i class="bi bi-house-door"></i>Home </a></li>
-      <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status</a></li>
-      <li><a href="e-payment.php" class="nav-link text-left active"  role="button"><i class="bi bi-cash-coin"></i>G-Cash</a></li>
+      <li class=""><a href="index.php" class="nav-link text-left "  role="button"><i class="bi bi-list"></i>Accountability
+      <?php 
+                            $sql_count = "SELECT COUNT(*) cartcount FROM `accountabilities` WHERE status = 'A';";
+                            $stmt=mysqli_stmt_init($conn);
+        
+                        if (!mysqli_stmt_prepare($stmt, $sql_count)){
+                            header("location: index.php?error=stmtfailed");
+                            exit();
+                        }
+                            
+                            mysqli_stmt_execute($stmt);
+
+                            $resultData = mysqli_stmt_get_result($stmt);
+
+                            if($row = mysqli_fetch_assoc($resultData)){ ?>
+                                <span class="position-absolute translate-middle badge rounded-pill bg-danger"><?php echo $row['cartcount']; ?></span>
+                            <?php }
+                        
+                            ?>
+    
+    </a></li>
+
+      <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status
+      <?php 
+                            $sql_cart_count = "SELECT COUNT(*) cartcount FROM `status` WHERE pay_status = 'P' AND stud_id = ?;";
+                            $stmt=mysqli_stmt_init($conn);
+        
+                        if (!mysqli_stmt_prepare($stmt, $sql_cart_count)){
+                            header("location: index.php?error=stmtfailed");
+                            exit();
+                        }
+                            mysqli_stmt_bind_param($stmt, "s" ,$_SESSION['stud_id']);
+                            mysqli_stmt_execute($stmt);
+
+                            $resultData = mysqli_stmt_get_result($stmt);
+
+                            if($row = mysqli_fetch_assoc($resultData)){ ?>
+                                <span class="position-absolute translate-middle badge rounded-pill bg-danger"><?php echo $row['cartcount']; ?></span>
+                            <?php }
+                        
+                            ?>
+    </a></li>
+      <li><a href="e-payment.php" class="nav-link text-left active"  role="button"><i class="bi bi-cash-coin"></i>G-Cash
+      <?php 
+                            $sql_cart_count = "SELECT COUNT(*) cartcount FROM `gcash` WHERE gc_status = 'UC' AND stud_id = ?;";
+                            $stmt=mysqli_stmt_init($conn);
+        
+                        if (!mysqli_stmt_prepare($stmt, $sql_cart_count)){
+                            header("location: index.php?error=stmtfailed");
+                            exit();
+                        }
+                            mysqli_stmt_bind_param($stmt, "s" ,$_SESSION['stud_id']);
+                            mysqli_stmt_execute($stmt);
+
+                            $resultData = mysqli_stmt_get_result($stmt);
+
+                            if($row = mysqli_fetch_assoc($resultData)){ ?>
+                                <span class="position-absolute translate-middle badge rounded-pill bg-danger"><?php echo $row['cartcount']; ?></span>
+                            <?php }
+                        
+                            ?>
+    
+    </a></li>
       <li><a href="setting.php" class="nav-link text-left"  role="button"><i class="bi bi-gear-fill"></i>Setting</a></li>
       <li><a href="about.php" class="nav-link text-left"  role="button"><i class="bi bi-book-half"></i>About Us</a></li>
       <li><a href="../logout.php" class="nav-link text-left"  role="button"><i class="bi bi-door-open"></i>Log Out</a></li>
