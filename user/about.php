@@ -72,11 +72,16 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <div class="row">
             <div class="col-md-6">
             <p class="banner-title">BUPC College Student Council</p>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus sed, quo, 
-                    odit ratione nobis, commodi dignissimos reiciendis 
-                    ipsam voluptates optio delectus consequatur 
-                    excepturi tenetur officia recusandae illo quia 
-                     distinctio?</p>
+                <p class="banner-content">The College Student Council is the Supreme Campus/College Student Body. 
+                  The  CSC acts in compliance with the provisions of its constitution and the laws, 
+                  vision, and  mission of Bicol University and the aims and objectives of the campus
+                   so that its purposes  are not stained with personal interests. 
+                   Furthermore, the student body ensures the welfare  and interest
+                    of the students are maintained. Alongside facing the difficulties 
+                    raised by  students' problems and concerns, it supports the school 
+                    and the learner by offering contact  links between students and the university. 
+                    (Bicol University, 2021) 
+</p>
             
             </div>
 
@@ -96,11 +101,11 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <div class="row">
             <div class="col-md-6">
             <p class="banner-title">BUPC CSC Accountability System</p>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus sed, quo, 
-                    odit ratione nobis, commodi dignissimos reiciendis 
-                    ipsam voluptates optio delectus consequatur 
-                    excepturi tenetur officia recusandae illo quia 
-                     distinctio?</p>
+                <p class="banner-content">It will provide storing records of accountabilities of BUPC CSC to make it easier to identify records. 
+                The system has the capability to add, save, delete and update data. 
+                It has a setting database tool, it also provides a summary of data or generate report, 
+                students can also view their payment status and determines which CSC officer logged on a specific time.
+                </p>
             </div>
 
             <div class="col-md-6 justify-content-center">
@@ -126,7 +131,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 						<div class="col-6 text-right">
 							<ul class="list-inline">
 								<li class="footer-item">
-									<a class="text-muted" href="#">Contact</a>
+									<a class="text-muted" href="https://www.facebook.com/bupc.csc.one">Contact</a>
 								</li>
 								<li class="footer-item">
 									<a class="text-muted" href="../footer/privacy.php">Privacy Policy</a>

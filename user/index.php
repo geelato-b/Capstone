@@ -71,12 +71,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <div class="row">
             <div class="col-md-6">
                 <p class="banner-title">BUPC CSC Accountability System</p>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus sed, quo, 
-                    odit ratione nobis, commodi dignissimos reiciendis 
-                    ipsam voluptates optio delectus consequatur 
-                    excepturi tenetur officia recusandae illo quia 
-                     distinctio?</p>
-                     
+                
             </div>
             <div class="col-md-6">
                 <img src="../img/banner4.svg" alt="" class="img-fluid">
@@ -86,10 +81,11 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         
 </section>
 
-
 <section id="banner">
     <div class="container">
         <div class="row">
+        <p class="title">Pay through Gcash</p>
+        
             <div class="col-md-6">
             <img src="../img/steps.svg" alt="" class="img-fluid">  
             </div>
@@ -115,26 +111,25 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         
 </section>
 
+
 <section id="banner">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-            <p class="banner-title">Status</p>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus sed, quo, 
-                    odit ratione nobis, commodi dignissimos reiciendis 
-                    ipsam voluptates optio delectus consequatur 
-                    excepturi tenetur officia recusandae illo quia 
-                     distinctio?</p>
-            </div>
-
+          
             <div class="col-md-6 justify-content-center">
             <img src="../img/status.svg" alt="" class="img-fluid">  
+                
+            </div>
+
+            <div class="col-md-6">
+            <p class="banner-title">Check your Accountability Status</p>
                 
             </div>
         </div>
     </div>
         
 </section>
+
 
 
 
@@ -150,7 +145,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 						<div class="col-6 text-right">
 							<ul class="list-inline">
 								<li class="footer-item">
-									<a class="text-muted" href="#">Contact</a>
+									<a class="text-muted" href="https://www.facebook.com/bupc.csc.one">Contact</a>
 								</li>
 								<li class="footer-item">
 									<a class="text-muted" href="../footer/privacy.php">Privacy Policy</a>
