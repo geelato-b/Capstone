@@ -34,13 +34,30 @@ header{
     padding-top: 10%;
     height: 100%;
     width: 100%;
+   
+}
+#banner .title{
+    color: black;
+    font-size: 50px;
+    font-weight: bolder;
+    margin-top: 50px;
+    text-align-last: center;
+    padding-bottom: 5rem;
+    
 }
 
 .banner-title{
     font-size: 40px;
     font-weight: 600;
+    justify-content: center;
     margin-top: 100px;
     
+}
+
+.banner-content{
+  font-size: 1.3rem;
+  text-align: justify;
+
 }
 /*------------------------content---------------------------------*/
 
@@ -313,6 +330,7 @@ form .signin-form{
 ----------------------*/
 
 footer.footer {
+  padding-top: 2rem;
     position:relative;
     bottom:0;
     padding-bottom: 1rem;
