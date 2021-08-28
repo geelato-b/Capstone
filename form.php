@@ -73,6 +73,15 @@ include_once "includes/func.inc.php";
                 <select id="studprog" name="studprog" class="form-select" >
                     <option>BS Information Technology</option>
                     <option>BS Information Technology Animation</option>
+                    <option>BS in Computer Engineering</option>
+                    <option>BS in Computer Science</option>
+                    <option>BS in Mechanical Technology</option>
+                    <option>BS in Automotive Technology</option>
+                    <option>BS in Electrical Technology</option>
+                    <option>BS in Food Technology</option>
+                    <option>Bachelor of Science in Nursing</option>
+                    <option>Bachelor of Tech and Livelihood Education</option>
+
                 </select>
                 </div>
                 <div class="mb-3">
