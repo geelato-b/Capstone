@@ -310,6 +310,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                 break;
                                                 case 0:
                                                   echo "<p class='text-danger'> Item Has Been Added</p>";
+                                                  echo "<p class='text-danger'>Click the Confirm Button</p>";
                                                 break;
                                             }
                                           }
@@ -330,15 +331,23 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 
                                                   <div class="mb-3">
                                                       <label for="TextInput" class="form-label">Program</label>
-                                                      <select name="stud_program" id="disabledSelect" class="form-select" require>
-                                                          <option values="BSIT">BS Information Technology</option>
-                                                          <option values="BSIT Animation">BS Information Technology Animation</option>
+                                                      <select name="stud_program" id="disabledSelect" class="form-select">
+                                                          <option values="BS Information Technology">BS Information Technology</option>
+                                                          <option values="BS Information Technology Animation">BS Information Technology Animation</option>
+                                                          <option values="BS in Computer Engineering">BS in Computer Engineering</option>
+                                                          <option values="BS in Computer Science">BS in Computer Science</option>
+                                                          <option values="BS in Mechanical Technology">BS in Mechanical Technology</option>
+                                                          <option values="BS in Automotive Technology">BS in Automotive Technology</option>
+                                                          <option values="BS in Electrical Technology">BS in Electrical Technology</option>
+                                                          <option values="BS in Food Technology">BS in Food Technology</option>
+                                                          <option values="Bachelor of Science in Nursing">Bachelor of Science in Nursing</option>
+                                                          <option values="Bachelor of Tech and Livelihood Education">Bachelor of Tech and Livelihood Education</option>
                                                       </select>
 
                                                   </div>
                                                   <div class="mb-3">
-                                                      <label for="TextInput" class="form-label">Year & Block</label>
-                                                      <input type="text" name="stud_year_block" class="form-control" require>
+                                                      <label for="TextInput" class="form-label" >Year & Block</label>
+                                                      <input type="text" placeholder= "Ex: 1A, 2B, 3C" name="stud_year_block" class="form-control" >
                                                   </div>
                                                   <div class="mb-3">
                                                       <label for="TextInput" class="form-label">Gender</label>
