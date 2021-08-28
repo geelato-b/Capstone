@@ -139,7 +139,33 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                               }
                             }
                         ?>
+                        <?php
+                    if (isset($_SESSION['status'])) {
+                    ?>
+                    <div class="container-sm">
+                    <div class="alert alert-success" role="alert">
+                      <i class="fas fa-check-circle"></i> <?php echo $_SESSION['status']; ?>
+                    </div>
+                     </div>
+                     
+                    <?php
+                        
+                        unset($_SESSION['status']);
+                    }
 
+                   ?>   
+                <?php
+                if (isset($_SESSION['status1'])) {
+                  ?>
+                      <div class="container-sm">
+                    <div class="alert alert-warning" role="alert">
+                      <i class="fas fa-exclamation-circle"></i> <?php echo $_SESSION['status1']; ?>
+                    </div>
+                     </div>
+                      <?php
+                      unset($_SESSION['status1']);
+                    }    
+                ?>             
                         <div class="collapse" id="AddAcctbl" class="card collapse mt-3 shadow">
                           <div class="card-header">
                               <h3 class="display-7">Add New Item</h3>
