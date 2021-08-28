@@ -262,9 +262,6 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 							<ul class="list-inline">
 								
 								<li class="footer-item">
-									<a class="text-muted" href="#">Contacts</a>
-								</li>
-								<li class="footer-item">
 									<a class="text-muted" href="../footer/privacy.php">Privacy Policy</a>
 								</li>
 								<li class="footer-item">

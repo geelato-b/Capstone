@@ -164,7 +164,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                     <td><?php echo $row['accbty_name'];?></td>
                                                     <td><?php echo $row['accbty_price'];?></td>
                                                     <td><?php echo $row['pymt_rcv_by'];?></td>
-                                                    <td><?php echo $row['pay_status'];?></td>
+                                                    <td><?php echo $row['pay_status']== 'P' ? 'Paid' : 'UnPaid' ; ;?></td>
                                                     <td><?php echo $row['date'];?></td>
 
                                                     
