@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2021 at 08:03 AM
+-- Generation Time: Aug 31, 2021 at 08:55 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -33,7 +33,7 @@ CREATE TABLE `accountabilities` (
   `accbty_desc` varchar(255) NOT NULL,
   `accbty_price` int(128) NOT NULL,
   `accbty_deadline` date NOT NULL COMMENT 'yyyy-mm-dd',
-  `status` varchar(128) NOT NULL DEFAULT 'A' COMMENT 'A = Activated\r\nD = Deactivated'
+  `status` varchar(128) NOT NULL DEFAULT 'NYP' COMMENT 'P-paid,\r\nNYP-not yet paid'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -41,8 +41,7 @@ CREATE TABLE `accountabilities` (
 --
 
 INSERT INTO `accountabilities` (`accbty_id`, `accbty_name`, `accbty_desc`, `accbty_price`, `accbty_deadline`, `status`) VALUES
-(1, 'CSC fee', 'Mandatory', 20, '2021-12-12', 'A'),
-(2, 'Red cross', 'Mandatory', 20, '2021-12-12', 'A');
+(1, 'CSC fee', 'Mandatory', 20, '2021-12-17', 'NYP');
 
 -- --------------------------------------------------------
 
@@ -54,18 +53,10 @@ CREATE TABLE `feedback` (
   `fb_id` int(128) NOT NULL,
   `bu_email` varchar(225) NOT NULL,
   `fb_cont` varchar(10000) NOT NULL,
-  `date_sent` date NOT NULL DEFAULT current_timestamp(),
+  `date_sent` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` varchar(1) NOT NULL DEFAULT 'A',
-  `fb_status` varchar(125) NOT NULL DEFAULT 'Unread'
+  `fb_status` varchar(11) NOT NULL DEFAULT 'Unread'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `feedback`
---
-
-INSERT INTO `feedback` (`fb_id`, `bu_email`, `fb_cont`, `date_sent`, `status`, `fb_status`) VALUES
-(1, 'vanyaseven@bicol-u.edu.ph', 'I could say I never dare\r\nTo think about you in that way, but\r\nI would be lyin\'\r\nAnd I pretend I\'m happy for you\r\nWhen you find some dude to take home\r\nBut I won\'t deny that\r\nIn the midst of the crowds\r\nIn the shapes in the clouds\r\nI don\'t see nobody but you\r\nIn my rose-tinted dreams\r\nWrinkled silk on my sheets\r\nI don\'t see nobody but you', '2021-08-22', 'A', 'Mark as Read'),
-(2, 'vanyaseven@bicol-u.edu.ph', 'I do the same thing I told you that I never would\r\nI told you I\'d change, even when I knew I never could\r\nKnow that I can\'t find nobody else as good as you\r\nI need you to stay, need you to stay, hey\r\nI do the same thing I told you that I never would\r\nI told you I\'d change even when I knew I never could\r\nKnow that I can\'t find nobody else as good as you\r\nI need you to stay, need you to stay, hey', '2021-08-23', 'A', 'Mark as Read');
 
 -- --------------------------------------------------------
 
@@ -78,7 +69,7 @@ CREATE TABLE `gcash` (
   `stud_id` varchar(128) NOT NULL,
   `stud_name` varchar(255) NOT NULL,
   `bu_email` varchar(255) NOT NULL,
-  `date_time` date NOT NULL DEFAULT current_timestamp(),
+  `date_time` timestamp NOT NULL DEFAULT current_timestamp(),
   `accbty_name` varchar(128) NOT NULL,
   `img` varchar(128) NOT NULL,
   `gc_status` varchar(64) NOT NULL DEFAULT 'UC',
@@ -99,10 +90,9 @@ CREATE TABLE `status` (
   `stud_year_block` varchar(30) NOT NULL,
   `gender` varchar(11) NOT NULL COMMENT 'M-male, F-female',
   `accbty_id` varchar(11) NOT NULL,
-  `accbty_price` int(128) NOT NULL,
   `pymt_rcv_by` varchar(128) NOT NULL,
   `pay_status` varchar(20) NOT NULL,
-  `date` date NOT NULL DEFAULT current_timestamp()
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -200,13 +190,13 @@ ALTER TABLE `student_info`
 -- AUTO_INCREMENT for table `accountabilities`
 --
 ALTER TABLE `accountabilities`
-  MODIFY `accbty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `accbty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `fb_id` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `fb_id` int(128) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `gcash`
