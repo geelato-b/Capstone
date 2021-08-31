@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2021 at 08:55 AM
+-- Generation Time: Aug 31, 2021 at 09:07 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -33,7 +33,7 @@ CREATE TABLE `accountabilities` (
   `accbty_desc` varchar(255) NOT NULL,
   `accbty_price` int(128) NOT NULL,
   `accbty_deadline` date NOT NULL COMMENT 'yyyy-mm-dd',
-  `status` varchar(128) NOT NULL DEFAULT 'NYP' COMMENT 'P-paid,\r\nNYP-not yet paid'
+  `status` varchar(128) NOT NULL DEFAULT 'A' COMMENT 'A = Active\r\nD = Deactivated'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `accountabilities` (
 --
 
 INSERT INTO `accountabilities` (`accbty_id`, `accbty_name`, `accbty_desc`, `accbty_price`, `accbty_deadline`, `status`) VALUES
-(1, 'CSC fee', 'Mandatory', 20, '2021-12-17', 'NYP');
+(1, 'CSC fee', 'Mandatory', 20, '2021-12-17', 'A');
 
 -- --------------------------------------------------------
 
