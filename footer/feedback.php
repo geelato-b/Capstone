@@ -41,10 +41,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
-              <a href="index.php" class="nav-link text-dark">Home</a>
+              <a href="../user/index.php" class="nav-link text-dark">Home</a>
             </li>
             <li>
-              <a href="acc.php" class="nav-link text-dark">Accountability
+              <a href="../user/acc.php" class="nav-link text-dark">Accountability
               <?php 
                             $sql_count = "SELECT COUNT(*) cartcount FROM `accountabilities` WHERE status = 'A';";
                             $stmt=mysqli_stmt_init($conn);
@@ -67,7 +67,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
               </a>
             </li>
             <li>
-              <a href="status.php" class="nav-link text-dark">Status
+              <a href="../user/status.php" class="nav-link text-dark">Status
               <?php 
                             $sql_cart_count = "SELECT COUNT(*) cartcount FROM `status` WHERE pay_status = 'P' AND stud_id = ?;";
                             $stmt=mysqli_stmt_init($conn);
@@ -90,7 +90,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
               </a>
             </li>
             <li>
-              <a href="e-payment.php" class="nav-link text-dark">G-Cash
+              <a href="../user/e-payment.php" class="nav-link text-dark">G-Cash
               <?php 
                             $sql_cart_count = "SELECT COUNT(*) cartcount FROM `gcash` WHERE gc_status = 'UC' AND stud_id = ?;";
                             $stmt=mysqli_stmt_init($conn);
@@ -113,10 +113,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
               </a>
             </li>
             <li>
-              <a href="setting.php" class="nav-link text-dark">Setting</a>
+              <a href="../user/setting.php" class="nav-link text-dark">Setting</a>
             </li>
             <li>
-              <a href="about.php" class="nav-link text-dark">About Us</a>
+              <a href="../user/about.php" class="nav-link text-dark">About Us</a>
             </li>
             
             <li>
