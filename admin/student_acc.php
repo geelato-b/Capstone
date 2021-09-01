@@ -119,7 +119,7 @@ if(isset($_GET['searchkey'])){
         <!-- Begin Page Content -->
 
         <section>
-          <a href="student_info.php" class="list-group-item list-group-item-action"><i class="fas fa-redo-alt"></i> Refresh</a>
+          <a href="student_acc.php" class="list-group-item list-group-item-action"><i class="fas fa-redo-alt"></i> Refresh</a>
             <div class="main__container" style="margin-top:2rem;">
              <div class="container__fluid"> 
                     <div class="row" id="contentPanel">
