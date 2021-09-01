@@ -22,7 +22,6 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" > 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/dash.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" >
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
@@ -145,7 +144,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 						<div class="col-6 text-right">
 							<ul class="list-inline">
 								<li class="footer-item">
-									<a class="text-muted" href="#">Contact</a>
+									<a class="text-muted" href="https://www.facebook.com/bupc.csc.one">Contact</a>
 								</li>
 								<li class="footer-item">
 									<a class="text-muted" href="../footer/privacy.php">Privacy Policy</a>
@@ -154,13 +153,14 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 									<a class="text-muted" href="../footer/terms.php">Terms of Service</a>
 								</li>
                 <li class="footer-item">
-									<a class="text-muted" href="../footer/terms.php">Feedback</a>
+									<a class="text-muted" href="../footer/feedback.php">Feedback</a>
 								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</footer>
+
 
       <?php    
 
