@@ -22,6 +22,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" > 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dash.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
    
 </head>
 <body>
@@ -74,7 +78,33 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
               <div class="modal-content rounded-9 shadow">
                 <div class="modal-header p-5 pb-6 border-bottom-0">
                   <!-- <h5 class="modal-title">Modal title</h5> -->
+                  <?php
+                    if (isset($_SESSION['status'])) {
+                    ?>
+                    <div class="container-sm">
+                    <div class="alert alert-success" role="alert">
+                      <i class="fas fa-check-circle"></i> <?php echo $_SESSION['status']; ?>
+                    </div>
+                     </div>
+                     
+                    <?php
+                        
+                        unset($_SESSION['status']);
+                    }
 
+                   ?>   
+                <?php
+                if (isset($_SESSION['status1'])) {
+                  ?>
+                      <div class="container-sm">
+                    <div class="alert alert-warning" role="alert">
+                      <i class="fas fa-exclamation-circle"></i> <?php echo $_SESSION['status1']; ?>
+                    </div>
+                     </div>
+                      <?php
+                      unset($_SESSION['status1']);
+                    }    
+                ?>      
                 </div>
 
                 <div class="modal-body p-5 pt-0">
