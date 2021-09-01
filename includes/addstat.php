@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_POST['pay_status'])){
+if(isset($_POST['stud_id'])){
 include_once "db_conn.php";
 
     $status_id = htmlentities($_POST['status_id']);
@@ -12,7 +12,6 @@ include_once "db_conn.php";
     $gender = htmlentities($_POST['gender']);
     $accbty_id = htmlentities($_POST['accbty_id']);
     $accbty_price = htmlentities($_POST['accbty_price']);
-    $pay_status = htmlentities($_POST['pay_status']);
     $pymt_rcv_by = htmlentities($_POST['pymt_rcv_by']);
     $date= htmlentities($_POST['date']);
     
@@ -48,15 +47,15 @@ include_once "db_conn.php";
                             , `accbty_id`
                             , `accbty_price`
                             , `pymt_rcv_by`
-                            , `pay_status`
-                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                            
+                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt_ins = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt_ins, $sql_ins)){
            $_SESSION['status1'] = "Failed to Save. Try Again.";
             header("location: ../admin/payment.php?error=2"); //insert failed
             exit();
         }
-        mysqli_stmt_bind_param($stmt_ins, "sssssssss", $stud_id , $stud_name,  $stud_program,  $stud_year_block, $gender, $accbty_id, $accbty_price, $pymt_rcv_by, $pay_status);
+        mysqli_stmt_bind_param($stmt_ins, "ssssssss", $stud_id , $stud_name,  $stud_program,  $stud_year_block, $gender, $accbty_id, $accbty_price, $pymt_rcv_by);
         mysqli_stmt_execute($stmt_ins);
         $_SESSION['status'] = " <b>Success</b><br>A record was saved successfully.";
         header("location: ../admin/payment.php?error=0"); //success
