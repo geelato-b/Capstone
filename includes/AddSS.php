@@ -48,6 +48,7 @@ session_start();
     
     $stmt_chk = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt_chk, $sql_check)){
+         $_SESSION['status1'] = "<b>Connection Failed. </b> ";
        header("location: ../user/e-payment.php?error=3"); //statement failed
         exit();
     }
@@ -64,6 +65,7 @@ session_start();
         $stmt_ins = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt_ins, $sql_ins)){
+             $_SESSION['status1'] = "<b>Upload Failed. </b><br> Please try again. ";
         header("location: ../user/e-payment.php?error=2&target_filename={$target_filename}"); //insert failed
         exit();
         }
@@ -76,11 +78,12 @@ session_start();
             if (move_uploaded_file($image_temp_file, $target_dir."/".$target_filename)) {
                 echo "The file ". htmlspecialchars( basename($_FILES["fileToUpload"]["name"])). "file has been uploaded.";
             }else{
+                $_SESSION['status1'] = "<b>Upload Failed. </b><br> Please try again. ";
                 header("localtion: ../user/e-payment.php?error=99"); //file upload failed
                 exit();
             }
         }
-        $_SESSION['status'] = " Success";
+        $_SESSION['status'] = " <b>Thanks for your payment!</b><br>Please wait for confirmation.";
     
         header("location:  ../user/e-payment.php?error=0&Item Added &target_filename={$target_filename}"); //successful
         exit();

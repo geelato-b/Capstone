@@ -21,7 +21,7 @@ include_once "db_conn.php";
     
     $stmt_chk = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt_chk, $sql_check)){
-       
+       $_SESSION['status1'] = "<b>Connection Failed</b>";
        header("location: ../admin/payment.php?error=3"); //statement failed
         exit();
     }
@@ -34,7 +34,7 @@ include_once "db_conn.php";
     }
 
     if(!empty($arr)){
-         $_SESSION['status1'] = "Already Exist";
+         $_SESSION['status1'] = "<b>Already Exist</b>";
         header("location: ../admin/payment.php?error=1&itemname={$accbty_name}"); //item exist
         exit();
     }
@@ -58,7 +58,7 @@ include_once "db_conn.php";
         }
         mysqli_stmt_bind_param($stmt_ins, "sssssssss", $stud_id , $stud_name,  $stud_program,  $stud_year_block, $gender, $accbty_id, $accbty_price, $pymt_rcv_by, $pay_status);
         mysqli_stmt_execute($stmt_ins);
-        $_SESSION['status'] = " Success";
+        $_SESSION['status'] = " <b>Success</b><br>A record was saved successfully.";
         header("location: ../admin/payment.php?error=0"); //success
     }
 }
