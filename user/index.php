@@ -134,6 +134,8 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <div class="row">
             <div class="col-md-6">
                 <p class="banner-title">BUPC CSC Accountability System</p>
+		    <p>"We'll keep your finances on the track where everybody counts."</p>
+	
                 
             </div>
             <div class="col-md-6">
