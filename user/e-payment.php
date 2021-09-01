@@ -182,6 +182,19 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                         unset($_SESSION['status']);
                     }
                 ?>
+                <?php
+                if (isset($_SESSION['status1'])) {
+                  ?>
+                      <div class="container-sm">
+                    <div class="alert alert-warning" role="alert">
+                      <i class="fas fa-exclamation-circle"></i> <?php echo $_SESSION['status1']; ?>
+                    </div>
+                     </div>
+                      <?php
+                      unset($_SESSION['status1']);
+                    }    
+                ?>   
+                   
           <div class="collapse" id="AddGCASH" class="card collapse mt-3 shadow">
                           <div class="card-header">
                               <h3 class="display-7">&nbsp Upload G-Cash Receipt</h3>
@@ -216,12 +229,36 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                             <label for="" class="form-label">Image</label>
                                             <input name="itemimagefile" type="file" class="form-control" required="">
                                         </div>
-                                      
-                                        
-                                        </div>
-                                          <div class="card-footer">
+
+                                          <!-- <div class="card-footer">
                                             <button class="btn btn-primary" name="AddSS" type="submit"> <i class="bi bi-save"></i> Upload </button>
+                                          </div> -->
+                                          <div class="card-footer">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                              <i class="bi bi-save"></i> Upload
+                                            </button>
                                           </div>
+                                          <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+                                  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="staticBackdropLabel"><b>Confirmation</b></h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                          Are you sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button name="AddSS" type="submit"  class="btn btn-primary" >Yes</button>
+                                          <button  class="btn btn-outline-danger" data-bs-dismiss="modal" type="button">No</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
 
                                         </div>
                                 </form>

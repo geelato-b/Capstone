@@ -94,10 +94,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                           
                           <form class="d-flex">
                           <div class="input-group mb-3">
-                          <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
-                          <button class="btn btn-primary" type="button">
-                          <i class="bi bi-search"></i>
-                          </button>
+                          <a class="btn btn-primary" href="status.php" role="button"><i class="bi bi-search"></i> Search</a>
                           </div>
                           </form>
                       </nav>
@@ -302,17 +299,9 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                           <form action="../includes/gcashprocess.php" method="post">
                                           <?php if(isset($_GET['error'])) {
                                             switch ($_GET['error']){
-                                                case 1:
-                                                  echo "<p class='text-danger'> Item Exist</p>";
-                                                break;
-                                                case 2:
-                                                  echo "<p class='text-danger'>Adding Record Failed</p>";
-                                                break;
-                                                case 3:
-                                                  echo "<p class='text-danger'>Checking Item Failed</p>";
-                                                break;
+                                               
                                                 case 0:
-                                                  echo "<p class='text-danger'> Item Has Been Added</p>";
+                                                 
                                                   echo "<p class='text-danger'>Click the Confirm Button</p>";
                                                 break;
                                             }
@@ -421,8 +410,31 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 
                                             
                                                           <div class="card-footer">
-                                                              <button class="btn btn-primary"> <i class="bi bi-save"></i> Save </button>
+                                                              <!-- <button class="btn btn-primary"> <i class="bi bi-save"></i> Save </button> -->
+                                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                                <i class="bi bi-save"></i> Save 
+                                                            </button>
+
+                                                          </div>
+                                                          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                          <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                              <div class="modal-header">
+                                                                <h5 class="modal-title" id="staticBackdropLabel"><i class="bi bi-save"></i> Save</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                              </div>
+                                                              <div class="modal-body">
+                                                                Are you sure?
+                                                              </div>
+                                                              <div class="modal-footer">
+                                                                <button name="pay_status" type="submit"  class="btn btn-primary" >Yes</button>
+                                                                <button  class="btn btn-outline-danger" data-bs-dismiss="modal" type="button">No</button>
+                                                                
+                                                              </div>
                                                             </div>
+                                                          </div>
+                                                        </div>
+
                                                   </div>
                                           </form>
                                 </div>

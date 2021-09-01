@@ -15,7 +15,7 @@ include_once "db_conn.php";
     
     $stmt_chk = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt_chk, $sql_check)){
-
+        $_SESSION['status1'] = "Connection Failed.";
        header("location: ../admin/update.php?error=3"); //statement failed
         exit();
     }
@@ -41,12 +41,13 @@ include_once "db_conn.php";
                             VALUES (?, ?, ?, ?);";
         $stmt_ins = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt_ins, $sql_ins)){
+            $_SESSION['status1'] = "Failed to insert. Try again.";
             header("location: ../admin/update.php?error=2"); //insert failed
             exit();
         }
         mysqli_stmt_bind_param($stmt_ins, "ssss", $accbty_name,  $accbty_price,  $accbty_desc, $accbty_deadline);
         mysqli_stmt_execute($stmt_ins);
-        $_SESSION['status'] = "Success";
+        $_SESSION['status'] ="<b>".  $accbty_name . "</b>". " is successfully added. <br><b>Deadline: </b>". $accbty_deadline;
         header("location: ../admin/update.php?error=0"); //success
     }
 }
