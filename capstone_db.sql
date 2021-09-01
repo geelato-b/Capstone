@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2021 at 09:07 AM
+-- Generation Time: Sep 01, 2021 at 09:56 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -41,7 +41,8 @@ CREATE TABLE `accountabilities` (
 --
 
 INSERT INTO `accountabilities` (`accbty_id`, `accbty_name`, `accbty_desc`, `accbty_price`, `accbty_deadline`, `status`) VALUES
-(1, 'CSC fee', 'Mandatory', 20, '2021-12-17', 'A');
+(1, 'CSC fee', 'Mandatory', 20, '2021-12-17', 'A'),
+(2, 'Red cross', 'Mandatory', 100, '2022-01-01', 'A');
 
 -- --------------------------------------------------------
 
@@ -55,7 +56,7 @@ CREATE TABLE `feedback` (
   `fb_cont` varchar(10000) NOT NULL,
   `date_sent` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` varchar(1) NOT NULL DEFAULT 'A',
-  `fb_status` varchar(11) NOT NULL DEFAULT 'Unread'
+  `fb_status` varchar(64) NOT NULL DEFAULT 'Unread'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -90,8 +91,9 @@ CREATE TABLE `status` (
   `stud_year_block` varchar(30) NOT NULL,
   `gender` varchar(11) NOT NULL COMMENT 'M-male, F-female',
   `accbty_id` varchar(11) NOT NULL,
+  `accbty_price` int(128) NOT NULL,
   `pymt_rcv_by` varchar(128) NOT NULL,
-  `pay_status` varchar(20) NOT NULL,
+  `pay_status` varchar(1) NOT NULL DEFAULT 'P',
   `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -115,7 +117,7 @@ CREATE TABLE `student_acc` (
 --
 
 INSERT INTO `student_acc` (`stud_id`, `bu_email`, `stud_name`, `password`, `user_type`, `status`) VALUES
-('1969-PC-Admin', 'bicol-u.edu.ph', 'BUPC', 'admin', 'A', 'Active'),
+('1969-PC-Admin', 'bicol-u.edu.ph', 'BUPC', 'admin000', 'A', 'Active'),
 ('2018-PC-100000', 'vanyaseven@bicol-u.edu.ph', 'Vanya Seven', 'qwerty123', 'S', 'Active');
 
 -- --------------------------------------------------------
@@ -190,7 +192,7 @@ ALTER TABLE `student_info`
 -- AUTO_INCREMENT for table `accountabilities`
 --
 ALTER TABLE `accountabilities`
-  MODIFY `accbty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `accbty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `feedback`
