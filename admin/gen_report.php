@@ -96,10 +96,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                     
                     <form class="d-flex">
                     <div class="input-group mb-3">
-                    <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
-                    <button class="btn btn-primary" type="button">
-                    <i class="bi bi-search"></i>
-                    </button>
+                    
                     </div>
                     </form>
                 

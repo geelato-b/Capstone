@@ -255,7 +255,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 					<div class="row text-muted">
 						<div class="col-6 text-left">
 							<p class="mb-0">
-								<a href="index.html" class="text-muted"><strong> BUPC CSC Accountability System </strong></a> &copy
+								<a href="index.php" class="text-muted"><strong> BUPC CSC Accountability System </strong></a> &copy
 							</p>
 						</div>
 						<div class="col-6 text-right">

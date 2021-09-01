@@ -397,13 +397,6 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                   </div>
 
                                                   <div class="mb-3">
-                                                      <label for="TextInput" class="form-label">Status</label>
-                                                      <select name="pay_status" id="disabledSelect" class="form-select" require>
-                                                          <option value="UP">Unpaid</option>
-                                                          <option value="P">Paid</option>
-                                                      </select>
-                                                  </div>
-                                                  <div class="mb-3">
                                                       <label for="TextInput" class="form-label">Payment Received By</label>
                                                       <input type="text" name="pymt_rcv_by" class="form-control" require>
                                                   </div>
