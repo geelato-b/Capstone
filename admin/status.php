@@ -91,30 +91,73 @@ if(isset($_GET['searchkey'])){
           <!-- Topbar Navbar -->
           
           <div class="container-fluid">
-          <div>
+            <div>
                <a href="index.php"><img class="img-profile " src="../img/logo2.png" width="115px" height="105px"></a>
                   <a href="index.php"><img class="img-profile" src="../img/logo1.png" width="100px" height="100px"></a>
             </div>
                
               
                <form class="d-flex">
+
                 <form action="status.php" method="GET">
                <div class="input-group mb-3">
                <input type="text" id="searchbar" name="searchkey" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
                <button class="btn btn-primary" type="button">
                <i class="bi bi-search"></i>
                </button>
+
                </div>
                 </form>
+
                </form>
 
-               
-             </div>
+          </div>
         </nav>
         <!-- End of Topbar -->
         <!-- Begin Page Content -->
 
         <section>
+        
+          <!-- <ul class="list-group list-group-horizontal">
+           <li class="list-group-item list-group-item-primary"><a href="status.php"><i class="fas fa-redo-alt"></i> Refresh</a></li>
+           <li class="list-group-item list-group-item-primary"><a href="payment.php"><i class="bi bi-cash-coin"></i> Payment</a></li>
+          </ul> -->
+          <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group" role="group" aria-label="First group">
+    &nbsp<a href="status.php"><button type="button" class="btn btn-secondary"><i class="fas fa-redo-alt"></i> Refresh</button></a>
+    
+
+  </div>
+  <div class="input-group">
+    <div  id="btnGroupAddon2">
+      &nbsp<a href="payment.php"><button type="button" class="btn btn-primary"><i class="bi bi-cash-coin"></i> Payment</button></a>
+         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#search">
+                <i class="fas fa-info-circle"></i> </a>
+          </button>
+        </div>
+  </div>
+</div>
+          
+          
+<!-- Modal -->
+                    <div class="modal fade" id="search" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><b>Reminder</b></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            When using the search bar, please <u>enter the complete word</u>.<br><br>
+                            It doesn't accept incomplete, copy-paste, and autocomplete words.
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Continue</button>
+                           <!--  <a href="status.php"><button type="button" class="btn btn-primary"></button></a> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
             <div class="main__container" style="margin-top:2rem;">
              <div class="container__fluid"> 
                     <div class="row" id="contentPanel">
@@ -200,7 +243,7 @@ if(isset($_GET['searchkey'])){
                                                     <th>Gender</th>
                                                     <th>Accountability</th>
                                                     <th>Amount</th>
-                                                    <th>Payment Received By</th>
+                                                    <th>Received By</th>
                                                     <th>Status</th>
                                                     <th>Date</th>
                                                 </thead>

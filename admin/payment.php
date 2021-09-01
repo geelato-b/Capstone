@@ -93,10 +93,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
               
                <form class="d-flex">
                <div class="input-group mb-3">
-               <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
-               <button class="btn btn-primary" type="button">
-               <i class="bi bi-search"></i>
-               </button>
+                <a class="btn btn-primary" href="status.php" role="button"><i class="bi bi-search"></i> Search</a>
                </div>
                </form>
 
@@ -112,11 +109,8 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                         <div class="card-header">
                                     <h3 class="display-7">Pay Here</h3>
                           </div>
-                          <div>
-                      
-                          
-                          </div>
-                    <?php
+                          <div class="mb-3">
+                      <?php
                     if (isset($_SESSION['status'])) {
                     ?>
                     <div class="container-sm">
@@ -142,7 +136,10 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                       <?php
                       unset($_SESSION['status1']);
                     }    
-                ?>             
+                ?>   
+                          
+                          </div>
+                              
                     <div class="card-body">
                         <div class="Payment">
                         <form action="../includes/addstat.php" method="post">
@@ -192,11 +189,11 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                     <label for="TextInput" class="form-label">Accountability</label>
                                     <select name="accbty_id" id="" class="form-select">
                                     <?php
-                                            $sql_acc = "SELECT `accbty_id`, `accbty_name` FROM `accountabilities` Where status = 'A';";
+                                            $sql_acc = "SELECT `accbty_id`, `accbty_name`, `accbty_deadline` FROM `accountabilities` Where status = 'A';";
                                             $result = mysqli_query($conn, $sql_acc);
                                             if(mysqli_num_rows($result) > 0){
                                                 while($row = mysqli_fetch_assoc($result)){
-                                                    echo "<option value='".$row['accbty_id']." '>".$row['accbty_name']. "</option>";
+                                                    echo "<option value='".$row['accbty_id']." '>".$row['accbty_name']. " </option>";
                                                 }
                                             }
                                         ?>
@@ -222,9 +219,33 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                 
 
                                          <div class="card-footer">
-                                            <button class="btn btn-primary"> <i class="bi bi-save"></i> Save </button>
+                                            <!-- <button class="btn btn-primary"> <i class="bi bi-save"></i> Save </button> -->
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                              <i class="bi bi-save"></i> Save 
+                                            </button>
                                           </div>
-                                </div>
+                                          <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+                                  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="staticBackdropLabel"><i class="bi bi-save"></i> Save</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                          Are you sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button name="pay_status" type="submit"  class="btn btn-primary" >Yes</button>
+                                          <button  class="btn btn-outline-danger" data-bs-dismiss="modal" type="button">No</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                               
                         </form>
                         </div>
                     </div>

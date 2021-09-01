@@ -9,6 +9,11 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
     $STUD_ID = $_SESSION['stud_id'];
     $student_info = GetUserDetails($conn, $STUD_ID );
 }
+$searchkey="";
+if(isset($_GET['searchkey'])){
+  $searchkey = htmlentities($_GET['searchkey']);
+
+}
 ?>
 
 <!doctype html>
@@ -95,7 +100,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
               
                <form class="d-flex">
                <div class="input-group mb-3">
-               <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
+               <input type="text" id="searchbar" name="searchkey"class="form-control bg-light " placeholder="Search for..." aria-label="Search">
                <button class="btn btn-primary" type="button">
                <i class="bi bi-search"></i>
                </button>
@@ -108,7 +113,9 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
         <!-- Begin Page Content -->
 
         <section>
+          <a href="update.php" class="list-group-item list-group-item-action"><i class="fas fa-redo-alt"></i> Refresh</a>
             <nav class="navbar sticky-top navbar-light">
+
                 <div class="container-fluid">
                         <p>
                             <a class="btn btn-primary" data-bs-toggle="collapse" href="#AddAcctbl" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -122,23 +129,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                     <div class="col-3"></div>
                     <div class="col-6">
                     
-                        <?php if(isset($_GET['error'])) {
-                              switch ($_GET['error']){
-                                  case 1:
-                                    echo "<p class='text-danger'> Item Exist</p>";
-                                  break;
-                                  case 2:
-                                    echo "<p class='text-danger'>Adding Record Failed</p>";
-                                  break;
-                                  case 3:
-                                    echo "<p class='text-danger'>Checking Item Failed</p>";
-                                  break;
-                                  case 0:
-                                    echo "<p class='text-danger'> Item Has Been Added</p>";
-                                  break;
-                              }
-                            }
-                        ?>
+                        
                         <?php
                     if (isset($_SESSION['status'])) {
                     ?>
@@ -176,17 +167,17 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                 <form action="../includes/AddAcc.php" method="post">
                                         <div class="mb-3">
                                             <label for="TextInput" class="form-label">Accountability Name</label>
-                                            <input type="text" name="accbty_name" id="accbty_name" class="form-control" >
+                                            <input type="text" name="accbty_name" id="accbty_name" class="form-control" required="">
                                         </div>
                                         
                                         <div class="mb-3">
                                             <label for="TextInput" class="form-label">Amount</label>
-                                            <input type="number" name="accbty_price" id="accbty_price" class="form-control" >
+                                            <input type="number" name="accbty_price" id="accbty_price" class="form-control" required="" >
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="TextInput" class="form-label">Deadline</label>
-                                            <input type="date" name="accbty_deadline" id="accbty_deadline" class="form-control" >
+                                            <input type="date" name="accbty_deadline" id="accbty_deadline" class="form-control" required="">
                                         </div>
 
                                         <div class="mb-3">
@@ -213,27 +204,61 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
         </section>
 
         <section id="content" >
+
             <div class="main__container" style="margin-top:2rem;">
              <div class="container__fluid"> 
                     <div class="row" id="contentPanel">
                     <div class="col-12">
                         <?php
-                                            $sql =" SELECT 
+                        if ($searchkey == "") {
+                           $sql =" SELECT 
                                                         `accbty_id`
                                                         , `accbty_name`
                                                         , `accbty_desc`
                                                         , `accbty_price`
                                                         , `accbty_deadline`
                                                         , `status`
-                                                        FROM `accountabilities`;";
-                            $stmt=mysqli_stmt_init($conn);
-                            if (!mysqli_stmt_prepare($stmt, $sql)){
-                                header("location: ?error=failedcheckout");
+                                                        FROM `accountabilities`
+                                                        WHERE status = 'A';";
+
+                                            $stmt=mysqli_stmt_init($conn);
+                                            //prepare the statement
+                                            if (!mysqli_stmt_prepare($stmt, $sql)){
+                                            echo "Statement Failed.";
+                                            exit();
+                                            }
+                        }
+                        else{
+                            $sql =" SELECT 
+                                                        `accbty_id`
+                                                        , `accbty_name`
+                                                        , `accbty_desc`
+                                                        , `accbty_price`
+                                                        , `accbty_deadline`
+                                                        , `status`
+                                                        FROM `accountabilities`
+                                                        WHERE status = 'A'
+                                                        AND `accbty_name` = ?
+                                                        OR `accbty_desc` = ?
+                                                        OR `accbty_deadline` = ?;";
+
+                                $stmt=mysqli_stmt_init($conn);
+                               if (!mysqli_stmt_prepare($stmt, $sql)){
+                               header("location: update.php?error");
+                               echo "Connection Failed. Record Not Found.";
                                 exit();
                                 }
-                                mysqli_stmt_execute($stmt);
+                            mysqli_stmt_bind_param($stmt, "sss" , $searchkey , $searchkey , $searchkey);
+                        }
+                                           
+                             mysqli_stmt_execute($stmt);
             
-                                $resultData = mysqli_stmt_get_result($stmt); ?>
+                                $resultData = mysqli_stmt_get_result($stmt); 
+                                $arr=array();
+                                while($row = mysqli_fetch_assoc($resultData)){ 
+                                  array_push($arr,$row);
+                                }
+                                if(!empty($arr)){ ?>
                             <div class="container">
                                 <div class="row">
                                     <table class="table table-hover" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -245,7 +270,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                                     <th>Deadline</th>
                                                     <th></th>
                                                 </thead>
-                                            <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
+                                            <?php foreach($arr as $key => $row){ ?>
                                                 <tr>
                                                     
                                                     <td><?php echo $row['accbty_name']; ?></td>
@@ -266,6 +291,12 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['stud_id']) ){
                                     </table> 
                             </div>
                         </div>
+                        <?php }
+
+                        else{
+                            echo "<h4>&nbsp No Records Found.</h4>";
+                          }
+                        ?>
              </div>
            </div>
           </div>          

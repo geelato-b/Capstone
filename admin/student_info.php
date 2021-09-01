@@ -9,6 +9,12 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
     $STUD_ID = $_SESSION['stud_id'];
     $student_info = GetUserDetails($conn, $STUD_ID );
 
+$searchkey="";
+if(isset($_GET['searchkey'])){
+  $searchkey = htmlentities($_GET['searchkey']);
+
+}
+
 ?>
 
 <!doctype html>
@@ -94,7 +100,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
               
                <form class="d-flex">
                <div class="input-group mb-3">
-               <input type="text" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
+               <input type="text" id="searchbar" name="searchkey" class="form-control bg-light " placeholder="Search for..." aria-label="Search">
                <button class="btn btn-primary" type="button">
                <i class="bi bi-search"></i>
                </button>
@@ -108,27 +114,70 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         <!-- Begin Page Content -->
 
         <section id="content">
+          <a href="student_info.php" class="list-group-item list-group-item-action"><i class="fas fa-redo-alt"></i> Refresh</a>
             <div class="main__container" style="margin-top:2rem;">
              <div class="container__fluid"> 
                     <div class="row" id="contentPanel">
                     <div class="col-12">
+
                         <?php
-                                            $sql =" SELECT `stud_id`
-                                                            , `stud_name`
-                                                            , `stud_program`
-                                                            , `stud_year_block`
-                                                            , `gender`
-                                                            , `stud_birthdate`
-                                                            , `stud_address` 
-                                                            FROM `student_info` ;";
-                            $stmt=mysqli_stmt_init($conn);
-                            if (!mysqli_stmt_prepare($stmt, $sql)){
-                              header("location: student_info.php?error");
-                                exit();
-                                }
+                        if ($searchkey == "") {
+                                                 
+                                            $sql =" SELECT i.stud_id
+                                                            , i.stud_name
+                                                            , i.stud_program
+                                                            , i.stud_year_block
+                                                            , i.gender
+                                                            , i.stud_birthdate
+                                                            , i.stud_address
+                                                            FROM `student_info` i
+                                                            JOIN `student_acc` a
+                                                            ON i.stud_id = a.stud_id
+                                                            WHERE a.status = 'Active';";
+
+                                              $stmt=mysqli_stmt_init($conn);
+                                              //prepare the statement
+                                              if (!mysqli_stmt_prepare($stmt, $sql)){
+                                              echo "Statement Failed.";
+                                              exit();
+                                              }
+                         }
+                         else{
+                                             $sql =" SELECT i.stud_id
+                                                            , i.stud_name
+                                                            , i.stud_program
+                                                            , i.stud_year_block
+                                                            , i.gender
+                                                            , i.stud_birthdate
+                                                            , i.stud_address
+                                                            FROM `student_info` i
+                                                            JOIN `student_acc` a
+                                                            ON a.stud_id = i.stud_id
+                                                            WHERE i.stud_id = ?
+                                                            OR i.stud_name = ?
+                                                            OR i.stud_program = ?
+                                                            OR i.stud_year_block = ?
+                                                            OR i.stud_address = ?;";
+
+                                              $stmt=mysqli_stmt_init($conn);
+                                              if (!mysqli_stmt_prepare($stmt, $sql)){
+                                                header("location: student_info.php?error");
+                                                 echo "Connection Failed. Record Not Found.";
+                                                  exit();
+                                              }
+                                          mysqli_stmt_bind_param($stmt, "sssss" , $searchkey , $searchkey , $searchkey , $searchkey , $searchkey);
+
+                         }
+                            
                                 mysqli_stmt_execute($stmt);
             
-                                $resultData = mysqli_stmt_get_result($stmt); ?>
+                                $resultData = mysqli_stmt_get_result($stmt); 
+                                $arr=array();
+                                while($row = mysqli_fetch_assoc($resultData)){ 
+                                  array_push($arr,$row);
+                                }
+                                if(!empty($arr)){
+                        ?>
                             <div class="container">
                                 <div class="row">
                                     <table class="table table-hover" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -142,7 +191,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                     <th>Birthdate</th>
                                                     <th>Address</th>
                                                 </thead>
-                                            <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
+                                            <?php foreach($arr as $key => $row){ ?>
                                                 <tr>
                                                     <td><?php echo $row['stud_id']; ?></td>
                                                     <td><?php echo $row['stud_name']; ?></td>
@@ -157,6 +206,12 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                     </table> 
                             </div>
                         </div>
+                        <?php }
+
+                        else{
+                            echo "<h4>&nbsp No Records Found.</h4>";
+                          }
+                        ?>
              </div>
            </div>
           </div>          
