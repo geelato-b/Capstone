@@ -30,7 +30,7 @@ include_once ('includes/func.inc.php');
                     
                     <div class="sign-in">
                     <form action="includes/processlogin.php" method="POST" id="login" class="signin-form" >
-                        <?php
+                    <?php
                             if (isset($_SESSION['status'])) {
                             ?>
                             <div class="input-box">
@@ -38,9 +38,35 @@ include_once ('includes/func.inc.php');
                             <?php echo $_SESSION['status']; ?>
                             </div>
                             </div>
+
                             <?php
                                 
                                 unset($_SESSION['status']);
+                            }
+                            if (isset($_SESSION['status1'])) {
+                            ?>
+                            <div class="input-box">
+                            <div class="alert alert-warning" role="alert">
+                            <?php echo $_SESSION['status1']; ?>
+                            </div>
+                            </div>
+                            <?php
+                                
+                                unset($_SESSION['status1']);
+                            }
+                            ?>
+
+                            <?php
+                             if (isset($_SESSION['status2'])) {
+                            ?>
+                            <div class="input-box">
+                            <div class="alert alert-warning" role="alert">
+                            <?php echo $_SESSION['status2']; ?>
+                            </div>
+                            </div>
+                            <?php
+                                
+                                unset($_SESSION['status2']);
                             }
                             ?>
                     <h2 class="title">Sign In</h2>
@@ -65,6 +91,8 @@ include_once ('includes/func.inc.php');
                                 
                                 <div class="sign_up">
                                 <a href="form.php">Don't have an account yet?</a>
+                                <br><br>
+                                <a href="https://www.facebook.com/bupc.csc.one">Contact</a>
                                 </div>
                                 
                                 
