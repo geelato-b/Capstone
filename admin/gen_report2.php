@@ -2,7 +2,6 @@
 session_start();
 include_once "../includes/db_conn.php";
 include_once "../includes/func.inc.php"; 
-
 $status_logged_in = null;
 if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
     $status_logged_in = array('status' => true, 'user_type' => $_SESSION['user_type'] );
@@ -106,60 +105,77 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
         </nav>
         <!-- End of Topbar -->
         <!-- Begin Page Content -->
+        <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-text">
+            <a href="gen_report.php"><i class="bi bi-back"></i></i></a>
+            </span>
 
-
-        <section id="content">
+        </div>
+        </nav>
+                       
+    <section id="content">
         <div class="main__container" style="margin-top:2rem;">
              <div class="container__fluid"> 
                     <div class="row" id="contentPanel">
                     <div class="col-12">
-                    <div class="category-cont">
-                    <?php
-                            $categories = getCatList($conn);?>
-                            <div class="container">
+                            
+                        <?php   
+                            if(isset($_GET['category'])){ ?>
+                                        <div class="row">
+                                        <?php
+                                                $accbty_id = htmlentities($_GET['category']);
+                                                $items = getItemListPerAcc($conn,$accbty_id);
+                            ?>
+                             
+                            <div class= "card-body">
+                                
+                            <div class="container" >
                                 <div class="row">
-                                          <table class="table table-hover" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                                
+                                    <table class="table table-hover" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                                                                                                           border-radius: 10px;">
                                           <thead>
+                                              <th>Transaction Date</th>
                                               <th>Name</th>
-                                              <th>Description</th>
                                               <th>Amount</th>
-                                              <th>Deadline</th>
                                           </thead>
-                                          
-                                              <?php   foreach($categories as $key => $val ){ ?>
-                                                <tr>
-                                                    <td><a style="text-decoration:none;" href="gen_report2.php?category=<?php echo $val['accbty_id']; ?>&catname=<php echo $val['accbty_desc']; ?>">
-                                                    <?php echo $val['accbty_name'];?></a></td>
-                                                    <td><?php echo $val['accbty_desc']; ?></td>
-                                                    <td> Php <?php  echo number_format($val['accbty_price'],2); ?> </td> 
-                                                    <td><?php echo $val['accbty_deadline']; ?></td>
-                                                </tr>
-                                      
+
                                           <?php
-                                          }
-                                          ?>
+                                            foreach($items as $key => $val ){ 
+                                            ?>
 
-                                      </div>       
-                                  </div>
-                                </table>
+                                             <tr>
+                                                    <td><?php echo $val['date'];?></a></td>
+                                                    <td><?php echo $val['stud_name']; ?></td>
+                                                    <td> Php <?php  echo number_format($val['accbty_price'],2); ?> </td> 
+                                                    
+                                                </tr>
+                                             <?php } 
+                                             } ?>       
+
+                                    </table>          
                                 </div>
-                              </div>
-                    </div> 
-                    </div> 
-              </div>         
-         </div>             
+                             </div>     
 
-</section> 
+                            </div>
+                              
+                    
+                    </div> 
+                </div> 
+        </div>                
 
-    <?php    
+     </section>
+
+     
+
+<?php    
 
 }
 
 else{
 header("location: ../index.php");  
 }
-
 ?>
 
 

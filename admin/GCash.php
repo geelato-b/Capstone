@@ -57,7 +57,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
       </li>
 
 		  <li><a href="payment.php" class="nav-link text-left"  role="button"><i class="bi bi-cash-coin"></i>Payment</a></li>
-          <li><a href="Gcash.php" class="nav-link text-left active"  role="button"><i class="bi bi-currency-exchange"></i>Gcash</a></li>
+          <li><a href="Gcash.php" class="nav-link text-left active"  role="button"><i class="bi bi-currency-exchange"></i>Proof of Payment</a></li>
           <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status</a></li>
           <li><a href="update.php" class="nav-link text-left"  role="button"><i class="bi bi-journal-check"></i>Update</a></li>
           <li><a href="setting.php" class="nav-link text-left"  role="button"><i class="bi bi-gear-fill"></i>Setting</a></li>
@@ -107,14 +107,39 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 
                       <section id="content" >
                           <div class="card-header">
-                              <h3 class="display-7">GCash Confirmation</h3>
+                              <h3 class="display-7">Payment Confirmation</h3>
+                              
                           </div>
                           <div class="rightbutton">
                             <p>
                                 <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                   History
                                 </a>
+
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <i class="bi bi-exclamation-circle-fill"></i>
+</button>
                             </p>
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <u>Fill in all the information required</u> in the input box on the right side of your screen before clicking the confirm button.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
                               <div class="collapse" id="collapseExample">
                                 <div class="card-body">
                                   
@@ -133,7 +158,8 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                                                       , `gc_status`
                                                                       , `status`
                                                                       FROM `gcash`
-                                                                      WHERE gc_status = 'C';
+                                                                      WHERE gc_status = 'C'
+                                                                      ORDER BY date_time DESC;;
                                                                       ";
                                           $stmt=mysqli_stmt_init($conn);
                                           if (!mysqli_stmt_prepare($stmt, $sql)){
@@ -213,7 +239,8 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                           JOIN `student_info` s
                                           ON s.stud_id = g.stud_id
                                           WHERE gc_status = 'UC' 
-                                          AND `status`  = 'A' ;";
+                                          AND `status`  = 'A' 
+                                          ORDER BY g.date_time DESC;";
 
                                 $stmt=mysqli_stmt_init($conn);
                                 if (!mysqli_stmt_prepare($stmt, $sql)){
@@ -278,7 +305,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                       <?php
                                       }
                                   }else{
-                                    echo "NO GCASH PAYMENT TO CONFIRM.";
+                                    echo "NO PAYMENT TO CONFIRM.";
                                   }
 
                               
