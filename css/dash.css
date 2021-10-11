@@ -362,6 +362,7 @@ main-top card
     box-shadow: 0 0 0.875rem 0 rgba(33,37,41,.05);
 }
 
+
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
@@ -371,6 +372,12 @@ main-top card
 .card-title {
     font-size: .875rem;
     color: #495057;
+}
+
+.card-title:hover{
+    font-weight: bolder;
+    color:black;
+    
 }
 
 .card-body h1{
