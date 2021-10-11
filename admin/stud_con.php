@@ -130,9 +130,9 @@ if(isset($_GET['searchkey'])){
                                                           , `stud_name`
                                                           , `password` 
                                                           , `status` 
-                                                          , `user_type` 
+                                                          , `user_type`
                                                           FROM `student_acc` 
-                                                          WHERE user_type = 'S'
+                                                          WHERE user_type = 'U'
                                                           OR user_type = 'blocked';";
 
                                               $stmt=mysqli_stmt_init($conn);
@@ -147,7 +147,7 @@ if(isset($_GET['searchkey'])){
                                                           , `stud_name`
                                                           , `password` 
                                                           , `status` 
-                                                          , `user_type` 
+                                                          , `user_type`
                                                           FROM `student_acc` 
                                                           WHERE stud_name = ?
                                                           OR stud_id = ?;";
@@ -187,11 +187,11 @@ if(isset($_GET['searchkey'])){
                                                     <td><?php echo $row['stud_name']; ?></td>
                                                     <td><?php echo $row['password'];?></td>
                                                     <td>
-                                                    <form action="../includes/stud_stat.php" method="post">
+                                                    <form action="../includes/stud_stat2.php" method="post">
                                                                 <input hidden type="text" name="stud_id" value="<?php echo $row['stud_id']; ?>">
                                                                 <input hidden type="text" name="stud_name" value="<?php echo $row['stud_name']; ?>">
-                                                                <input type="hidden" name="block_user" value="<?php echo $row['user_type'] == 'S' ? 'Blocked' : 'S' ; ?>">
-                                                                <button class="btn btn-primary"> <?php echo $row['user_type'] == 'S' ? 'Block' : 'Unblock' ; ?> </button>
+                                                                <input type="hidden" name="block_user" value="<?php echo $row['user_type'] == 'U' ? 'S' : 'U' ; ?>">
+                                                                <button class="btn btn-primary"> <?php echo $row['user_type'] == 'U' ? 'Confirm' : 'Unconfirm' ; ?> </button>
                                                     </form>
                                                   
                                                   </td>

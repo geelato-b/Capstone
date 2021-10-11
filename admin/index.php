@@ -124,9 +124,9 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 									<div class="col-sm-3">
 										<div class="card">
 											<div class="card-body">
-												<a href="student_info.php"><h5 class="card-title mb-4">Total of Number Registered Students</h5>
+												<a href="stud_con.php"><h5 class="card-title mb-4">Unconfirm Student Account</h5>
                         <?php 
-                            $sql_count = "SELECT COUNT(*) cartcount FROM `student_acc` WHERE status = 'Active' AND user_type = 'S' OR user_type = 'blocked';";
+                            $sql_count = "SELECT COUNT(*) cartcount FROM `student_acc` WHERE status = 'Active' AND user_type = 'U' ;";
                             $stmt=mysqli_stmt_init($conn);
         
                         if (!mysqli_stmt_prepare($stmt, $sql_count)){
@@ -153,7 +153,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
 									<div class="col-sm-3">
 										<div class="card">
 											<div class="card-body">
-												<a href="GCash.php"><h5 class="card-title mb-4">Pending Gcash Payment</h5>
+												<a href="GCash.php"><h5 class="card-title mb-4">Pending Payment</h5>
                         <?php 
                             $sql_count = "SELECT COUNT(*) cartcount FROM `gcash` WHERE gc_status = 'UC';";
                             $stmt=mysqli_stmt_init($conn);
