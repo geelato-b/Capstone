@@ -49,7 +49,7 @@ if(passMatch($psword, $cpassword)!== false){
 else{
 
 $sql = "INSERT INTO `student_acc` ( `stud_id`,`bu_email`, `stud_name`, `password`, `status`, `user_type`)
-VALUES (  '${stid}','${bu_email}',  '${studname}','${psword}', 'Active', 'S');" ;
+VALUES (  '${stid}','${bu_email}',  '${studname}','${psword}', 'Active', 'U');" ;
 
 $sql .="INSERT INTO  `student_info` 
 (  `stud_id`,`bu_email`, `stud_name`,`stud_program`, `stud_year_block`, `gender`, `stud_birthdate`, `stud_address`) 
@@ -57,7 +57,7 @@ $sql .="INSERT INTO  `student_info`
 
 
 if (mysqli_multi_query($conn, $sql)) {
-     $_SESSION['status'] = "Successfully Registered. You can Sign In now.";
+     $_SESSION['status'] = "Please wait for admin's confirmation.";
     header("location: ../index.php?success");
     } else {
     echo "Error: " . $sql . mysqli_error($conn);

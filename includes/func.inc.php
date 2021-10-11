@@ -129,78 +129,64 @@ function checkImage($img_file, $target_dir, $targetimagename){
     return $stat;
 }
 
-function getCategories($conn){
-    $sql = "SELECT * FROM `accountabilities`";
-    $stmt=mysqli_stmt_init($conn);
+function getItemListPerAcc($conn,$accbty_id){
+    $err;
+    $sql = "SELECT c.date
+                    , c.stud_name
+                    , c.accbty_price
+                from `status` c
+                join `accountabilities` i
+                on (c.accbty_id = i.accbty_id)
+                WHERE i.accbty_id = ?
+                AND c.pay_status = 'P'
+                ORDER BY c.date DESC;
+                ";
     
+    $stmt = mysqli_stmt_init($conn);
+
     if (!mysqli_stmt_prepare($stmt, $sql)){
-        return false;
-        exit;
+        header("location: ../admin/gen_report2.php?error=stmtfailed");
+        exit();
     }
-        mysqli_stmt_execute($stmt);
-        $resultData = mysqli_stmt_get_result($stmt);
-        $resArr = array();
-      if(!empty($resultData)){
-        while($row = mysqli_fetch_assoc($resultData)){
-            array_push($resArr, $row);
-        }
-        return $resArr;
-      }
-        else{
-            return false;
-      }
-        mysql_stmt_close($stmt);
+    mysqli_stmt_bind_param($stmt, "s" ,$accbty_id); 
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+    $arr = array();
+    while($row = mysqli_fetch_assoc($resultData)){
+            array_push($arr,$row);
+    }
+    return $arr;
+    mysql_stmt_close($stmt);
+
+}
+
+function getCatList($conn){
+    $err;
+    $sql = "SELECT `accbty_id`, `accbty_name`, `accbty_desc`, `accbty_price`, `accbty_deadline`, `status`, `acc_status` 
+    FROM `accountabilities` 
+    ORDER BY accbty_deadline DESC;";
+    
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)){
+        header("location: ../admin/gen_report.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+    $arr = array();
+    while($row = mysqli_fetch_assoc($resultData)){
+            array_push($arr,$row);
+    }
+    return $arr;
+    mysql_stmt_close($stmt);
+
 }
 
 
-function getSalesPerfCat($conn, $cat_id = null){
-    if($cat_id != null){
 
-         $sql="SELECT c.date
-                   , c.stud_name
-                   , c.accbty_price
-                from `status` c
-                join `accountabilities` i
-                  on (c.accbty_id = i.accbty_id)
-               WHERE i.accbty_id = ?
-                 AND c.pay_status = 'P';
-        ";
-        $params = array();
-        array_push($params, $cat_id);
-        
-        return query($conn, $sql, $params );
-    } 
-    else if($cat_id != null) {
-            $sql="SELECT c.date
-            , c.stud_name
-            , c.accbty_price
-         from `status` c
-         join `accountabilities` i
-           on (c.accbty_id = i.accbty_id)
-        WHERE i.accbty_id = ?
-          AND c.pay_status = 'P';
-        ";
-        $params = array();
-        array_push($params, $cat_id);
-        
-        return query($conn, $sql, $params );
-    }
-    else{
-         $sql="SELECT c.date
-         , c.stud_name
-         , c.accbty_price
-      from `status` c
-      join `accountabilities` i
-        on (c.accbty_id = i.accbty_id)
-     WHERE i.accbty_id = ?
-       AND c.pay_status = 'P'
-        ";
-        
-        return query($conn, $sql);
-    }
-       
-        
-    }
 
 
 
