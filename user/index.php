@@ -87,7 +87,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
               </a>
             </li>
             <li>
-              <a href="e-payment.php" class="nav-link text-dark">G-Cash
+              <a href="e-payment.php" class="nav-link text-dark">Proof of Payment
               <?php 
                             $sql_cart_count = "SELECT COUNT(*) cartcount FROM `gcash` WHERE gc_status = 'UC' AND stud_id = ?;";
                             $stmt=mysqli_stmt_init($conn);

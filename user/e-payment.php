@@ -20,7 +20,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" > 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <title>Student: BUPC CSC Accountability System</title>
+    <title>Proof of Payment: BUPC CSC Accountability System</title>
     <link rel="stylesheet" href="../css/dash.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" >
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" >
@@ -85,7 +85,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                         
                             ?>
     </a></li>
-      <li><a href="e-payment.php" class="nav-link text-left active"  role="button"><i class="bi bi-cash-coin"></i>G-Cash
+      <li><a href="e-payment.php" class="nav-link text-left active"  role="button"><i class="bi bi-cash-coin"></i>Proof of Payment
       <?php 
                             $sql_cart_count = "SELECT COUNT(*) cartcount FROM `gcash` WHERE gc_status = 'UC' AND stud_id = ?;";
                             $stmt=mysqli_stmt_init($conn);
@@ -137,7 +137,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                
                <form class="d-flex">
                <div class="input-group mb-3">
-                <h1>G-Cash</h1>
+                <h1>Proof of Payment</h1>
                </div>
 
                </form>
@@ -197,7 +197,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                    
           <div class="collapse" id="AddGCASH" class="card collapse mt-3 shadow">
                           <div class="card-header">
-                              <h3 class="display-7">&nbsp Upload G-Cash Receipt</h3>
+                              <h3 class="display-7">&nbsp Upload Receipt</h3>
                           </div>
 
                             <div class="card-body">
