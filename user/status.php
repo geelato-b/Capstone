@@ -65,7 +65,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
  
  </a></li>
 
-   <li><a href="status.php" class="nav-link text-left"  role="button"><i class="bi bi-person-lines-fill"></i>Status
+   <li><a href="status.php" class="nav-link text-left active"  role="button"><i class="bi bi-person-lines-fill"></i>Status
    <?php 
                          $sql_cart_count = "SELECT COUNT(*) cartcount FROM `status` WHERE pay_status = 'P' AND stud_id = ?;";
                          $stmt=mysqli_stmt_init($conn);
@@ -85,7 +85,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                      
                          ?>
  </a></li>
-   <li><a href="e-payment.php" class="nav-link text-left active"  role="button"><i class="bi bi-cash-coin"></i>Proof of Payment
+   <li><a href="e-payment.php" class="nav-link text-left"  role="button"><i class="bi bi-cash-coin"></i>Proof of Payment
    <?php 
                          $sql_cart_count = "SELECT COUNT(*) cartcount FROM `gcash` WHERE gc_status = 'UC' AND stud_id = ?;";
                          $stmt=mysqli_stmt_init($conn);

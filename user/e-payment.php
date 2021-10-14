@@ -159,7 +159,7 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                         <p>
                             &nbsp
                             <a class="btn btn-primary" data-bs-toggle="collapse" href="#AddGCASH" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            <i class="bi bi-plus-circle"></i> G-Cash
+                            <i class="bi bi-plus-circle"></i> Proof of Payment
                             </a>
                             &nbsp
                             <a class="btn btn-primary" data-bs-toggle="collapse" href="#History" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -204,27 +204,22 @@ if(isset($_SESSION['user_type']) && isset($_SESSION['stud_id']) ){
                                 <div class="AddAcctbl">
                                 <form action="../includes/AddSS.php" method="post" enctype="multipart/form-data">
                                         <div class="mb-3">
-                                            <label for="disabledTextInput" class="form-label">Student ID</label>
-                                            <input type="text" id="stud_id" name="stud_id" class="form-control" placeholder="Ex. 201X-PC-1XXXXX" required="">
+                                            <label hidden for="disabledTextInput" class="form-label">Student ID</label>
+                                            <input hidden type="text" id="stud_id" name="stud_id" class="form-control"  value="<?php echo $_SESSION['stud_id'];?>">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="disabledTextInput" class="form-label">Student FullName</label>
-                                            <input type="text" id="stud_name" name="stud_name" class="form-control" required="">
+                                            <label hidden for="disabledTextInput" class="form-label">Student FullName</label>
+                                            <input hidden type="text" id="stud_name" name="stud_name" class="form-control"  value="<?php echo  $student_info['stud_name'];?>">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="disabledTextInput" class="form-label">BU Email</label>
-                                            <input type="text" id="bu_email" name="bu_email" class="form-control" placeholder="fnamelname@bicol-u.edu.ph" required="">
+                                            <label hidden for="disabledTextInput" class="form-label">BU Email</label>
+                                            <input hidden type="text" id="bu_email" name="bu_email" class="form-control"  value="<?php echo  $student_info['bu_email'];?>">
                                         </div>
                                         <div class="mb-3">
                                             <label for="TextInput" class="form-label">Accountability Name</label>
                                             <input type="text" name="accbty_name" id="accbty_name" class="form-control" placeholder="Ex. CSC Fee, T-Shirt" required="" >
                                         </div>
                                         
-                                        <div class="mb-3">
-                                            <label for="TextInput" class="form-label">Amount</label>
-                                            <input type="number" name="accbty_price" id="accbty_price" class="form-control" required="">
-                                        </div>
-
                                         <div class="mb-3">
                                             <label for="" class="form-label">Image</label>
                                             <input name="itemimagefile" type="file" class="form-control" required="">
