@@ -15,7 +15,9 @@ $studaddress = $_POST['studaddress'];
 $status = $_POST['status'];
 $usertype = $_POST['usertype'];
 $result = "";
-
+// $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^";  
+$pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@bicol-u.edu.ph$^"; 
+$id = "^[2-9-]+*-PC-+[1-9-]+$^"; 
 $servername = "localhost";
 $studid = "root";
 $password = "";
@@ -45,7 +47,30 @@ if(passMatch($psword, $cpassword)!== false){
     header("location: ../form.php?error=Password don't match");
     exit();    
     
+}elseif (!preg_match ("/^([a-zA-Z ,.' ]+)$/", $studname) ) {  
+     $_SESSION['status'] = "Your name is not valid.";
+    header("location: ../form.php?error=NotValid");
+    exit();   
+}elseif (!preg_match ($pattern, $bu_email) ){
+    $_SESSION['status'] = "Your Email is not valid.";
+    header("location: ../form.php?error=NotValid");
+    exit();  
 }
+elseif (!preg_match("/^([0-9 ' ]+[-PC-]+[0-9 ']+)$/" ,$stid)) {
+    $_SESSION['status'] = "Your Student ID Number is not valid.";
+    header("location: ../form.php?error=NotValid");
+    exit(); 
+} 
+elseif (!preg_match("/^([0-9]+[a-zA-Z]+)$/" ,$studyrblck)) {
+    $_SESSION['status'] = "Your Yr. & Block is not valid.";
+    header("location: ../form.php?error=NotValid");
+    exit(); 
+} 
+elseif (!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#" ,$psword)) {
+    $_SESSION['status'] = "<b>Your Password is not valid.</b> <br> Password must be at least 8 characters in length and must contain at least one number,one upper case letter, one lower case letter and one special character.";
+    header("location: ../form.php?error=NotValid");
+    exit(); 
+ } 
 else{
 
 $sql = "INSERT INTO `student_acc` ( `stud_id`,`bu_email`, `stud_name`, `password`, `status`, `user_type`)
